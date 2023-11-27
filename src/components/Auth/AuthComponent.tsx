@@ -7,7 +7,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Item from '@mui/material/Unstable_Grid2';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-export function AccountSelectionPage() {
+export function AuthComponent() {
     const accountsType = [
         {
             id: 1,
@@ -45,14 +45,15 @@ export function AccountSelectionPage() {
                 alignItems='center' 
                 lg={6}
             >
-                <Item style={{
+                <Item 
+                    style={{
                         width: '31.25rem',
                         backgroundColor: '#E3E3E3'
                     }} 
                     boxShadow={2}
                     borderRadius='0.375rem'
                 >
-                    <Box p={5}>
+                    <Box p={5} style={{height: '100%'}}>
                         <Box typography='h1' fontSize={'2rem'} color='#00000077'>Bem-Vindo de volta!</Box>
                         <Box typography='body1' fontSize='0.77344rem' color='#00000077' mb={3}>Logue-se para explorar tudo de melhor aqui.</Box>
 
