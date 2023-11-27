@@ -41,7 +41,7 @@ export function Header() {
               </MenuItem>
 
               <MenuItem onClick={handleCloseMenu}>
-                <NavLink to=''>Entrar</NavLink>
+                <NavLink to='/auth/login/select-account'>Entrar</NavLink>
               </MenuItem>
 
               <MenuItem onClick={handleCloseMenu}>
@@ -54,7 +54,7 @@ export function Header() {
           <Box component='nav' display={{ xs: 'none', md: 'initial' }}>
             <Button color='inherit' component={NavLink} to='/funcionalidades'>Funcionalidades</Button>
             <Button color='inherit' component={NavLink} to='/precos'>Preços</Button>
-            <Button color='inherit' component={NavLink} to=''>Entrar</Button>
+            <Button color='inherit' component={NavLink} to='/auth/login/select-account'>Entrar</Button>
             <Button color='inherit' component={NavLink} to=''>Cadastrar</Button>
           </Box>
         </Toolbar>
