@@ -4,7 +4,8 @@ import { HomePage } from "./pages/HomePage";
 import { PricePage } from "./pages/PricePage";
 import { FeaturePage } from "./pages/FeaturePage";
 import { AccountSelection } from "./pages/AuthPages/Login/AccountSelection";
-import { Auth } from "./components/Auth/AuthComponent";
+import { RegisterAccountSelection } from "./pages/AuthPages/Register/AccountSelection";
+import { Auth } from "./components/Auth";
 
 export const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +19,7 @@ export const routes = createBrowserRouter(
   
       <Route element={<Auth />}>
         <Route path="auth/login/select-account" element={<AccountSelection />} />
+        <Route path="auth/register/select-account" element={<RegisterAccountSelection />} />
       </Route>
     </Route>
   )
