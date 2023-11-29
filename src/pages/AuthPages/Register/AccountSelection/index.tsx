@@ -39,11 +39,11 @@ export function RegisterAccountSelection() {
             <Stack spacing={3}>
                 {
                     accountsType.map((el, i) => (
-                        <AppButton height='5.625rem' variant='text'  className='authButton selectAccountButton' color='#00000077' backgroundColor='#BBBBBB' boxShadow={2} id={el.id} key={i}>
+                        <AppButton height='5.625rem' variant='text' className='authButton selectAccountButton' color='#00000077' backgroundColor='#BBBBBB' boxShadow={2} id={el.id} key={i}>
                             <Box textTransform='none' fontSize='0.875rem'>
                                 {el.type}
                             </Box>
-                            <Box textTransform='none' fontSize='0.875rem' mt={1.5} lineHeight='normal' textAlign='left'>
+                            <Box textTransform='none' fontSize='0.875rem' mt={1.9} textAlign='left'>
                                 {el.desc}
                             </Box>
                         </AppButton>
@@ -52,8 +52,8 @@ export function RegisterAccountSelection() {
             </Stack>
 
             <Box display='flex' justifyContent='end' mt={8}>
-                <AppButton height='1.875rem' width='5rem' variant='text' className='authBackButton' color='#00000077' fontSize='0.75rem' disableRipple={true} >Voltar</AppButton>
-                <AppButton height='1.875rem'  width='5rem' variant='contained' className='authButton authNextButton' color='#00000077' backgroundColor='#BBBBBB' boxShadow={2} fontSize='0.75rem'>Avançar</AppButton>
+                <AppButton height='1.875rem' width='5rem' variant='text' className='authBackButton' fontSize='0.75rem' isRippleDisabled={true} >Voltar</AppButton>
+                <AppButton height='1.875rem' width='5rem' variant='contained' className='authButton authNextButton' backgroundColor='#BBBBBB' boxShadow={2} fontSize='0.75rem'>Avançar</AppButton>
             </Box>
         </>
     )

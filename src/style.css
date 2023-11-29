@@ -12,6 +12,12 @@
     }
 }
 
+.button.hover {
+    &:hover {
+        background-color: transparent;
+    }
+}
+
 .authNextButton {
     margin-left: 1rem;
 }

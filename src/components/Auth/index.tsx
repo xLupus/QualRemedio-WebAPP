@@ -6,6 +6,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Item from '@mui/material/Unstable_Grid2';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
+//page
 export function Auth() {
     const theme: Theme = useTheme();
     const isLargeScreen: boolean = useMediaQuery(theme.breakpoints.up('lg'));

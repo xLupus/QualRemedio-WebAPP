@@ -6,6 +6,8 @@ import { FeaturePage } from "./pages/FeaturePage";
 import { AccountSelection } from "./pages/AuthPages/Login/AccountSelection";
 import { RegisterAccountSelection } from "./pages/AuthPages/Register/AccountSelection";
 import { Auth } from "./components/Auth";
+import { MailVerification } from "./pages/AuthPages/Register/Mail/MailVerification";
+import { SendMail } from "./pages/AuthPages/Register/Mail/SendMail";
 
 export const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -20,6 +22,8 @@ export const routes = createBrowserRouter(
       <Route element={<Auth />}>
         <Route path="auth/login/select-account" element={<AccountSelection />} />
         <Route path="auth/register/select-account" element={<RegisterAccountSelection />} />
+        <Route path="auth/register/email/verification" element={<MailVerification />} />
+        <Route path="auth/register/email/send" element={<SendMail />} />
       </Route>
     </Route>
   )

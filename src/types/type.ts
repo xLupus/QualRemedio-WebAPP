@@ -8,7 +8,10 @@ export interface AppButtonProps {
     height?: string | undefined;
     boxShadow?: number | string | undefined;
     width?: string | undefined;
-    disableRipple?: boolean | undefined;
     fontSize?: string | undefined;
+    display?: string | undefined;
+    flexDirection?: "row" | "row-reverse" | "column" | "column-reverse" | undefined;
+    justifyContent?: string | undefined;
+    isRippleDisabled?: boolean | undefined;
     children: React.ReactNode;
 }
