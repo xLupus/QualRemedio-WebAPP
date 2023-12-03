@@ -25,7 +25,7 @@ export function Login() {
                 <AppInput 
                     id='email-field'
                     color='primary'
-                    variant='outlined'
+                    variant='filled'
                     type='email'
                     label='E-mail'
                     isRequired={true}
@@ -34,7 +34,7 @@ export function Login() {
                 <AppInput 
                     id='password-filed'
                     color='primary'
-                    variant='outlined'
+                    variant='filled'
                     type='password'
                     label='Senha'
                     isRequired={true}

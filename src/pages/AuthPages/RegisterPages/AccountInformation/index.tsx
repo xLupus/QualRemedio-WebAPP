@@ -1,5 +1,4 @@
-import { NavLink } from 'react-router-dom';
-import { Box, Link, Unstable_Grid2 as Grid } from "@mui/material";
+import { Box, Unstable_Grid2 as Grid } from "@mui/material";
 import { AppButton } from '../../../../components/Button';
 import { AppInput } from '../../../../components/Input';
 import { AppSelectInput } from '../../../../components/Input/InputSelect';
@@ -20,7 +19,7 @@ export function RegisterAccountInformation() {
                             <AppInput 
                                 id='email-field'
                                 color='primary'
-                                variant='outlined'
+                                variant='filled'
                                 type='text'
                                 label='Nome'
                                 isRequired={true}
@@ -31,7 +30,7 @@ export function RegisterAccountInformation() {
                             <AppInput 
                                 id='email-field'
                                 color='primary'
-                                variant='outlined'
+                                variant='filled'
                                 type='text'
                                 label='CPF'
                                 isRequired={true}
@@ -42,8 +41,9 @@ export function RegisterAccountInformation() {
                             <AppInput 
                                 id='email-field'
                                 color='primary'
-                                variant='outlined'
+                                variant='filled'
                                 type='date'
+                                label='Nasc.:'
                                 isRequired={true}
                             />
                         </Grid>
@@ -52,7 +52,7 @@ export function RegisterAccountInformation() {
                             <AppInput 
                                 id='email-field'
                                 color='primary'
-                                variant='outlined'
+                                variant='filled'
                                 type='tel'
                                 label='Telefone'
                                 isRequired={true}
@@ -68,7 +68,7 @@ export function RegisterAccountInformation() {
                             <AppInput 
                                 id='name-field'
                                 color='primary'
-                                variant='outlined'
+                                variant='filled'
                                 type='text'
                                 label='Nome'
                                 isRequired={true}
@@ -79,7 +79,7 @@ export function RegisterAccountInformation() {
                             <AppInput 
                                 id='cpf-field'
                                 color='primary'
-                                variant='outlined'
+                                variant='filled'
                                 type='text'
                                 label='CPF'
                                 isRequired={true}
@@ -90,8 +90,9 @@ export function RegisterAccountInformation() {
                             <AppInput 
                                 id='date-field'
                                 color='primary'
-                                variant='outlined'
+                                variant='filled'
                                 type='date'
+                                label='Nasc.:'
                                 isRequired={true}
                             />
                         </Grid>
@@ -100,7 +101,7 @@ export function RegisterAccountInformation() {
                             <AppInput 
                                 id='tel-field'
                                 color='primary'
-                                variant='outlined'
+                                variant='filled'
                                 type='tel'
                                 label='Telefone'
                                 isRequired={true}
@@ -111,7 +112,7 @@ export function RegisterAccountInformation() {
                             <AppInput 
                                 id='crm-field'
                                 color='primary'
-                                variant='outlined'
+                                variant='filled'
                                 type='text'
                                 label={accountType === 2 ? 'CRM' : 'Documento'}
                                 isRequired={true}
@@ -122,7 +123,7 @@ export function RegisterAccountInformation() {
                             <AppInput 
                                 id='speclty-field'
                                 color='primary'
-                                variant='outlined'
+                                variant='filled'
                                 type='text'
                                 label='Especialidade'
                                 isRequired={true}

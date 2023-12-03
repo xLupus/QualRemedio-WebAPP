@@ -1,10 +1,12 @@
 import { Box } from "@mui/material";
-import { AppButton } from '../../../../../components/Button';
+import { AppButton } from '../../../../components/Button';
 
-export function SendMail() {
+export function SendMail({ isFromPath }: { isFromPath: string }) {
     return (
         <>
-            <Box typography='body1' mb={8} textAlign='center'>STEP</Box>
+            {
+                isFromPath === 'register' && <Box typography='body1' mb={8} textAlign='center'>STEP</Box>
+            }
 
             <Box typography='body1' fontSize='0.875rem' color='#00000077' textAlign='center' mb={1.25}>Enviamos uma verificação em seu e-mail:</Box>
             <Box typography='body1' fontSize='0.875rem' color='#00000077' textAlign='center' mb={9} width='80%' mx='auto'>t***e@g***l.com</Box>
