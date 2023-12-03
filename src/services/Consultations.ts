@@ -1,4 +1,5 @@
-import axios, { AxiosError } from "axios"
+import { AxiosError } from "axios"
+import { axios_instance } from "../config/axios"
 
 export interface IndexConsultationParams {
   filter?: {
@@ -10,11 +11,6 @@ export interface IndexConsultationParams {
     take: number
   },
 
-}
-export const request_headers = {
-  headers: {
-    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInJvbGUiOnsiaWQiOjIsIm5hbWUiOiJEb2N0b3IiLCJkZXNjcmlwdGlvbiI6IkNvbmNlZGUgcGVybWlzc8OjbyBwYXJhIG8gY2FyZ28gZGUgZG91dG9yIn0sImlhdCI6MTcwMTM4NTQxNSwiZXhwIjoxNzAxNjQ0NjE1fQ.j7szrEv4AY5lk427hNUguAE1PoXO5tzdVnE1BLDbsWk",
-  }
 }
 
 export interface CreateConsultationParams {
@@ -65,7 +61,7 @@ class Consultations {
     console.log({ query_params });
 
     try {
-      const response = await axios.get(`http://localhost:8080/api/v1/consultations?${query_string}`, request_headers)
+      const response = await axios_instance.get(`consultations?${query_string}`)
 
       return response.data
     } catch (err: unknown) {
@@ -79,7 +75,7 @@ class Consultations {
 
   async create(bond_id: number, data: CreateConsultationParams) {
     try {
-      const response = await axios.post(`http://localhost:8080/api/v1/bond/${bond_id}/consultations`, data, request_headers)
+      const response = await axios_instance.post(`bond/${bond_id}/consultations`, data)
 
       return response.data
 
@@ -90,7 +86,7 @@ class Consultations {
 
   async show(consultation_id: number) {
     try {
-      const response = await axios.get(`http://localhost:8080/api/v1/consultations/${consultation_id}`, request_headers)
+      const response = await axios_instance.get(`consultations/${consultation_id}`)
 
       return response.data
     } catch (err: unknown) {
@@ -100,7 +96,7 @@ class Consultations {
 
   async update(consultation_id: number, data: UpdateConsultationParams) {
     try {
-      const response = await axios.patch(`http://localhost:8080/api/v1/consultations/${consultation_id}`, data, request_headers)
+      const response = await axios_instance.patch(`consultations/${consultation_id}`, data)
 
       return response.data
     } catch (err: unknown) {
@@ -112,7 +108,7 @@ class Consultations {
 
   async destroy(consultation_id: number) {
     try {
-      const response = await axios.delete(`http://localhost:8080/api/v1/consultations/${consultation_id}`, request_headers)
+      const response = await axios_instance.delete(`consultations/${consultation_id}`)
 
       return response.data
     } catch (err: unknown) {
@@ -123,7 +119,7 @@ class Consultations {
 
   async status() {
     try {
-      const response = await axios.get('http://localhost:8080/api/v1/consultation_status', request_headers)
+      const response = await axios_instance.get('consultation_status')
 
       return response.data
     } catch (err: unknown) {

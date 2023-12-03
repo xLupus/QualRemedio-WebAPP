@@ -1,4 +1,4 @@
-import { Button, CircularProgress, FormHelperText, InputLabel, MenuItem, Select, Stack, TextField, Typography } from "@mui/material"
+import { Button, CircularProgress, Paper, FormHelperText, InputLabel, MenuItem, Select, Stack, TextField, Typography } from "@mui/material"
 import { useQueries } from "@tanstack/react-query"
 import { z } from "zod"
 import { SubmitHandler, useForm } from "react-hook-form"
@@ -8,6 +8,7 @@ import Specialty from "../../../services/Specialty"
 import Consultations, { UpdateConsultationParams } from "../../../services/Consultations"
 import { useNavigate, useParams } from "react-router-dom"
 import { useEffect } from "react"
+import { grey } from "@mui/material/colors"
 
 interface ConsultationUpdateFormData {
   reason: string,
@@ -113,7 +114,11 @@ export const UpdateConsultationPage = () => {
       <Typography variant='h5' component='h1'>Editar Consultas</Typography>
 
       {consultation_data_loading && (
-        <CircularProgress />
+        <Paper sx={{ bgcolor: grey[50] }}>
+          <Stack width='100%' minHeight={400} justifyContent={'center'} alignItems={'center'}>
+            <CircularProgress color="primary" />
+          </Stack>
+        </Paper>
       )}
 
       {!consultation_data_loading && (

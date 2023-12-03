@@ -90,7 +90,6 @@ export const CreateConsultationPage = () => {
             <Typography>Data da Consulta*</Typography>
 
             <TextField
-              placeholder="Data da Consulta"
               type="date"
               variant='outlined'
               sx={{ minWidth: 200 }}

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { axios_instance } from "../config/axios";
 
 class Specialty {
   async index() {
@@ -9,7 +10,7 @@ class Specialty {
     }
 
     try {
-      const response = await axios.get('http://localhost:8080/api/v1/specialties', request_headers)
+      const response = await axios_instance.get('specialties')
 
       return response.data
 

@@ -1,4 +1,4 @@
-import axios from "axios";
+import { axios_instance } from "../config/axios";
 
 class Bond {
   async index() {
@@ -9,10 +9,10 @@ class Bond {
     }
 
     try {
-      const response = await axios.get('http://localhost:8080/api/v1/user/bond', request_headers)
+      const response = await axios_instance.get('user/bond')
 
       return response.data
-      
+
     } catch (err: unknown) {
       console.log(err);
     }

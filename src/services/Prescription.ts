@@ -1,5 +1,4 @@
 import axios, { AxiosError } from "axios";
-import { request_headers } from "./Consultations";
 
 interface PrescriptionStoreData {
   label: string,

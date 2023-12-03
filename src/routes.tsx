@@ -9,6 +9,9 @@ import { ShowConsultationDetailsPage } from "./pages/Consultation/ShowConsultati
 import { UpdateConsultationPage } from "./pages/Consultation/UpdateConsultationPage";
 import { CreatePrescriptionPage } from "./pages/Prescription/CreatePrescriptionPage";
 import { UpdatePrescriptionPage } from "./pages/Prescription/UpdatePrescriptionPage";
+import { ShowProfileDetails } from "./pages/Profile/ShowProfileDetails";
+import { UpdateProfileData } from "./pages/Profile/UpdateProfileData";
+import { ChangePassword } from "./pages/Profile/ChangePassword";
 
 export const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -20,6 +23,10 @@ export const routes = createBrowserRouter(
       </Route>
 
       <Route path="/d">
+        <Route path="perfil" element={<ShowProfileDetails />} />
+        <Route path="perfil/atualizar" element={<UpdateProfileData />} />
+        <Route path="perfil/atualizar/senha" element={<ChangePassword />} />
+
         <Route path="consultas" element={<ListConsultationPage actions query={{ auth_user: 14, bond_id: 1 }} />} />
         <Route path="consultas/criar" element={<CreateConsultationPage />} />
         <Route path="consultas/:consultation_id" element={<ShowConsultationDetailsPage />} />
