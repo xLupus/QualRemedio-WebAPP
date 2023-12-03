@@ -25,9 +25,9 @@ export const ShowPrescriptionDetailsPage = ({ consultation_id, prescription_id, 
     <Modal
       open={openModal}
       onClose={handleCloseModal}
-      sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}
+      sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: 2   }}
     >
-      <Stack minWidth={500} maxWidth={800} sx={{ bgcolor: 'white' }} padding={3} spacing={5}>
+      <Stack minWidth={500} maxWidth={'md'} sx={{ bgcolor: 'white' }} padding={3} spacing={5}>
         {isLoading || isFetching
           ? (
             <Stack alignItems='center'>

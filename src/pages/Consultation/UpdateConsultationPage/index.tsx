@@ -105,7 +105,7 @@ export const UpdateConsultationPage = () => {
     const response = await Consultations.update(Number(consultation_id), update_consultation_request_data)
 
     if (response.status == 200)
-      navigate(`/d/consultas/${consultation_id}`)
+      navigate(`/d/consultas/${consultation_id}`, { replace: true })
   }
 
   return (

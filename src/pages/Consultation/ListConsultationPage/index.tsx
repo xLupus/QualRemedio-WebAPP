@@ -4,8 +4,16 @@ import { Link, NavLink } from 'react-router-dom'
 import Consultations from '../../../services/Consultations'
 import { useState } from 'react'
 
-//<IResponseRequest, Error>
-export const ListConsultationPage = () => {
+interface ListConsultationProps {
+  actions?: boolean,
+
+  query?: { //TODO - Rever
+    auth_user?: number,
+    bond_id?: number
+  }
+}
+
+export const ListConsultationPage = ({ actions, query }: ListConsultationProps) => {
   const [selectedConsultation, setSelectedConsultation] = useState<number | null>(null)
 
   const [page, setPage] = useState(1)
@@ -15,7 +23,10 @@ export const ListConsultationPage = () => {
     queryKey: ['consultations', page],
 
     queryFn: () => Consultations.index({
-      filter: { created_by: 14 }, //TODO - Pegar do Storage
+      filter: {
+        created_by: query?.auth_user,
+        bond: query?.bond_id
+      }, //TODO - Pegar do Storage
       paginate: {
         skip: ((page - 1) * rowsPerPage),
         take: rowsPerPage
@@ -53,11 +64,13 @@ export const ListConsultationPage = () => {
     <Stack spacing={3} maxWidth={'lg'} padding={2} >
       <Typography variant='h5' component='h1'>Lista de Consultas</Typography>
 
-      <Box alignSelf='end'>
-        <NavLink to={'criar'}>
-          <Button variant='contained'>+ Consulta</Button>
-        </NavLink>
-      </Box>
+      {actions && (
+        <Box alignSelf='end'>
+          <NavLink to={'criar'}>
+            <Button variant='contained'>+ Consulta</Button>
+          </NavLink>
+        </Box>
+      )}
 
       <Table size="small">
         <TableHead color=''>
@@ -66,8 +79,10 @@ export const ListConsultationPage = () => {
             <TableCell>Razão</TableCell>
             <TableCell>Especialidade</TableCell>
             <TableCell>Status</TableCell>
-            <TableCell>Profissional</TableCell>
-            <TableCell>Ações</TableCell>
+            <TableCell>Vinculado a</TableCell>
+            {actions && (
+              <TableCell>Ações</TableCell>
+            )}
           </TableRow>
         </TableHead>
 
@@ -100,12 +115,14 @@ export const ListConsultationPage = () => {
                         <TableCell>{consultation.status.status}</TableCell>
                         <TableCell>{consultation.bond.to.name}</TableCell>
 
-                        <TableCell>
-                          <Stack direction='row' spacing={1}>
-                            <Button color='info' variant='contained' component={Link} to={`${consultation.id}/editar`}>Atualizar</Button>
-                            <Button color='error' variant='contained' onClick={() => openDeleteModalConfirm(consultation.id)}>Apagar</Button>
-                          </Stack>
-                        </TableCell>
+                        {actions && (
+                          <TableCell>
+                            <Stack direction='row' spacing={1}>
+                              <Button color='info' variant='contained' component={Link} to={`${consultation.id}/editar`}>Atualizar</Button>
+                              <Button color='error' variant='contained' onClick={() => openDeleteModalConfirm(consultation.id)}>Apagar</Button>
+                            </Stack>
+                          </TableCell>
+                        )}
                       </TableRow>
                     ))}
                   </>
@@ -123,6 +140,7 @@ export const ListConsultationPage = () => {
             onChange={handleChangePage}
             hidePrevButton={page == 1}
             hideNextButton={page == request_data.number_of_pages}
+            color='primary'
           />
         </Stack>
       )}

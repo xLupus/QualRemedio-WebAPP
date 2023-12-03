@@ -37,16 +37,21 @@ export interface UpdateConsultationParams {
 class Consultations {
   async index(params?: IndexConsultationParams) { //TODO - REVER
     const query_params = []
+    const filter_params = []
 
     if (params) {
       const { filter, paginate } = params
 
       if (filter) {
-        const { created_by } = filter //* bond
+        const { created_by, bond } = filter //* bond
 
         if (created_by)
-          query_params.push(`filter=created_by:${created_by}`)
+          filter_params.push(`created_by:${created_by}`)
 
+        if (bond)
+          filter_params.push(`bond:${bond}`)
+
+        query_params.push(`filter=${filter_params.join(',')}`)
       }
 
       if (paginate) {
@@ -57,7 +62,7 @@ class Consultations {
 
     const query_string = query_params.join('&')
 
-    //console.log({ query_string });
+    console.log({ query_params });
 
     try {
       const response = await axios.get(`http://localhost:8080/api/v1/consultations?${query_string}`, request_headers)

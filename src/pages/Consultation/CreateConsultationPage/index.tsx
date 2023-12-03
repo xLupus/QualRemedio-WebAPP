@@ -77,7 +77,7 @@ export const CreateConsultationPage = () => {
     const response = await Consultations.create(Number(professional), create_consultation_request_data)
 
     if (response.status == 200)
-      navigate('/d/consultas')
+      navigate('/d/consultas', { replace: true })
   }
 
   return (

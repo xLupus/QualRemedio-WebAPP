@@ -20,13 +20,12 @@ export const routes = createBrowserRouter(
       </Route>
 
       <Route path="/d">
-        <Route path="consultas" element={<ListConsultationPage />} />
+        <Route path="consultas" element={<ListConsultationPage actions query={{ auth_user: 14, bond_id: 1 }} />} />
         <Route path="consultas/criar" element={<CreateConsultationPage />} />
         <Route path="consultas/:consultation_id" element={<ShowConsultationDetailsPage />} />
         <Route path="consultas/:consultation_id/editar" element={<UpdateConsultationPage />} />
         <Route path="consultas/:consultation_id/prescricao/criar" element={<CreatePrescriptionPage />} />
-        {/*<Route path="consultas/:consultation_id/prescricao/:prescription_id" element={<ShowPrescriptionDetailsPage />} /> */}
-        <Route path="consultas/:consultation_id/prescricao/:prescription_id/atualizar" element={<UpdatePrescriptionPage />} /> 
+        <Route path="consultas/:consultation_id/prescricao/:prescription_id/atualizar" element={<UpdatePrescriptionPage />} />
       </Route>
     </>
   )
