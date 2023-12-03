@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 import  '../../../../style.css';
 import { AppButton } from '../../../../components/Button';
 
-export function AccountSelection() {
+export function LoginAccountSelection() {
     const accountsType = [
         {
             id: 1,
@@ -22,7 +22,7 @@ export function AccountSelection() {
 
     return (
         <>
-            <Box typography='h1' fontSize={'2rem'} color='#00000077' mb={1.25}>Bem-Vindo de volta!</Box>
+            <Box typography='h1' fontSize='2rem' color='#00000077' mb={1.25}>Bem-Vindo de volta!</Box>
             <Box typography='body1' fontSize='0.77344rem' color='#00000077' mb={3}>Logue-se para explorar tudo de melhor aqui.</Box>
 
             <Box typography='body1' fontSize='0.77344rem' color='#50505080' mb={6}>

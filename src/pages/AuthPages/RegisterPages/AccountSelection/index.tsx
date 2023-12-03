@@ -51,7 +51,7 @@ export function RegisterAccountSelection() {
                 }
             </Stack>
 
-            <Box display='flex' justifyContent='end' mt={8}>
+            <Box display='flex' justifyContent='end' alignItems='center' mt={8}>
                 <AppButton height='1.875rem' width='5rem' variant='text' className='authBackButton' fontSize='0.75rem' isRippleDisabled={true} >Voltar</AppButton>
                 <AppButton height='1.875rem' width='5rem' variant='contained' className='authButton authNextButton' backgroundColor='#BBBBBB' boxShadow={2} fontSize='0.75rem'>Avançar</AppButton>
             </Box>

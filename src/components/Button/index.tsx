@@ -17,6 +17,8 @@ export function AppButton({
     flexDirection, 
     justifyContent,
     isRippleDisabled,
+    isFullWidth = true,
+    textTransform = 'none',
     className, 
     children
 }: AppButtonProps) {
@@ -38,11 +40,13 @@ export function AppButton({
                         justifyContent,
                         padding: 1.5,
                         borderRadius: '0.25rem',
-                        lineHeight: 'normal'
+                        lineHeight: 'normal',
+                        textTransform
                     }}
                     id={id?.toString()} 
                     key={key} 
                     disableRipple={isRippleDisabled}
+                    fullWidth={isFullWidth}
                 >
                     {children}
                 </Button>
