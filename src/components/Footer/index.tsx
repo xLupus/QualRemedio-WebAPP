@@ -12,8 +12,7 @@ export function Footer() {
           <Logo />
 
           <Box component='nav' sx={{ marginLeft: { md: 8 } }}>
-            <Button color='inherit' component={NavLink} to=''>Funcionalidades</Button>
-            <Button color='inherit' component={NavLink} to=''>Preços</Button>
+            <Button color='inherit' component={NavLink} to=''>Planos</Button>
             <Button color='inherit' component={NavLink} to=''>Entrar</Button>
             <Button color='inherit' component={NavLink} to=''>Cadastrar</Button>
           </Box>
@@ -21,7 +20,7 @@ export function Footer() {
 
         <Box display='flex' flexWrap='wrap' justifyContent={{ xs: 'center', md: 'space-between' }} gap={1} >
           <Box display='flex' flexWrap='wrap' justifyContent='center' alignItems='center'>
-            <Typography>Copyright © 2023 Qual Remedio ltd.</Typography>
+            <Typography>Copyright © 2023 Solutions High Tech ltda.</Typography>
             <Typography>Todos os direitos reservados.</Typography>
           </Box>
 

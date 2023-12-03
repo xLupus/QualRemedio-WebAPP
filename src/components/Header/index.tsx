@@ -33,11 +33,7 @@ export function Header() {
 
             <Menu id="mobile-menu" anchorEl={anchorEl} open={open} onClose={() => handleCloseMenu()}>
               <MenuItem onClick={handleCloseMenu}>
-                <NavLink to='/funcionalidades'>Funcionalidades</NavLink>
-              </MenuItem>
-
-              <MenuItem onClick={handleCloseMenu}>
-                <NavLink to='/precos'>Preços</NavLink>
+                <NavLink to='/precos'>Planos</NavLink>
               </MenuItem>
 
               <MenuItem onClick={handleCloseMenu}>
@@ -52,8 +48,7 @@ export function Header() {
 
           {/* Full Menu */}
           <Box component='nav' display={{ xs: 'none', md: 'initial' }}>
-            <Button color='inherit' component={NavLink} to='/funcionalidades'>Funcionalidades</Button>
-            <Button color='inherit' component={NavLink} to='/precos'>Preços</Button>
+            <Button color='inherit' component={NavLink} to='/precos'>Planos</Button>
             <Button color='inherit' component={NavLink} to=''>Entrar</Button>
             <Button color='inherit' component={NavLink} to=''>Cadastrar</Button>
           </Box>

@@ -11,11 +11,12 @@ function create_table_data(
 }
 
 const table_rows = [
-  create_table_data('Frozen yoghurt', 'v', 'v', 'v'),
-  create_table_data('Ice cream sandwich', 'v', 'v', 'v'),
-  create_table_data('Eclair', 'v', 'v', 'v'),
-  create_table_data('Cupcake', 'v', 'v', 'v'),
-  create_table_data('Gingerbread', 'v', 'v', 'v'),
+  create_table_data('Agendamento de consultas', 'Limitado', 'Ilimitado', 'Ilimitado'),
+  create_table_data('Lembretes automáticos', '---', 'v', 'v'),
+  create_table_data('Receitas e Prescrições', 'Armazenamento limitado', 'Armazenamento amplo', 'Armazenamento amplo'),
+  create_table_data('Histórico médico', 'v', 'v', 'v'),
+  create_table_data('Registro detalhado', 'v', 'v', 'v'),
+  create_table_data('Suporte ao Cliente', 'Comunidade e básico', 'Prioritário', 'Dedicado 24/7'),
 ];
 
 
@@ -32,7 +33,7 @@ export function PricePage() {
 
           <CardContent>
             <Typography marginBottom={3}>
-              Lorem ipsum dolor sit amet consectetur. Consectetur congue scelerisque vehicula dolor tincidunt.
+              Comece a cuidar da sua saúde agora mesmo, usando nosso plano 100% gratuito.
             </Typography>
 
             <Typography>
@@ -49,20 +50,29 @@ export function PricePage() {
 
           <List>
             <ListItem>
-              <ListItemText>Lorem ipsum dolor sit amet consectetur.</ListItemText>
+              <ListItemText>Agendamento de consultas ( Limitado )</ListItemText>
             </ListItem>
 
             <ListItem>
-              <ListItemText>Lorem ipsum dolor sit amet consectetur.</ListItemText>
+              <ListItemText>Receitas e Prescrições ( Armazenamento Limitado )</ListItemText>
             </ListItem>
 
             <ListItem>
-              <ListItemText>Lorem ipsum dolor sit amet consectetur.</ListItemText>
+              <ListItemText>Marcação de consultas</ListItemText>
+            </ListItem>
+            
+            <ListItem>
+              <ListItemText>Suporte ao Cliente ( Básico )</ListItemText>
             </ListItem>
 
             <ListItem>
-              <ListItemText>Lorem ipsum dolor sit amet consectetur.</ListItemText>
+              <ListItemText></ListItemText>
             </ListItem>
+
+            <ListItem>
+              <ListItemText></ListItemText>
+            </ListItem>
+
           </List>
         </Card>
 
@@ -71,7 +81,7 @@ export function PricePage() {
 
           <CardContent>
             <Typography marginBottom={3}>
-              Lorem ipsum dolor sit amet consectetur. Consectetur congue scelerisque vehicula dolor tincidunt.
+              Excelente para quem precisa de um quantidade maior de armazenamento.
             </Typography>
 
             <Typography>
@@ -88,20 +98,25 @@ export function PricePage() {
 
           <List>
             <ListItem>
-              <ListItemText>Lorem ipsum dolor sit amet consectetur.</ListItemText>
+              <ListItemText>Agendamento de consultas ( Ilimitado )</ListItemText>
             </ListItem>
 
             <ListItem>
-              <ListItemText>Lorem ipsum dolor sit amet consectetur.</ListItemText>
+              <ListItemText>Lembretes automáticos</ListItemText>
             </ListItem>
 
             <ListItem>
-              <ListItemText>Lorem ipsum dolor sit amet consectetur.</ListItemText>
+              <ListItemText>Receitas e Prescrições ( Armazenamento Amplo )</ListItemText>
             </ListItem>
 
             <ListItem>
-              <ListItemText>Lorem ipsum dolor sit amet consectetur.</ListItemText>
+              <ListItemText>Marcação de consultas</ListItemText>
             </ListItem>
+            
+            <ListItem>
+              <ListItemText>Suporte ao Cliente ( Prioritário )</ListItemText>
+            </ListItem>
+
           </List>
         </Card>
 
@@ -110,7 +125,7 @@ export function PricePage() {
 
           <CardContent>
             <Typography marginBottom={3}>
-              Lorem ipsum dolor sit amet consectetur. Consectetur congue scelerisque vehicula dolor tincidunt.
+            Solução perfeita para equipes de médio porte que trabalham de forma colaborativa.
             </Typography>
 
             <Typography>
@@ -127,71 +142,30 @@ export function PricePage() {
 
           <List>
             <ListItem>
-              <ListItemText>Lorem ipsum dolor sit amet consectetur.</ListItemText>
+              <ListItemText>Agendamento de consultas ( Ilimitado )</ListItemText>
             </ListItem>
 
             <ListItem>
-              <ListItemText>Lorem ipsum dolor sit amet consectetur.</ListItemText>
+              <ListItemText>Lembretes automáticos</ListItemText>
+            </ListItem>
+            
+            <ListItem>
+              <ListItemText>Receitas e Prescrições ( Armazenamento Amplo )</ListItemText>
             </ListItem>
 
             <ListItem>
-              <ListItemText>Lorem ipsum dolor sit amet consectetur.</ListItemText>
+              <ListItemText>Marcação de consultas</ListItemText>
+            </ListItem>
+            
+            <ListItem>
+              <ListItemText>Suporte ao Cliente ( Dedicado 24/7 )</ListItemText>
             </ListItem>
 
-            <ListItem>
-              <ListItemText>Lorem ipsum dolor sit amet consectetur.</ListItemText>
-            </ListItem>
           </List>
         </Card>
       </Stack>
 
-      <Typography component='h2' variant='h5' fontWeight='bold' sx={{ paddingY: 4 }}>Detalhes do Plano</Typography>
-
-      <TableContainer sx={{ display: 'flex', justifyContent: 'center', marginBottom: 10 }}>
-        <Table sx={{ maxWidth: 'lg' }}>
-          <TableHead>
-            <TableRow>
-              <TableCell>Compare todos os planos</TableCell>
-              <TableCell align='center'>Gratuito</TableCell>
-              <TableCell align='center'>Premium</TableCell>
-              <TableCell align='center'>Enterprise</TableCell>
-            </TableRow>
-          </TableHead>
-
-          <TableBody>
-            {table_rows.map((row, i) => (
-              <TableRow key={i}>
-                <TableCell>{row.feature}</TableCell>
-                <TableCell align='center'>{row.free}</TableCell>
-                <TableCell align='center'>{row.premium}</TableCell>
-                <TableCell align='center'>{row.enterprise}</TableCell>
-              </TableRow>
-            ))}
-
-            <TableRow >
-              <TableCell></TableCell>
-
-              <TableCell align='center'>
-                <Button variant='contained' size="small">
-                  Assinar Plano
-                </Button>
-              </TableCell>
-
-              <TableCell align='center'>
-                <Button variant='contained' size="small">
-                  Assinar Plano
-                </Button>
-              </TableCell>
-
-              <TableCell align='center'>
-                <Button variant='contained' size="small">
-                  Assinar Plano
-                </Button>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
+      
     </Container>
   )
 }
