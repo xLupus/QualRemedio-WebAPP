@@ -1,9 +1,9 @@
 import { Box, Stack, Typography, Button, Card, CardContent } from '@mui/material'
 
 export function HomePage() {
+
   return (
     <Box component='main'>
-
       {/* Jumbotroon - O que fazemos */}
       <Stack alignItems='center' justifyContent='center' spacing={2} useFlexGap padding={2} textAlign='center' paddingTop={5} sx={{ bgcolor: 'yellow' }}>
         <Typography variant='h5' fontWeight='bold'>Lorem ipsum dolor sit amet consectetur.</Typography>
@@ -50,6 +50,7 @@ export function HomePage() {
           </Card>
 
           <Card sx={{ maxWidth: 340, paddingY: 3, boxShadow: 6 }}>
+
             <CardContent sx={{ paddingBottom: 0 }}>
               <img src="https://placehold.co/100" alt="" style={{ margin: 'auto' }} />
               <Typography variant='subtitle1' fontWeight='bold' textAlign='center' marginTop={2}>Lorem ipsum</Typography>
@@ -87,6 +88,8 @@ export function HomePage() {
       </Stack>
 
       {/*  */}
+   
     </Box>
+    
   )
 }
