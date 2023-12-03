@@ -19,6 +19,7 @@ export function AppButton({
     isRippleDisabled,
     isFullWidth = true,
     textTransform = 'none',
+    type = 'button',
     className, 
     children
 }: AppButtonProps) {
@@ -43,6 +44,7 @@ export function AppButton({
                         lineHeight: 'normal',
                         textTransform
                     }}
+                    type={type}
                     id={id?.toString()} 
                     key={key} 
                     disableRipple={isRippleDisabled}

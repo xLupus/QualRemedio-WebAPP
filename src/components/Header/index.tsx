@@ -3,8 +3,24 @@ import { NavLink } from "react-router-dom"
 import { useState, MouseEvent } from 'react'
 import { Logo } from "../Logo"
 import { HiMenu } from 'react-icons/hi'
+import { useAuthContext } from "../../hooks/authContext"
+import AuthService from '../../services/Auth/Login';
+import { useNavigate } from 'react-router-dom';
 
 export function Header() {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+
+    const result = await AuthService.logout();
+  
+      if(result?.status === 200) {
+        navigate('/auth/login');
+      }
+  }
+
+  const currentUser = useAuthContext();
+  console.log(currentUser)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
 
@@ -35,18 +51,27 @@ export function Header() {
               <MenuItem onClick={handleCloseMenu}>
                 <NavLink to='/funcionalidades'>Funcionalidades</NavLink>
               </MenuItem>
-
               <MenuItem onClick={handleCloseMenu}>
-                <NavLink to='/precos'>Preços</NavLink>
+                  <NavLink to='/precos'>Preços</NavLink>
               </MenuItem>
+              {
+                currentUser ? 
+                  <>
+                    <MenuItem onClick={handleLogout}>
+                      <NavLink to='/auth/select-account'>Logout</NavLink>
+                    </MenuItem>
+                  </>
+                  :
+                  <>
+                    <MenuItem onClick={handleCloseMenu}>
+                      <NavLink to='/auth/login/select-account'>Entrar</NavLink>
+                    </MenuItem>
 
-              <MenuItem onClick={handleCloseMenu}>
-                <NavLink to='/auth/login/select-account'>Entrar</NavLink>
-              </MenuItem>
-
-              <MenuItem onClick={handleCloseMenu}>
-                <NavLink to=''>Cadastrar</NavLink>
-              </MenuItem>
+                    <MenuItem onClick={handleCloseMenu}>
+                      <NavLink to=''>Cadastrar</NavLink>
+                    </MenuItem>
+                  </>
+                }  
             </Menu>
           </Box>
 
@@ -54,8 +79,18 @@ export function Header() {
           <Box component='nav' display={{ xs: 'none', md: 'initial' }}>
             <Button color='inherit' component={NavLink} to='/funcionalidades'>Funcionalidades</Button>
             <Button color='inherit' component={NavLink} to='/precos'>Preços</Button>
-            <Button color='inherit' component={NavLink} to='/auth/login/select-account'>Entrar</Button>
-            <Button color='inherit' component={NavLink} to=''>Cadastrar</Button>
+            {
+                currentUser ? 
+                  <>
+                    <Button color='inherit' onClick={handleLogout}>Logout</Button>
+                  </>
+                  :
+                  <>
+                    <Button color='inherit' component={NavLink} to='/auth/login/select-account'>Entrar</Button>
+                    <Button color='inherit' component={NavLink} to=''>Cadastrar</Button>
+                  </>
+              }  
+            
           </Box>
         </Toolbar>
       </Container>

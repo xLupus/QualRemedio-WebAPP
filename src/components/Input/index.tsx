@@ -1,9 +1,11 @@
 import { TextField } from "@mui/material";
 import { AppInputProps } from "../../types/type";
+import React from "react";
 
-export function AppInput({id, variant = 'outlined', label, color = 'primary', value, size = 'medium', type = 'text', onChange, onKeyDown, isFullWidth = true, isRequired = false}: AppInputProps) {
+export const AppInput = React.forwardRef(({id, variant = 'outlined', label, color = 'primary', value, size = 'medium', type = 'text', onChange, onKeyDown, helperText, isFullWidth = true, isRequired = false}: AppInputProps, ref) => {
     return (
-        <TextField 
+        <TextField
+            inputRef={ref}
             id={id} 
             label={label} 
             variant={variant} 
@@ -11,11 +13,12 @@ export function AppInput({id, variant = 'outlined', label, color = 'primary', va
             color={color} 
             value={value} 
             size={size}
-            fullWidth={isFullWidth} 
+            fullWidth={isFullWidth}
+            helperText={helperText}
             onChange={onChange} 
             onKeyDown={onKeyDown}
             required={isRequired}
-            autoComplete="off" 
+            autoComplete="off"
         />
     )
-}
+}) 
