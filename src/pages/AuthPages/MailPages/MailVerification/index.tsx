@@ -1,4 +1,4 @@
-import { Box, TextField} from "@mui/material";
+import { Box } from "@mui/material";
 import { AppButton } from '../../../../components/Button';
 //import { NavLink } from "react-router-dom";
 import { AppInput } from "../../../../components/Input";
@@ -13,7 +13,16 @@ export function MailVerification({ isFromPath }: { isFromPath: string }) {
                     <Box typography='body1' fontSize='0.875rem' color='#00000077' textAlign='center' mb={4.3} width='80%' mx='auto'>Faremos uma verificação após o seu cadastro para fins de segurança</Box>
 
                     <Box component='form'>
-                        <TextField label="Email" variant="filled" name="email" sx={{backgroundColor: '#FFF'}} fullWidth required autoComplete="off"/>
+                        <AppInput 
+                            id='email-field'
+                            color='primary'
+                            variant='filled'
+                            type='email'
+                            label='Email'
+                            autoComplete="off"
+                            required
+                            fullWidth
+                        />
                     </Box>
 
                     <Box display='flex' justifyContent='end' mt={8}>
@@ -29,12 +38,14 @@ export function MailVerification({ isFromPath }: { isFromPath: string }) {
                     <Box typography='body1' fontSize='0.875rem' color='#00000077' textAlign='center' width='90%' mx='auto' mb={4}>Insira o e-mail que você usou no seu cadastro para enviarmos as instruções de recuperação.</Box>
                     
                     <AppInput 
-                        id='password-filed'
+                        id='email-field'
                         color='primary'
                         variant='filled'
                         type='email'
                         label='Email'
-                        isRequired={true}
+                        autoComplete="off"
+                        required
+                        fullWidth
                     />
         
                     <Box display='flex' justifyContent='center' mt={5.5}>
@@ -42,7 +53,7 @@ export function MailVerification({ isFromPath }: { isFromPath: string }) {
                     </Box>
         
                     <Box display='flex' justifyContent='flex-end' mt={8}>
-                        <AppButton height='1.875rem' width='5rem' variant='text' className='authBackButton' fontSize='0.75rem' isRippleDisabled={true}>Voltar</AppButton>
+                        <AppButton height='1.875rem' width='5rem' variant='text' fontSize='0.75rem' isRippleDisabled={true}>Voltar</AppButton>
                     </Box>
                 </>
     )

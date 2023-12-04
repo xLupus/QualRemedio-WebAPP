@@ -1,15 +1,15 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Box, Checkbox, Divider, FormControlLabel, FormGroup, Link, TextField, Typography } from "@mui/material";
-import Stack from '@mui/material/Stack';
-import  '../../../../style.css';
-//import { AppInput } from '../../../../components/Input';
+import { Box, Checkbox, Divider, FormControlLabel, FormGroup, IconButton, InputAdornment, Link, Typography, Stack } from "@mui/material";
 import { AppButton } from '../../../../components/Button';
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Google, Microsoft } from '@mui/icons-material';
+import { Google, Microsoft, Visibility, VisibilityOff } from '@mui/icons-material';
 import { LoginService } from '../../../../types/type';
 import { z } from 'zod';
-import AuthService from '../../../../services/Auth/Login/index';
+import { AppInput } from '../../../../components/Input';
+import { useState } from 'react';
+import { AppInputAdornments } from '../../../../components/Input/InputAdornments';
+import  '../../../../style.css';
 
 const validator = z.object({
     email: z
@@ -25,28 +25,33 @@ const validator = z.object({
 });
 
 export function Login() {
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+    
     const navigate = useNavigate();
 
     const { register, handleSubmit, formState: { errors } } = useForm<LoginService>({
         resolver: zodResolver(validator),
     })
 
-    const handleLogin = async (data: LoginService) => {
-        const { email, password, role } = data;
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleMouseDownPassword = (e: unknown) => e.preventDefault();
 
+    const handleLogin = (data: LoginService) => {
+        const { email, password, role } = data;
+        console.log('2')
         const loginData = {
             email,
             password,
             role
         }
     
-        const result = await AuthService.login(loginData);
+      /*   const result = await AuthService.login(loginData);
 
         if(result?.status === 200) {
             navigate('/');
-        }
+        } */
     }
-
+    
     return (
         <>
             <Box typography='h1' fontSize={'2rem'} color='#00000077' mb={1.25}>Bem-Vindo de volta!</Box>
@@ -62,7 +67,7 @@ export function Login() {
 
             <Box component='form' onSubmit={handleSubmit(handleLogin)}>
                 <Stack spacing={3}>
-                    <TextField 
+                    <AppInput 
                         id='email-field'
                         color='primary'
                         variant='filled'
@@ -70,33 +75,51 @@ export function Login() {
                         label='E-mail'
                         {...register('email')}
                         required
-                        autoComplete="off"
+                        fullWidth
+                        autoComplete='off'
                     />
 
-                    <TextField 
+                    <AppInputAdornments
                         id='password-field'
-                        color='primary'
                         variant='filled'
-                        type='password'
+                        color='primary'
+                        type={showPassword ? 'text' : 'password'}
                         label='Senha'
                         {...register('password')}
                         required
-                        autoComplete="off"
+                        fullWidth
+                        autoComplete='off'
+                        endAdornment={
+                            <InputAdornment position='end'>
+                                    <IconButton
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge='end'
+                                        sx={{marginRight: '.25rem'}}
+                                        size='small'
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                            </InputAdornment>
+                        }
                     />
 
-                    <TextField 
-                        id='hidden-field'
+                    <AppInput 
+                        id='role-field'
+                        color='primary'
+                        variant='filled'
                         type='hidden'
-                        {...register('role', { value: 1 })}
-                        required
-                    />                    
+                        {...register('role', { value: 1})}
+                        fullWidth
+                        sx={{display: 'none'}}
+                    />
                 </Stack>
 
                 <Box display='flex' justifyContent='space-between' alignItems='center' mb={6} mt={2}>
                     <FormGroup>
                         <FormControlLabel control={<Checkbox color="default" defaultChecked />} label={<Typography fontSize='0.77344rem' color='#50505080'>Lembrar-me</Typography>} />
                     </FormGroup>
-                    <Link component={NavLink} to='/auth/register/select-account' ml='0.2rem' typography='body1' fontSize='0.77344rem' color='#50505080' underline='none'>Esqueceu a senha?</Link>
+                    <Link component={NavLink} to='/recover-password/email-verification' ml='0.2rem' typography='body1' fontSize='0.77344rem' color='#50505080' underline='none'>Esqueceu a senha?</Link>
                 </Box>
 
                 <Box display='flex' justifyContent='center'>

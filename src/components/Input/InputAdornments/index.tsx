@@ -1,146 +1,31 @@
-/* import { FormControl, Input, InputLabel, InputAdornment, IconButton, OutlinedInput, FilledInput } from "@mui/material";
+import { FormControl, Input, InputLabel, OutlinedInput, FilledInput } from "@mui/material";
 import { AppInputAdornmentsProps } from "../../../types/type";
+import { ForwardRefExoticComponent, RefAttributes, RefObject, forwardRef } from "react";
 
-export function AppInputAdornments({
-    id = '', 
-    variant = 'outlined',
-    label = '', 
-    edge = 'end',
-    color = 'primary', 
-    type = 'text', 
-    element,
-    position = 'end',
-    inputAdornment = '',
-    value,
-    onKeyDown,
-    onChange,
-    isFullWidth = false,
-    handleClick = () => {}, 
-    handleMouseDown = () => {}
-}: AppInputAdornmentsProps) {
-    return (
-        <FormControl variant={variant} fullWidth={isFullWidth} component='form'>
-            <InputLabel htmlFor={id}>{label}</InputLabel>
-                {
-                    variant === 'outlined' ? 
+export const AppInputAdornments: ForwardRefExoticComponent<AppInputAdornmentsProps & RefAttributes<HTMLDivElement>> = forwardRef(({
+    ...props
+}: AppInputAdornmentsProps,
+ref: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined) => {
+        return (
+            <FormControl variant={props.variant} fullWidth={props.fullWidth}>
+                <InputLabel htmlFor={props.id}>{props.label}</InputLabel>
+                    {
+                        props.variant === 'outlined' ? 
                         <OutlinedInput
-                            id={id}
-                            type={type}
-                            color={color}
-                            value={value}
-                        
-                            onKeyDown={onKeyDown}
-                            autoComplete="off"
-                            onChange={onChange}
-                            startAdornment={
-                                inputAdornment === 'start' &&
-                                <InputAdornment position={position}>
-                                    <IconButton
-                                        onClick={handleClick}
-                                        onMouseDown={handleMouseDown}
-                                        edge={edge}
-                                        sx={{marginRight: '.25rem'}}
-                                        size='small'
-                                    >
-                                        {element}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            endAdornment={
-                                inputAdornment === 'end' &&
-                                <InputAdornment position={position}>
-                                    <IconButton   
-                                        onClick={handleClick}
-                                        onMouseDown={handleMouseDown}
-                                        edge={edge}
-                                        sx={{marginRight: '.25rem'}}
-                                        size='small'
-                                    >
-                                        {element}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            label={label}
+                            {...props}
+                            inputRef={ref}
                         />
-                    : variant === 'filled' ?
+                    : props.variant === 'filled' ?
                         <FilledInput
-                            id={id}
-                            type={type}
-                            color={color}
-                            value={value}
-                            onKeyDown={onKeyDown}
-                            onChange={onChange}
-                            autoComplete="off"
-                            startAdornment={
-                                inputAdornment === 'start' &&
-                                <InputAdornment position={position}>
-                                    <IconButton
-                                        onClick={handleClick}
-                                        onMouseDown={handleMouseDown}
-                                        edge={edge}
-                                        sx={{marginRight: '.25rem'}}
-                                        size='small'
-                                    >
-                                        {element}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            endAdornment={
-                                inputAdornment === 'end' &&
-                                <InputAdornment position={position}>
-                                    <IconButton
-                                        onClick={handleClick}
-                                        onMouseDown={handleMouseDown}
-                                        edge={edge}
-                                        sx={{marginRight: '.25rem'}}
-                                        size='small'
-                                    >
-                                        {element}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            label={label}
+                            {...props}
+                            inputRef={ref}
                         />
-                    :
+                        :
                         <Input
-                            id={id}
-                            type={type}
-                            color={color}
-                            value={value}
-                            onKeyDown={onKeyDown}
-                            onChange={onChange}
-                            autoComplete="off"
-                            startAdornment={
-                                inputAdornment === 'start' &&
-                                <InputAdornment position={position}>
-                                    <IconButton
-                                        onClick={handleClick}
-                                        onMouseDown={handleMouseDown}
-                                        edge={edge}
-                                        sx={{marginRight: '.25rem'}}
-                                        size='small'
-                                    >
-                                        {element}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            endAdornment={
-                                inputAdornment === 'end' &&
-                                <InputAdornment position={position}>
-                                    <IconButton
-                                        onClick={handleClick}
-                                        onMouseDown={handleMouseDown}
-                                        edge={edge}
-                                        sx={{marginRight: '.25rem'}}
-                                        size='small'
-                                    >
-                                        {element}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            label={label}
+                            {...props}
+                            inputRef={ref}
                         />
                 }
         </FormControl>
     )
-} */
+})

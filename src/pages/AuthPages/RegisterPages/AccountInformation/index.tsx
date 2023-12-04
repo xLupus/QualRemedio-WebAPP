@@ -17,45 +17,50 @@ export function RegisterAccountInformation() {
                     <>
                         <Grid xs={12}>
                             <AppInput 
-                                id='email-field'
+                                id='name-field'
                                 color='primary'
                                 variant='filled'
                                 type='text'
                                 label='Nome'
-                                isRequired={true}
+                                required
+                                fullWidth
                             />
                         </Grid>
 
                         <Grid xs={6}>
                             <AppInput 
-                                id='email-field'
+                                id='cpf-field'
                                 color='primary'
                                 variant='filled'
                                 type='text'
                                 label='CPF'
-                                isRequired={true}
+                                required
+                                fullWidth
                             />
                         </Grid>
 
                         <Grid xs={6}>
                             <AppInput 
-                                id='email-field'
+                                id='nasc-field'
                                 color='primary'
                                 variant='filled'
                                 type='date'
                                 label='Nasc.:'
-                                isRequired={true}
+                                min="1900-01-01"
+                                required
+                                fullWidth
                             />
                         </Grid>
 
                         <Grid xs={12}>
                             <AppInput 
-                                id='email-field'
+                                id='tel-field'
                                 color='primary'
                                 variant='filled'
                                 type='tel'
                                 label='Telefone'
-                                isRequired={true}
+                                required
+                                fullWidth
                             />
                         </Grid>
                     </>
@@ -71,7 +76,8 @@ export function RegisterAccountInformation() {
                                 variant='filled'
                                 type='text'
                                 label='Nome'
-                                isRequired={true}
+                                required
+                                fullWidth
                             />
                         </Grid>
 
@@ -82,7 +88,8 @@ export function RegisterAccountInformation() {
                                 variant='filled'
                                 type='text'
                                 label='CPF'
-                                isRequired={true}
+                                required
+                                fullWidth
                             />
                         </Grid>
 
@@ -93,7 +100,8 @@ export function RegisterAccountInformation() {
                                 variant='filled'
                                 type='date'
                                 label='Nasc.:'
-                                isRequired={true}
+                                required
+                                fullWidth
                             />
                         </Grid>
 
@@ -104,18 +112,20 @@ export function RegisterAccountInformation() {
                                 variant='filled'
                                 type='tel'
                                 label='Telefone'
-                                isRequired={true}
+                                required
+                                fullWidth
                             />
                         </Grid>
 
                         <Grid xs={6}>
                             <AppInput 
-                                id='crm-field'
+                                id={ accountType === 2 ? 'crm-field' : 'doc-field'}
                                 color='primary'
                                 variant='filled'
                                 type='text'
-                                label={accountType === 2 ? 'CRM' : 'Documento'}
-                                isRequired={true}
+                                label={ accountType === 2 ? 'CRM' : 'Documento' }
+                                required
+                                fullWidth
                             />
                         </Grid>
 
@@ -126,7 +136,8 @@ export function RegisterAccountInformation() {
                                 variant='filled'
                                 type='text'
                                 label='Especialidade'
-                                isRequired={true}
+                                required
+                                fullWidth
                             />
                         </Grid>
                     </>

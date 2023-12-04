@@ -33,11 +33,11 @@ export function Routes() {
                     {/* Area Publica */}
                     <Route element={<App />}>
                         <Route index element={<HomePage />} />
+                        <Route path="funcionalidades" element={<FeaturePage />} />
                         <Route path="precos" element={<PricePage />} />
                     </Route>
 
                     <Route element={<Protected />}>
-                        <Route path="funcionalidades" element={<FeaturePage />} />
                     </Route>
                 
                     <Route element={<Auth />}>
@@ -48,9 +48,9 @@ export function Routes() {
                         {/* Registro */}
                         <Route path="auth/register/select-account" element={<RegisterAccountSelection />} />
                         <Route path="auth/register/email-verification" element={<MailVerification isFromPath={'register'} />} />
-                        <Route path="auth/register/email-send" element={<SendMail isFromPath={'register'} />} />
                         <Route path="auth/register/account-info" element={<RegisterAccountInformation />} />
                         <Route path="auth/register/create-password" element={<CreatePassword isFromPath="register" />} />
+                        <Route path="auth/register/email-send" element={<SendMail isFromPath={'register'} />} />
                         <Route path="auth/register/account-created" element={<RegisterAccountCreated />} />
                        
                         {/* Recuperação de senha */}

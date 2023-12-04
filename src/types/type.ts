@@ -1,7 +1,6 @@
-import { TextFieldVariants } from "@mui/material";
-import { ChangeEventHandler, KeyboardEventHandler } from "react";
+import { SxProps, TextFieldVariants, Theme } from "@mui/material";
+import { ChangeEventHandler, FocusEventHandler, FormEventHandler, HTMLInputTypeAttribute, Key, KeyboardEventHandler, ReactNode } from "react";
 
-//System Props
 interface AppButtonProps {
     id?: number | string | undefined;
     key?: number;
@@ -25,40 +24,57 @@ interface AppButtonProps {
 
 interface AppInputProps {
     id?: string;
+    key?: Key | null | undefined;
     variant?: TextFieldVariants  | undefined;
-    color?: "error" | "primary" | "secondary" | "info" | "success" | "warning";
-    label?: string | undefined;
-    value?: string | undefined;
-    type?: string | undefined;
-    helperText?: any;
-    size?: "small" | "medium";
+    color?: "error" | "primary" | "secondary" | "info" | "success" | "warning"  | undefined;
+    label?: ReactNode | undefined;
+    value?: unknown;
+    type?: HTMLInputTypeAttribute | undefined;
+    helperText?: ReactNode | undefined;
+    size?: "small" | "medium" | undefined;
+    placeholder?: string | undefined;
+    fullWidth?: boolean | undefined;
+    required?: boolean | undefined;
+    autoComplete?: string | undefined;
+    min?: string | number | undefined;
+    max?: string | number | undefined;
+    sx?: SxProps<Theme> | undefined;
     onChange?: ChangeEventHandler<Element> | undefined;
     onKeyDown?: KeyboardEventHandler<Element> | undefined;
-    isFullWidth?: boolean | undefined;
-    isRequired?: boolean | undefined;
+    onFocus?: FocusEventHandler<Element> | undefined;
+    onInput?: FormEventHandler<Element> | undefined;
 }
 
-/* 
 interface AppInputAdornmentsProps {
     id?: string;
+    key?: Key | null | undefined
     variant?: TextFieldVariants  | undefined;
-    label?: any;
-    edge?: any;
+    label?: ReactNode | undefined;
+    edge?: false | "end" | "start" | undefined;
     color?: "error" | "primary" | "secondary" | "info" | "success" | "warning"; 
-    type?: string | undefined; 
+    type?: HTMLInputTypeAttribute | undefined; 
+    value?: string | undefined;
     element?: React.ReactNode | undefined;
     position?: "end" | "start" | undefined;
     inputAdornment?: string | undefined;
-    value?: string | undefined;
+    size?: "small" | "medium" | undefined;
+    placeholder?: string | undefined;
+    fullWidth?: boolean | undefined;
+    required?: boolean | undefined;
+    autoComplete?: string | undefined;
+    handleClick?: unknown;
+    handleMouseDown?: unknown;
+    min?: string | number | undefined;
+    max?: string | number | undefined;
+    sx?: SxProps<Theme> | undefined;
     onChange?: ChangeEventHandler<Element> | undefined;
     onKeyDown?: KeyboardEventHandler<Element> | undefined;
-    isFullWidth?: boolean | undefined;
-    isRequired?: boolean | undefined;
-    handleClick: unknown;
-    handleMouseDown: unknown;
-    children: React.ReactNode;
+    onFocus?: FocusEventHandler<Element> | undefined;
+    onInput?: FormEventHandler<Element> | undefined;
+    startAdornment?: React.ReactNode | undefined;
+    endAdornment?: React.ReactNode | undefined;
 }
- */
+
 
 
 //Services
@@ -85,6 +101,8 @@ interface LoginService {
 export type {
     AppButtonProps,
     AppInputProps,
+    AppInputAdornmentsProps,
+
     RegisterService,
     LoginService
 }

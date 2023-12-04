@@ -1,10 +1,17 @@
-import { Box, Unstable_Grid2 as Grid, Stack, Typography } from "@mui/material";
+import { Box, Unstable_Grid2 as Grid, IconButton, InputAdornment, Stack, Typography } from "@mui/material";
 import { AppButton } from '../../../../components/Button';
-import { Square } from '@mui/icons-material';
-import { AppInput } from "../../../../components/Input";
+import { Square, Visibility, VisibilityOff } from '@mui/icons-material';
+import { AppInputAdornments } from "../../../../components/Input/InputAdornments";
+import { useState } from "react";
 
 export function CreatePassword({ isFromPath }: { isFromPath: string}) {
     const passwordValidationTexts: string[] = ['Letras maiúsculas', 'Caracteres especiais', 'Letras minúsculas', 'Mínimo de 8 caracteres', 'Números'];
+
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleMouseDownPassword = (e: unknown) => e.preventDefault();
 
     return (
         <>
@@ -39,23 +46,55 @@ export function CreatePassword({ isFromPath }: { isFromPath: string}) {
             </Grid>
 
             <Stack spacing={3} mt={5}>
-                <AppInput 
-                    id='email-field'
-                    color='primary'
-                    variant='filled'
-                    type='password'
-                    label='Senha'
-                    isRequired={true}
-                />
+                <AppInputAdornments
+                        id='password-field'
+                        variant='filled'
+                        color='primary'
+                        type={showPassword ? 'text' : 'password'}
+                        label='Senha'
+                       // {...register('password')}
+                        required
+                        fullWidth
+                        autoComplete='off'
+                        endAdornment={
+                            <InputAdornment position='end'>
+                                    <IconButton
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge='end'
+                                        sx={{marginRight: '.25rem'}}
+                                        size='small'
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                            </InputAdornment>
+                        }
+                    />
 
-                <AppInput 
-                    id='password-filed'
-                    color='primary'
-                    variant='filled'
-                    type='password'
-                    label='Confirme sua senha'
-                    isRequired={true}
-                />
+                    <AppInputAdornments
+                        id='confirm-pass-field'
+                        variant='filled'
+                        color='primary'
+                        type={showPassword ? 'text' : 'password'}
+                        label='Confirmar senha'
+                        //{...register('password')}
+                        required
+                        fullWidth
+                        autoComplete='off'
+                        endAdornment={
+                            <InputAdornment position='end'>
+                                    <IconButton
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge='end'
+                                        sx={{marginRight: '.25rem'}}
+                                        size='small'
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                            </InputAdornment>
+                        }
+                    />
             </Stack>
 
             <Box display='flex' justifyContent='flex-end' alignItems='center' mt={8}>

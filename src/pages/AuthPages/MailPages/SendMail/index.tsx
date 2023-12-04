@@ -17,8 +17,8 @@ export function SendMail({ isFromPath }: { isFromPath: string }) {
                 <AppButton height='2.5rem' width="100%" variant='contained' className='authButton' fontSize='0.875rem' backgroundColor='#BBBBBB' isRippleDisabled={true}>Reenviar verificação</AppButton>
             </Box>
 
-            <Box display='flex' justifyContent='end' mt={8}>
-                <AppButton height='1.875rem' width='5rem' className='button hover' variant='text' fontSize='0.75rem' backgroundColor='none' isRippleDisabled={true}>Voltar</AppButton>
+            <Box display='flex' justifyContent='flex-end' mt={8}>
+                <AppButton height='1.875rem' width='5rem' variant='text' fontSize='0.75rem' isRippleDisabled={true}>Voltar</AppButton>
             </Box>
         </>
     )

@@ -20,7 +20,7 @@ export function Header() {
   }
 
   const currentUser = useAuthContext();
-  console.log(currentUser)
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
 
