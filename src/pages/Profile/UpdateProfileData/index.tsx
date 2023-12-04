@@ -82,27 +82,24 @@ export const UpdateProfileData = () => {
       if (errors.profile.bio) {
         setError('profile.bio', errors.profile.bio[0])
       }
-
-      console.log(errors);
     }
 
     if (response.data.success)
       navigate('/d/perfil', { replace: true })
-
-    console.log({ form_data, response });
   }
 
   return (
     <Stack maxWidth='sm' spacing={3}>
       <Typography>Informações de Conta</Typography>
 
-      {!isLoading && (
+      {isLoading && isFetching && (
         <Paper sx={{ bgcolor: grey[50] }}>
           <Stack width='100%' minHeight={400} justifyContent={'center'} alignItems={'center'}>
             <CircularProgress color="primary" />
           </Stack>
         </Paper>
       )}
+
       {!isLoading && !isFetching && (
         <form onSubmit={handleSubmit(handleFormSubmit)}>
           <Stack spacing={3}>

@@ -1,8 +1,8 @@
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { z } from "zod"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Button, FormControl, OutlinedInput, Stack, TextField, Typography } from "@mui/material"
+import { Button, Stack, TextField, Typography, Link as MUILink } from "@mui/material"
 import Prescription from "../../../services/Prescription"
 
 interface CreatePrescriptionData {
@@ -50,6 +50,8 @@ export const CreatePrescriptionPage = () => {
 
   return (
     <Stack maxWidth={'md'}>
+
+
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <Stack spacing={3}>
           <Stack spacing={1} >
@@ -104,7 +106,10 @@ export const CreatePrescriptionPage = () => {
             />
           </Stack>
 
-          <Button type="submit" variant='contained' sx={{ width: 'fit-content' }}>Adicionar Prescrição</Button>
+          <Stack direction='row' alignItems={'center'} spacing={3}>
+            <Button type="submit" variant='contained' sx={{ width: 'fit-content' }}>Adicionar Prescrição</Button>
+            <MUILink component={Link} to={`/d/consultas/${consultation_id}`}>Voltar</MUILink>
+          </Stack>
         </Stack>
       </form>
     </Stack>

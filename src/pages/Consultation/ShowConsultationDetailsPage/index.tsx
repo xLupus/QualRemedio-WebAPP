@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
 import Consultations from "../../../services/Consultations"
 import { Link, useParams } from "react-router-dom"
-import { Box, Button, CircularProgress, Modal, Paper, Stack, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material"
+import { Box, Button, CircularProgress, Modal, Paper, Stack, Table, TableBody, TableCell, TableHead, TableRow, Typography, Link as MUILink } from "@mui/material"
 import { grey } from "@mui/material/colors"
 import Prescription from "../../../services/Prescription"
 import { useState } from "react"
@@ -55,6 +55,8 @@ export const ShowConsultationDetailsPage = () => {
 
   return (
     <Stack maxWidth='md' paddingY={2} spacing={2} borderRadius={2}>
+      <MUILink component={Link} to='/d/consultas'>Voltar</MUILink>
+
       <Typography variant="h6" component='h1'>Consulta #{consultation?.id}</Typography>
 
       <Box>
@@ -183,7 +185,7 @@ export const ShowConsultationDetailsPage = () => {
                   consultation_id={Number(consultation_id)}
                   prescription_id={prescriptionToShowDetails}
                   openModal={typeof prescriptionToShowDetails == 'number'}
-                  handleCloseModal={() => openDetailsModal(null)} 
+                  handleCloseModal={() => openDetailsModal(null)}
                 />
               )}
 

@@ -1,4 +1,5 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
+import { axios_instance } from "../config/axios";
 
 interface PrescriptionStoreData {
   label: string,
@@ -20,10 +21,9 @@ class Prescription {
       if (data.physical?.trim())
         formData.append('physical', data.physical.trim())
 
-      const response = await axios.post(
+      const response = await axios_instance.post(
         `http://localhost:8080/api/v1/consultations/${consultation_id}/prescriptions`,
         formData,
-        request_headers
       )
 
       return response.data
@@ -39,9 +39,8 @@ class Prescription {
 
   async show(consultation_id: number, prescription_id: number) {
     try {
-      const response = await axios.get(
+      const response = await axios_instance.get(
         `http://localhost:8080/api/v1/consultations/${consultation_id}/prescriptions/${prescription_id}`,
-        request_headers
       )
 
       return response.data
@@ -54,7 +53,7 @@ class Prescription {
 
   async destroy(consultation_id: number, prescription_id: number) {
     try {
-      const response = await axios.delete(`http://localhost:8080/api/v1/consultations/${consultation_id}/prescriptions/${prescription_id}`, request_headers)
+      const response = await axios_instance.delete(`http://localhost:8080/api/v1/consultations/${consultation_id}/prescriptions/${prescription_id}`)
 
       return response.data
     } catch (err: unknown) {
@@ -77,10 +76,9 @@ class Prescription {
       formData.append('physical', data.physical.trim())
 
     try {
-      const response = await axios.patch(
+      const response = await axios_instance.patch(
         `http://localhost:8080/api/v1/consultations/${consultation_id}/prescriptions/${prescription_id}`,
         formData,
-        request_headers
       )
 
       return response.data

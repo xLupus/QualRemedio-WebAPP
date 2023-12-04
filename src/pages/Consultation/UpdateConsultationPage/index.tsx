@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Paper, FormHelperText, InputLabel, MenuItem, Select, Stack, TextField, Typography } from "@mui/material"
+import { Button, CircularProgress, Paper, FormHelperText, InputLabel, MenuItem, Select, Stack, TextField, Typography, Link as MUILink } from "@mui/material"
 import { useQueries } from "@tanstack/react-query"
 import { z } from "zod"
 import { SubmitHandler, useForm } from "react-hook-form"
@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import Specialty from "../../../services/Specialty"
 //import Bond from "../../../services/Bond"
 import Consultations, { UpdateConsultationParams } from "../../../services/Consultations"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { useEffect } from "react"
 import { grey } from "@mui/material/colors"
 
@@ -210,9 +210,13 @@ export const UpdateConsultationPage = () => {
               />
             </Stack>
 
-            <Button type="submit" variant="contained" sx={{ width: 200 }}>
-              {isSubmitting ? <CircularProgress color="inherit" size={30} /> : 'Atualizar Consulta'}
-            </Button>
+            <Stack direction='row' alignItems={'center'} spacing={3}>
+              <Button type="submit" variant="contained" sx={{ width: 200 }}>
+                {isSubmitting ? <CircularProgress color="inherit" size={30} /> : 'Atualizar Consulta'}
+              </Button>
+
+              <MUILink component={Link} to='/d/consultas'>Voltar</MUILink>
+            </Stack>
           </Stack>
         </form>
       )}

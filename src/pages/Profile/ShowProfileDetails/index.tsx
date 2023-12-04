@@ -1,4 +1,4 @@
-import { Link as MUILink, Button, Modal, Stack, Typography } from "@mui/material"
+import { Link as MUILink, Button, Modal, Stack, Typography, Paper, CircularProgress } from "@mui/material"
 import { grey, red } from "@mui/material/colors"
 import { useState } from 'react'
 import { useQuery } from "@tanstack/react-query"
@@ -50,6 +50,14 @@ export const ShowProfileDetails = () => {
 
   return (
     <>
+      {isLoading && isFetching && (
+        <Paper sx={{ bgcolor: grey[50] }}>
+          <Stack width='100%' minHeight={400} justifyContent={'center'} alignItems={'center'}>
+            <CircularProgress color="primary" />
+          </Stack>
+        </Paper>
+      )}
+
       {!isLoading && !isFetching && (
         <Stack spacing={5} maxWidth='md'>
           <Stack spacing={3}>

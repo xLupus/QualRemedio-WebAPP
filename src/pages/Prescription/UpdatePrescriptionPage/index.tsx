@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import z from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form"
-import { Button, Stack, TextField, Typography } from "@mui/material";
+import { Button, Stack, TextField, Typography, Link as MUILink } from "@mui/material";
 import Prescription from "../../../services/Prescription";
 import { useEffect } from "react";
 
@@ -115,7 +115,10 @@ export const UpdatePrescriptionPage = () => {
                 />
               </Stack>
 
-              <Button type="submit" sx={{ width: 'fit-content' }} variant='contained'>Atualizar</Button>
+              <Stack direction={'row'} spacing={3} alignItems={'center'} >
+                <Button type="submit" sx={{ width: 'fit-content' }} variant='contained'>Atualizar</Button>
+                <MUILink component={Link} to={`/d/consultas/${consultation_id}`} >Voltar</MUILink>
+              </Stack>
             </Stack>
           </form>
         )}
