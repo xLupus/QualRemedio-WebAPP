@@ -22,13 +22,14 @@ class Prescription {
         formData.append('physical', data.physical.trim())
 
       const response = await axios_instance.post(
-        `http://localhost:8080/api/v1/consultations/${consultation_id}/prescriptions`,
+        `consultations/${consultation_id}/prescriptions`,
         formData,
       )
 
       return response.data
     } catch (err: unknown) {
       if (err instanceof AxiosError) {
+        console.log(err);
         return err.response?.data
 
       } else {
@@ -40,7 +41,7 @@ class Prescription {
   async show(consultation_id: number, prescription_id: number) {
     try {
       const response = await axios_instance.get(
-        `http://localhost:8080/api/v1/consultations/${consultation_id}/prescriptions/${prescription_id}`,
+        `consultations/${consultation_id}/prescriptions/${prescription_id}`,
       )
 
       return response.data
@@ -53,7 +54,7 @@ class Prescription {
 
   async destroy(consultation_id: number, prescription_id: number) {
     try {
-      const response = await axios_instance.delete(`http://localhost:8080/api/v1/consultations/${consultation_id}/prescriptions/${prescription_id}`)
+      const response = await axios_instance.delete(`consultations/${consultation_id}/prescriptions/${prescription_id}`)
 
       return response.data
     } catch (err: unknown) {
@@ -77,13 +78,14 @@ class Prescription {
 
     try {
       const response = await axios_instance.patch(
-        `http://localhost:8080/api/v1/consultations/${consultation_id}/prescriptions/${prescription_id}`,
+        `consultations/${consultation_id}/prescriptions/${prescription_id}`,
         formData,
       )
 
       return response.data
     } catch (err: unknown) {
       if (err instanceof AxiosError) {
+        console.log(err);
         return err.response?.data
       }
 
