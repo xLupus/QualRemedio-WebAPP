@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import { AppButton } from '../../../../components/Button';
 //import { NavLink } from "react-router-dom";
 import { AppInput } from "../../../../components/Input";
+import { NavLink } from "react-router-dom";
 
 export function MailVerification({ isFromPath }: { isFromPath: string }) {
     return (
@@ -26,8 +27,28 @@ export function MailVerification({ isFromPath }: { isFromPath: string }) {
                     </Box>
 
                     <Box display='flex' justifyContent='end' mt={8}>
-                        <AppButton height='1.875rem' width='5rem' variant='text' className='authBackButton' fontSize='0.75rem' isRippleDisabled={true}>Voltar</AppButton>
-                        <AppButton height='1.875rem'  width='5rem' variant='contained' className='authButton authNextButton' backgroundColor='#BBBBBB' boxShadow={2} fontSize='0.75rem'>Avançar</AppButton>
+                        <AppButton
+                            sx={{width: '5rem', height: '1.875rem', fontSize: '.75rem', color: '#00000077', textTransform: 'none'}}
+                            id='btn-login'
+                            variant='text'
+                            type='submit'
+                            component={NavLink}
+                            to='/auth/register/select-account'
+                            className='authBackButton' 
+                            disableRipple
+                        >
+                            Voltar
+                        </AppButton>
+
+                        <AppButton 
+                            sx={{width: '5rem', height: '1.875rem', fontSize: '.75rem', backgroundColor: '#BBBBBB', boxShadow: 2, color: '#00000077', textTransform: 'none'}}
+                            id='btn-login'
+                            variant='text'
+                            type='submit'
+                            className='authButton authNextButton'
+                        >
+                            Avançar
+                        </AppButton>
                     </Box>
                 </>
                :

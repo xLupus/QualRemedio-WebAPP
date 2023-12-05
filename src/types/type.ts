@@ -1,25 +1,22 @@
 import { SxProps, TextFieldVariants, Theme } from "@mui/material";
-import { ChangeEventHandler, FocusEventHandler, FormEventHandler, HTMLInputTypeAttribute, Key, KeyboardEventHandler, ReactNode } from "react";
+import { ChangeEventHandler, FocusEventHandler, FormEventHandler, ForwardRefExoticComponent, HTMLInputTypeAttribute, Key, KeyboardEventHandler, ReactNode, RefAttributes } from "react";
+import { NavLinkProps, To } from "react-router-dom";
 
 interface AppButtonProps {
-    id?: number | string | undefined;
-    key?: number;
+    id?: string | undefined;
+    key?: Key | null | undefined;
     variant: 'text' | 'outlined' | 'contained';
-    className?: string | undefined;
-    backgroundColor?: string | undefined;
-    color?: string | undefined;
-    height?: string | undefined;
     type?: "button" | "submit" | "reset" | undefined;
-    boxShadow?: number | string | undefined;
-    width?: string | undefined;
-    fontSize?: string | undefined;
-    display?: string | undefined;
-    flexDirection?: "row" | "row-reverse" | "column" | "column-reverse" | undefined;
-    justifyContent?: string | undefined;
-    isRippleDisabled?: boolean | undefined;
-    textTransform?: "none" | "capitalize" | "uppercase" | "lowercase" | "full-width" | "full-size-kana";
-    isFullWidth?: boolean | undefined;
-    children: React.ReactNode;
+    color?: "inherit" | "primary" | "secondary" | "success" | "error" | "info" | "warning" | undefined;
+    className?: string | undefined;
+    sx?: SxProps<Theme> | undefined;
+    disableRipple?: boolean | undefined;
+    fullWidth?: boolean | undefined;
+    hidden?: boolean | undefined;
+    href?: string | undefined;
+    children: ReactNode | undefined;
+    component?: ForwardRefExoticComponent<NavLinkProps & RefAttributes<HTMLAnchorElement>>
+    to?: To | undefined;
 }
 
 interface AppInputProps {
@@ -45,7 +42,7 @@ interface AppInputProps {
     onInput?: FormEventHandler<Element> | undefined;
 }
 
-interface AppInputAdornmentsProps {
+interface AppInputAdornmentProps {
     id?: string;
     key?: Key | null | undefined
     variant?: TextFieldVariants  | undefined;
@@ -75,8 +72,6 @@ interface AppInputAdornmentsProps {
     endAdornment?: React.ReactNode | undefined;
 }
 
-
-
 //Services
 interface RegisterService {
     name: string;
@@ -98,10 +93,11 @@ interface LoginService {
     role: number;
 }
 
+//Exports
 export type {
     AppButtonProps,
     AppInputProps,
-    AppInputAdornmentsProps,
+    AppInputAdornmentProps,
 
     RegisterService,
     LoginService

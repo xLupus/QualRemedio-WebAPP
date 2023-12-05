@@ -34,7 +34,13 @@ export function LoginAccountSelection() {
             <Stack spacing={3}>
                 {
                     accountsType.map((el, i) => (
-                        <AppButton height='2.5rem' variant='text' className='authButton' color='#00000077' backgroundColor='#BBBBBB' boxShadow={2} id={el.id} key={i}>
+                        <AppButton 
+                            sx={{height: '2.5rem', fontSize: '1rem', color: '#00000077', backgroundColor: '#BBBBBB', boxShadow: 2, textTransform: 'none'}}
+                            id={String(el.id)}
+                            key={i}
+                            variant='text'
+                            className='authButton'
+                        >
                             {el.type}
                         </AppButton>
                     ))

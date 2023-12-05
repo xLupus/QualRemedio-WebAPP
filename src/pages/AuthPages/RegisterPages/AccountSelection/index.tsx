@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom';
-import { Box, Link } from "@mui/material";
+import { Box, Link, Stack } from "@mui/material";
 import { AppButton } from '../../../../components/Button';
-import Stack from '@mui/material/Stack';
 
 export function RegisterAccountSelection() {
     const accountsType = [
@@ -39,11 +38,18 @@ export function RegisterAccountSelection() {
             <Stack spacing={3}>
                 {
                     accountsType.map((el, i) => (
-                        <AppButton height='5.625rem' variant='text' className='authButton selectAccountButton' color='#00000077' backgroundColor='#BBBBBB' boxShadow={2} id={el.id} key={i}>
-                            <Box textTransform='none' fontSize='0.875rem'>
+                        <AppButton 
+                            sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', height: '5.625rem', fontSize: '1rem', color: '#00000077', backgroundColor: '#BBBBBB', borderRadius: '.25rem', paddingX: 2, boxShadow: 2, textTransform: 'none', lineHeight: 'normal' }}
+                            id={String(el.id)}
+                            key={i}
+                            variant='text'
+                            type='submit'
+                            className='authButton'
+                        >
+                            <Box textTransform='none' fontSize='.875rem'>
                                 {el.type}
                             </Box>
-                            <Box textTransform='none' fontSize='0.875rem' mt={1.9} textAlign='left'>
+                            <Box textTransform='none' fontSize='.875rem' mt={1.9} textAlign='left'>
                                 {el.desc}
                             </Box>
                         </AppButton>
@@ -52,8 +58,28 @@ export function RegisterAccountSelection() {
             </Stack>
 
             <Box display='flex' justifyContent='end' alignItems='center' mt={8}>
-                <AppButton height='1.875rem' width='5rem' variant='text' className='authBackButton' fontSize='0.75rem' isRippleDisabled={true} >Voltar</AppButton>
-                <AppButton height='1.875rem' width='5rem' variant='contained' className='authButton authNextButton' backgroundColor='#BBBBBB' boxShadow={2} fontSize='0.75rem'>Avançar</AppButton>
+                <AppButton
+                    sx={{width: '5rem', height: '1.875rem', fontSize: '.75rem', color: '#00000077', textTransform: 'none'}}
+                    id='btn-login'
+                    variant='text'
+                    type='submit'
+                    component={NavLink}
+                    to='/auth/login/select-account'
+                    className='authBackButton' 
+                    disableRipple
+                >
+                    Voltar
+                </AppButton>
+
+                <AppButton 
+                    sx={{width: '5rem', height: '1.875rem', fontSize: '.75rem', backgroundColor: '#BBBBBB', boxShadow: 2, color: '#00000077', textTransform: 'none'}}
+                    id='btn-login'
+                    variant='text'
+                    type='submit'
+                    className='authButton authNextButton'
+                >
+                    Avançar
+                </AppButton>
             </Box>
         </>
     )

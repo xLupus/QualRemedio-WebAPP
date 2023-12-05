@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom"
 import { useState, MouseEvent } from 'react'
 import { Logo } from "../Logo"
 import { HiMenu } from 'react-icons/hi'
-import { useAuthContext } from "../../hooks/authContext"
+import { useAuthContext } from "../../hooks/AuthContext"
 import AuthService from '../../services/Auth/Login';
 import { useNavigate } from 'react-router-dom';
 

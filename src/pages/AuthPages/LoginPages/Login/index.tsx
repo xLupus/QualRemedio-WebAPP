@@ -8,8 +8,7 @@ import { LoginService } from '../../../../types/type';
 import { z } from 'zod';
 import { AppInput } from '../../../../components/Input';
 import { useState } from 'react';
-import { AppInputAdornments } from '../../../../components/Input/InputAdornments';
-import  '../../../../style.css';
+import { AppInputAdornment } from '../../../../components/Input/InputAdornment';
 
 const validator = z.object({
     email: z
@@ -33,8 +32,9 @@ export function Login() {
         resolver: zodResolver(validator),
     })
 
+    //password
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const handleMouseDownPassword = (e: unknown) => e.preventDefault();
+    const handleMouseDownPassword = (e: any) => e.preventDefault();
 
     const handleLogin = (data: LoginService) => {
         const { email, password, role } = data;
@@ -54,7 +54,7 @@ export function Login() {
     
     return (
         <>
-            <Box typography='h1' fontSize={'2rem'} color='#00000077' mb={1.25}>Bem-Vindo de volta!</Box>
+            <Box typography='h1' fontSize='2rem' color='#00000077' mb={1.25}>Bem-Vindo de volta!</Box>
             <Box typography='body1' fontSize='0.77344rem' color='#00000077' mb={3}>Logue-se para explorar tudo de melhor aqui.</Box>
 
             <Box display='flex' justifyContent='space-between' alignItems='center' mb={5}>
@@ -79,7 +79,7 @@ export function Login() {
                         autoComplete='off'
                     />
 
-                    <AppInputAdornments
+                    <AppInputAdornment
                         id='password-field'
                         variant='filled'
                         color='primary'
@@ -109,7 +109,7 @@ export function Login() {
                         color='primary'
                         variant='filled'
                         type='hidden'
-                        {...register('role', { value: 1})}
+                        {...register('role', { value: 1 })}
                         fullWidth
                         sx={{display: 'none'}}
                     />
@@ -123,7 +123,15 @@ export function Login() {
                 </Box>
 
                 <Box display='flex' justifyContent='center'>
-                    <AppButton height='2.5rem' width='18.75rem' variant='text' type='submit' fontSize='1rem' className='authButton' color='#00000077' backgroundColor='#BBBBBB' boxShadow={2} id='btn-login' isFullWidth={false}>Login</AppButton>
+                    <AppButton 
+                        sx={{width: '18.75rem', height: '2.5rem', fontSize: '1rem', backgroundColor: '#BBBBBB', boxShadow: 2, color: '#00000077', textTransform: 'none'}}
+                        id='btn-login'
+                        variant='text'
+                        type='submit'
+                        className='authButton'
+                    >
+                        Login
+                    </AppButton>
                 </Box>
                 
                 <Divider sx={{
@@ -141,11 +149,24 @@ export function Login() {
                 }}>Ou</Divider>
 
                 <Stack spacing={2.5} alignItems="center">
-                    <AppButton height='2.5rem' width='18.75rem' variant='text' className='authButton' color='#00000077' backgroundColor='#BBBBBB' boxShadow={2} id='btn-login-google' isFullWidth={false}>
+                    <AppButton 
+                        sx={{width: '18.75rem', height: '2.5rem', backgroundColor: '#BBBBBB', boxShadow: 2, color: '#00000077', textTransform: 'none'}}
+                        id='btn-login-google'
+                        variant='text'
+                        className='authButton' 
+                        fullWidth
+                    >
                         <Google />
                         <Typography ml='.5rem' typography='body1' fontSize='1rem' color='00000077'>Continuar com Google</Typography>
                     </AppButton>
-                    <AppButton height='2.5rem' width='18.75rem' variant='text' className='authButton' color='#00000077' backgroundColor='#BBBBBB' boxShadow={2} id='btn-login-ms' isFullWidth={false}>
+
+                    <AppButton 
+                        sx={{width: '18.75rem', height: '2.5rem', backgroundColor: '#BBBBBB', boxShadow: 2, color: '#00000077', textTransform: 'none'}}
+                        id='btn-login-ms'
+                        variant='text'
+                        className='authButton'
+                        fullWidth
+                    >
                         <Microsoft />
                         <Typography ml='.5rem' typography='body1' fontSize='1rem' color='#00000077'>Continuar com Microsoft</Typography>
                     </AppButton>

@@ -1,7 +1,7 @@
 import { Box, Unstable_Grid2 as Grid, IconButton, InputAdornment, Stack, Typography } from "@mui/material";
 import { AppButton } from '../../../../components/Button';
 import { Square, Visibility, VisibilityOff } from '@mui/icons-material';
-import { AppInputAdornments } from "../../../../components/Input/InputAdornments";
+import { AppInputAdornment } from "../../../../components/Input/InputAdornment";
 import { useState } from "react";
 
 export function CreatePassword({ isFromPath }: { isFromPath: string}) {
@@ -11,7 +11,7 @@ export function CreatePassword({ isFromPath }: { isFromPath: string}) {
 
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const handleMouseDownPassword = (e: unknown) => e.preventDefault();
+    const handleMouseDownPassword = (e: any) => e.preventDefault();
 
     return (
         <>
@@ -46,7 +46,7 @@ export function CreatePassword({ isFromPath }: { isFromPath: string}) {
             </Grid>
 
             <Stack spacing={3} mt={5}>
-                <AppInputAdornments
+                <AppInputAdornment
                         id='password-field'
                         variant='filled'
                         color='primary'
@@ -71,7 +71,7 @@ export function CreatePassword({ isFromPath }: { isFromPath: string}) {
                         }
                     />
 
-                    <AppInputAdornments
+                    <AppInputAdornment
                         id='confirm-pass-field'
                         variant='filled'
                         color='primary'
@@ -99,8 +99,19 @@ export function CreatePassword({ isFromPath }: { isFromPath: string}) {
 
             <Box display='flex' justifyContent='flex-end' alignItems='center' mt={8}>
                 <Box>
-                    <AppButton height='1.875rem' width='5rem' variant='text' className='authBackButton' fontSize='0.75rem' isRippleDisabled={true} >Voltar</AppButton>
-                    <AppButton height='1.875rem' width='5rem' variant='contained' className='authButton authNextButton' backgroundColor='#BBBBBB' boxShadow={2} fontSize='0.75rem'>Avançar</AppButton>
+                    <AppButton 
+                        sx={{width: '5rem', height: '1.875rem', fontSize: '.75rem'}}
+                        variant='text'
+                        className='authBackButton' 
+                        disableRipple
+                    >Voltar</AppButton>
+
+                    <AppButton 
+                        sx={{width: '5rem', height: '1.875rem', fontSize: '.75rem', backgroundColor: '#BBBBBB', boxShadow: 2}}
+                        variant='text'
+                        className='authButton authNextButton' 
+                        disableRipple
+                    >Avançar</AppButton>
                 </Box>
             </Box>
         </>

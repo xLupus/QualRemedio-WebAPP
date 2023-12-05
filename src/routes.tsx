@@ -13,7 +13,7 @@ import { MailVerification } from "./pages/AuthPages/MailPages/MailVerification";
 import { SendMail } from "./pages/AuthPages/MailPages/SendMail";
 import { CreatePassword } from "./pages/AuthPages/PasswordPage/CreatePassword";
 import { RecoverPasswordChangedPassword } from "./pages/AuthPages/ResetPasswordPages/PasswordChanged";
-import { useAuthContext } from "./hooks/authContext";
+import { useAuthContext } from "./hooks/AuthContext";
 
 export function Routes() {
     const Protected = () => {
