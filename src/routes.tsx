@@ -1,8 +1,8 @@
 import { Navigate, Outlet, Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import { App } from "./layouts/App";
-import { HomePage } from "./pages/HomePage";
-import { PricePage } from "./pages/PricePage";
-import { FeaturePage } from "./pages/FeaturePage";
+import { HomePage } from "./pages/AppPages/HomePage";
+import { PricePage } from "./pages/AppPages/PricePage";
+import { FeaturePage } from "./pages/AppPages/FeaturePage";
 import { Login } from "./pages/AuthPages/LoginPages/Login";
 import { Auth } from "./layouts/Auth";
 import { LoginAccountSelection } from "./pages/AuthPages/LoginPages/AccountSelection";
@@ -33,8 +33,8 @@ export function Routes() {
                     {/* Area Publica */}
                     <Route element={<App />}>
                         <Route index element={<HomePage />} />
-                        <Route path="funcionalidades" element={<FeaturePage />} />
-                        <Route path="precos" element={<PricePage />} />
+                        <Route path="functionalities" element={<FeaturePage />} />
+                        <Route path="prices" element={<PricePage />} />
                     </Route>
 
                     <Route element={<Protected />}>

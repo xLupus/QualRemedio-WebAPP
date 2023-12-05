@@ -8,7 +8,7 @@ export function App() {
     <Box display='flex' flexDirection='column' height='100vh'>
       <Header />
 
-      <Box sx={{flex: 1}} component='main'>
+      <Box sx={{flexGrow: 1}} component='main' mt={{xs: '3.5rem', sm: '4rem'}}>
         <Outlet />
       </Box>
 

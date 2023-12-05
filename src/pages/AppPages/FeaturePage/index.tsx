@@ -153,7 +153,7 @@ export function FeaturePage() {
         <Stack spacing={5} useFlexGap>
 
           {pacient_features.map((feature, i) => (
-            <Box display='flex' flexDirection='column' width='100%' paddingY={6} sx={{bgcolor: i % 2 == 1 ? 'lightgrey' : ''}} alignItems='center'>
+            <Box display='flex' flexDirection='column' width='100%' paddingY={6} sx={{bgcolor: i % 2 === 1 ? 'lightgrey' : ''}} alignItems='center'>
               <Stack width='100%' maxWidth={1020} direction={i % 2 == 1 ? 'row-reverse' : 'row'} spacing={3} useFlexGap key={i} >
                 <img src={feature.poster} alt="" />
 
