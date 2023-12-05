@@ -39,7 +39,7 @@ export function RegisterAccountSelection() {
                 {
                     accountsType.map((el, i) => (
                         <AppButton 
-                            sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', height: '5.625rem', fontSize: '1rem', color: '#00000077', backgroundColor: '#BBBBBB', borderRadius: '.25rem', paddingX: 2, boxShadow: 2, textTransform: 'none', lineHeight: 'normal' }}
+                            sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', height: '5.625rem', paddingX: 2 }}
                             id={String(el.id)}
                             key={i}
                             variant='text'
@@ -59,7 +59,7 @@ export function RegisterAccountSelection() {
 
             <Box display='flex' justifyContent='end' alignItems='center' mt={8}>
                 <AppButton
-                    sx={{width: '5rem', height: '1.875rem', fontSize: '.75rem', color: '#00000077', textTransform: 'none'}}
+                    sx={{width: '5rem', height: '1.875rem', fontSize: '.75rem', boxShadow: 'none', backgroundColor: 'transparent' }}
                     id='btn-login'
                     variant='text'
                     type='submit'
@@ -72,9 +72,9 @@ export function RegisterAccountSelection() {
                 </AppButton>
 
                 <AppButton 
-                    sx={{width: '5rem', height: '1.875rem', fontSize: '.75rem', backgroundColor: '#BBBBBB', boxShadow: 2, color: '#00000077', textTransform: 'none'}}
+                    sx={{width: '5rem', height: '1.875rem', fontSize: '.75rem' }}
                     id='btn-login'
-                    variant='text'
+                    variant='contained'
                     type='submit'
                     className='authButton authNextButton'
                 >

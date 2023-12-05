@@ -35,7 +35,7 @@ export function LoginAccountSelection() {
                 {
                     accountsType.map((el, i) => (
                         <AppButton 
-                            sx={{height: '2.5rem', fontSize: '1rem', color: '#00000077', backgroundColor: '#BBBBBB', boxShadow: 2, textTransform: 'none'}}
+                            sx={{ height: '2.5rem' }}
                             id={String(el.id)}
                             key={i}
                             variant='text'

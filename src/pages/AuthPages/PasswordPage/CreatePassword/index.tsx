@@ -3,12 +3,12 @@ import { AppButton } from '../../../../components/Button';
 import { Square, Visibility, VisibilityOff } from '@mui/icons-material';
 import { AppInputAdornment } from "../../../../components/Input/InputAdornment";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export function CreatePassword({ isFromPath }: { isFromPath: string}) {
     const passwordValidationTexts: string[] = ['Letras maiúsculas', 'Caracteres especiais', 'Letras minúsculas', 'Mínimo de 8 caracteres', 'Números'];
 
     const [showPassword, setShowPassword] = useState<boolean>(false);
-
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (e: any) => e.preventDefault();
@@ -99,19 +99,27 @@ export function CreatePassword({ isFromPath }: { isFromPath: string}) {
 
             <Box display='flex' justifyContent='flex-end' alignItems='center' mt={8}>
                 <Box>
-                    <AppButton 
-                        sx={{width: '5rem', height: '1.875rem', fontSize: '.75rem'}}
+                    <AppButton
+                        sx={{ width: '5rem', height: '1.875rem', fontSize: '.75rem', boxShadow: 'none', backgroundColor: 'none' }}
+                        id='btn-login'
                         variant='text'
+                        component={NavLink}
+                        to='/auth/register/email-verification'
                         className='authBackButton' 
                         disableRipple
-                    >Voltar</AppButton>
+                    >
+                        Voltar
+                    </AppButton>
 
                     <AppButton 
-                        sx={{width: '5rem', height: '1.875rem', fontSize: '.75rem', backgroundColor: '#BBBBBB', boxShadow: 2}}
+                        sx={{ width: '5rem', height: '1.875rem', fontSize: '.75rem' }}
+                        id='btn-login'
                         variant='text'
-                        className='authButton authNextButton' 
-                        disableRipple
-                    >Avançar</AppButton>
+                        type='submit'
+                        className='authButton authNextButton'
+                    >
+                        Avançar
+                    </AppButton>
                 </Box>
             </Box>
         </>

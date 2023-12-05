@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import { AppButton } from '../../../../components/Button';
+import { NavLink } from "react-router-dom";
 
 export function SendMail({ isFromPath }: { isFromPath: string }) {
     return (
@@ -14,11 +15,31 @@ export function SendMail({ isFromPath }: { isFromPath: string }) {
             <Box typography='body1' fontSize='0.875rem' color='#00000077' textAlign='center' width='80%' mx='auto'>Não recebeu o e-mail? Olhe em `spam`, `pasta de promoções` ou</Box>
             
             <Box display='flex' justifyContent='center' mt={4}>
-                <AppButton height='2.5rem' width="100%" variant='contained' className='authButton' fontSize='0.875rem' backgroundColor='#BBBBBB' isRippleDisabled={true}>Reenviar verificação</AppButton>
+                <AppButton 
+                    sx={{ width: '22.8125rem', height: '2.5rem', fontSize: '.875rem' }}
+                    id='btn-login'
+                    variant='contained'
+                    type='submit'
+                    className='authButton'
+                    disableRipple
+                    fullWidth
+                >
+                    Reenviar verificação
+                </AppButton>
             </Box>
 
             <Box display='flex' justifyContent='flex-end' mt={8}>
-                <AppButton height='1.875rem' width='5rem' variant='text' fontSize='0.75rem' isRippleDisabled={true}>Voltar</AppButton>
+                <AppButton
+                    sx={{ width: '5rem', height: '1.875rem', fontSize: '.75rem', boxShadow: 'none', backgroundColor: 'none' }}
+                    id='btn-login'
+                    variant='text'
+                    component={NavLink}
+                    to='/auth/register/create-password'
+                    className='authBackButton' 
+                    disableRipple
+                >
+                    Voltar
+                </AppButton>
             </Box>
         </>
     )

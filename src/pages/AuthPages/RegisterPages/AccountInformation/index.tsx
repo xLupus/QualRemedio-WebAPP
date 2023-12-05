@@ -2,6 +2,7 @@ import { Box, Unstable_Grid2 as Grid } from "@mui/material";
 import { AppButton } from '../../../../components/Button';
 import { AppInput } from '../../../../components/Input';
 import { AppSelectInput } from '../../../../components/Input/InputSelect';
+import { NavLink } from "react-router-dom";
 
 export function RegisterAccountInformation() {
     const accountType: number = 1;
@@ -32,7 +33,7 @@ export function RegisterAccountInformation() {
                                 id='cpf-field'
                                 color='primary'
                                 variant='filled'
-                                type='text'
+                                type='number'
                                 label='CPF'
                                 required
                                 fullWidth
@@ -86,7 +87,7 @@ export function RegisterAccountInformation() {
                                 id='cpf-field'
                                 color='primary'
                                 variant='filled'
-                                type='text'
+                                type='number'
                                 label='CPF'
                                 required
                                 fullWidth
@@ -149,8 +150,27 @@ export function RegisterAccountInformation() {
                     <AppSelectInput />
                 </Box>
                 <Box>
-                    <AppButton height='1.875rem' width='5rem' variant='text' className='authBackButton' fontSize='0.75rem' isRippleDisabled={true} >Voltar</AppButton>
-                    <AppButton height='1.875rem' width='5rem' variant='contained' className='authButton authNextButton' backgroundColor='#BBBBBB' boxShadow={2} fontSize='0.75rem'>Avançar</AppButton>
+                    <AppButton
+                        sx={{ width: '5rem', height: '1.875rem', fontSize: '.75rem', boxShadow: 'none', backgroundColor: 'none' }}
+                        id='btn-login'
+                        variant='text'
+                        component={NavLink}
+                        to='/auth/register/email-verification'
+                        className='authBackButton' 
+                        disableRipple
+                    >
+                        Voltar
+                    </AppButton>
+
+                    <AppButton 
+                        sx={{ width: '5rem', height: '1.875rem', fontSize: '.75rem' }}
+                        id='btn-login'
+                        variant='contained'
+                        type='submit'
+                        className='authButton authNextButton'
+                    >
+                        Avançar
+                    </AppButton>
                </Box>
             </Box>
         </>

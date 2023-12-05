@@ -26,12 +26,11 @@ export function MailVerification({ isFromPath }: { isFromPath: string }) {
                         />
                     </Box>
 
-                    <Box display='flex' justifyContent='end' mt={8}>
+                    <Box display='flex' justifyContent='flex-end' mt={8}>
                         <AppButton
-                            sx={{width: '5rem', height: '1.875rem', fontSize: '.75rem', color: '#00000077', textTransform: 'none'}}
+                            sx={{ width: '5rem', height: '1.875rem', fontSize: '.75rem', boxShadow: 'none', backgroundColor: 'none' }}
                             id='btn-login'
                             variant='text'
-                            type='submit'
                             component={NavLink}
                             to='/auth/register/select-account'
                             className='authBackButton' 
@@ -41,7 +40,7 @@ export function MailVerification({ isFromPath }: { isFromPath: string }) {
                         </AppButton>
 
                         <AppButton 
-                            sx={{width: '5rem', height: '1.875rem', fontSize: '.75rem', backgroundColor: '#BBBBBB', boxShadow: 2, color: '#00000077', textTransform: 'none'}}
+                            sx={{ width: '5rem', height: '1.875rem', fontSize: '.75rem' }}
                             id='btn-login'
                             variant='text'
                             type='submit'
@@ -70,11 +69,32 @@ export function MailVerification({ isFromPath }: { isFromPath: string }) {
                     />
         
                     <Box display='flex' justifyContent='center' mt={5.5}>
-                        <AppButton height='2.5rem' width='22.8125rem' variant='text' fontSize='1rem' className='authButton' color='#00000077' backgroundColor='#BBBBBB' boxShadow={2} id='btn-login' key={1} isFullWidth={false}>Enviar verificação</AppButton>
+                        <AppButton
+                            sx={{ width: '22.8125rem', height: '2.5rem' }}
+                            id='btn-login'
+                            variant='text'
+                            component={NavLink}
+                            to='/auth/register/select-account'
+                            className='authButton' 
+                            fullWidth
+                            disableRipple
+                        >
+                            Enviar verificação
+                        </AppButton>
                     </Box>
         
                     <Box display='flex' justifyContent='flex-end' mt={8}>
-                        <AppButton height='1.875rem' width='5rem' variant='text' fontSize='0.75rem' isRippleDisabled={true}>Voltar</AppButton>
+                        <AppButton
+                            sx={{ width: '5rem', height: '1.875rem', fontSize: '.75rem', boxShadow: 'none', backgroundColor: 'none' }}
+                            id='btn-login'
+                            variant='text'
+                            component={NavLink}
+                            to='/auth/register/select-account'
+                            className='authBackButton' 
+                            disableRipple
+                        >
+                            Voltar
+                        </AppButton>
                     </Box>
                 </>
     )

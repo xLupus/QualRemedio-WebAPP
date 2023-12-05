@@ -1,4 +1,4 @@
-import { SxProps, TextFieldVariants, Theme } from "@mui/material";
+import { SxProps, TextFieldVariants, Theme, } from "@mui/material";
 import { ChangeEventHandler, FocusEventHandler, FormEventHandler, ForwardRefExoticComponent, HTMLInputTypeAttribute, Key, KeyboardEventHandler, ReactNode, RefAttributes } from "react";
 import { NavLinkProps, To } from "react-router-dom";
 
@@ -9,7 +9,7 @@ interface AppButtonProps {
     type?: "button" | "submit" | "reset" | undefined;
     color?: "inherit" | "primary" | "secondary" | "success" | "error" | "info" | "warning" | undefined;
     className?: string | undefined;
-    sx?: SxProps<Theme> | undefined;
+    sx?: SxProps<Theme> |  undefined;
     disableRipple?: boolean | undefined;
     fullWidth?: boolean | undefined;
     hidden?: boolean | undefined;

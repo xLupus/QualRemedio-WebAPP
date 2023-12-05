@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { AppButton } from '../../../../components/Button';
 import { TaskAlt } from '@mui/icons-material';
+import { NavLink } from "react-router-dom";
 
 export function RegisterAccountCreated() {
     return (
@@ -18,7 +19,16 @@ export function RegisterAccountCreated() {
             <Typography typography='body1' fontSize='0.875rem' color='#00000077'  textAlign='center'>Aproveite sua experiência em nossa plataforma</Typography>
 
             <Box display='flex' justifyContent='flex-end' alignItems='center' mt={8}>
-                <AppButton height='1.875rem' width='5rem' variant='contained' className='authButton authNextButton' backgroundColor='#BBBBBB' boxShadow={2} fontSize='0.75rem'>Avançar</AppButton>
+                <AppButton 
+                    sx={{ width: '5rem', height: '1.875rem', fontSize: '.75rem' }}
+                    id='btn-login'
+                    variant='contained'
+                    className='authButton authNextButton'
+                    component={NavLink}
+                    to='/auth/login/select-account'
+                >
+                    Avançar
+                </AppButton>
             </Box>
         </>
     )

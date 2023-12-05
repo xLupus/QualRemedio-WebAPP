@@ -124,7 +124,7 @@ export function Login() {
 
                 <Box display='flex' justifyContent='center'>
                     <AppButton 
-                        sx={{width: '18.75rem', height: '2.5rem', fontSize: '1rem', backgroundColor: '#BBBBBB', boxShadow: 2, color: '#00000077', textTransform: 'none'}}
+                        sx={{ width: '18.75rem', height: '2.5rem' }}
                         id='btn-login'
                         variant='text'
                         type='submit'
@@ -150,7 +150,7 @@ export function Login() {
 
                 <Stack spacing={2.5} alignItems="center">
                     <AppButton 
-                        sx={{width: '18.75rem', height: '2.5rem', backgroundColor: '#BBBBBB', boxShadow: 2, color: '#00000077', textTransform: 'none'}}
+                        sx={{ width: '18.75rem', height: '2.5rem' }}
                         id='btn-login-google'
                         variant='text'
                         className='authButton' 
@@ -161,7 +161,7 @@ export function Login() {
                     </AppButton>
 
                     <AppButton 
-                        sx={{width: '18.75rem', height: '2.5rem', backgroundColor: '#BBBBBB', boxShadow: 2, color: '#00000077', textTransform: 'none'}}
+                        sx={{ width: '18.75rem', height: '2.5rem' }}
                         id='btn-login-ms'
                         variant='text'
                         className='authButton'
