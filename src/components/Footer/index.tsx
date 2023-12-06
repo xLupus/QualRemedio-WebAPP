@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 import { blue } from '@mui/material/colors'
 import moment from 'moment';
 
-export function Footer() {
+export function AppFooter() {
     return (
         <Box paddingY={6} sx={{ bgcolor: blue[900], color: 'white' }}>
             <Container>

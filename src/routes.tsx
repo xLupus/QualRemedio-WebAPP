@@ -14,6 +14,9 @@ import { SendMail } from "./pages/AuthPages/MailPages/SendMail";
 import { CreatePassword } from "./pages/AuthPages/PasswordPage/CreatePassword";
 import { RecoverPasswordChangedPassword } from "./pages/AuthPages/ResetPasswordPages/PasswordChanged";
 import { useAuthContext } from "./hooks/AuthContext";
+import { AccountConfiguration } from "./pages/AppPages/ProfilePages/AccountConfig";
+import { Profile } from "./layouts/Profile";
+import { Index } from "./layouts/Index";
 
 export function Routes() {
     const Protected = () => {
@@ -31,15 +34,12 @@ export function Routes() {
             createRoutesFromElements(
                 <Route path="/">
                     {/* Area Publica */}
-                    <Route element={<App />}>
+                    <Route element={<Index />}>
                         <Route index element={<HomePage />} />
                         <Route path="functionalities" element={<FeaturePage />} />
                         <Route path="prices" element={<PricePage />} />
                     </Route>
 
-                    <Route element={<Protected />}>
-                    </Route>
-                
                     <Route element={<Auth />}>
                         {/* Login */}
                         <Route path="auth/login/select-account" element={<LoginAccountSelection />} />
@@ -59,7 +59,17 @@ export function Routes() {
         
                         <Route path="recover-password/create-password" element={<CreatePassword isFromPath="recover-password"/>} />
                         <Route path="recover-password/password-changed" element={<RecoverPasswordChangedPassword />} />
-                    </Route>           
+                    </Route>   
+                            
+                    <Route element={<App />}>
+                        <Route element={<Profile />}>
+                            <Route path="/profile/account-config" element={<AccountConfiguration />} />
+                        </Route>
+                        
+                        <Route element={<Protected />}>
+                        </Route>
+                    </Route>
+                
                 </Route>
             )
         )
