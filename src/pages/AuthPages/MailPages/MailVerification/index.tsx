@@ -33,7 +33,7 @@ export function MailVerification({ isFromPath }: { isFromPath: string }) {
                             variant='text'
                             component={NavLink}
                             to='/auth/register/select-account'
-                            className='authBackButton' 
+                            className='authBackButton'
                             disableRipple
                         >
                             Voltar

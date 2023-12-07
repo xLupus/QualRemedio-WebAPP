@@ -3,7 +3,7 @@ import { AppCard } from '../../../../components/Card';
 import { AppButton } from '../../../../components/Button';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
 
-export function AccountConfiguration() {
+export function ProfileAccountConfiguration() {
     return (
         <>
             <AppCard sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '10.3125rem', p: 5}}>

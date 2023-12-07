@@ -14,9 +14,11 @@ import { SendMail } from "./pages/AuthPages/MailPages/SendMail";
 import { CreatePassword } from "./pages/AuthPages/PasswordPage/CreatePassword";
 import { RecoverPasswordChangedPassword } from "./pages/AuthPages/ResetPasswordPages/PasswordChanged";
 import { useAuthContext } from "./hooks/AuthContext";
-import { AccountConfiguration } from "./pages/AppPages/ProfilePages/AccountConfig";
+import { ProfileAccountConfiguration } from "./pages/AppPages/ProfilePages/AccountConfig";
 import { Profile } from "./layouts/Profile";
 import { Index } from "./layouts/Index";
+import { ProfileAccountSecurity } from "./pages/AppPages/ProfilePages/Security";
+import { ProfilePlans } from "./pages/AppPages/ProfilePages/Plans";
 
 export function Routes() {
     const Protected = () => {
@@ -63,7 +65,10 @@ export function Routes() {
                             
                     <Route element={<App />}>
                         <Route element={<Profile />}>
-                            <Route path="/profile/account-config" element={<AccountConfiguration />} />
+                            <Route path="/profile/account-config" element={<ProfileAccountConfiguration />} />
+                            <Route path="/profile/security" element={<ProfileAccountSecurity />} />
+                            <Route path="/profile/system" element={<ProfileAccountConfiguration />} />
+                            <Route path="/profile/plans" element={<ProfilePlans />} />
                         </Route>
                         
                         <Route element={<Protected />}>
