@@ -31,7 +31,7 @@ export function AppHeader() {
     return (
         <AppBar position="fixed">
                 <Container maxWidth='xl'>
-                <Toolbar sx={{display: 'flex', justifyContent: 'space-between'}}>
+                <Toolbar sx={{display: 'flex', justifyContent: 'space-between', alignItems:'center'}}>
                        
                                 <Link component={NavLink} to='/' underline="none" color='inherit'>
                                     <Logo />
@@ -50,6 +50,10 @@ export function AppHeader() {
                                         
                                         <MenuItem onClick={handleCloseMenu} key='menu-link2'>
                                             <Link sx={{color: 'inherit'}} component={NavLink} to='/prices' underline="none" px={2} fontSize='1.25rem'>Preços</Link>
+                                        </MenuItem>
+
+                                        <MenuItem onClick={handleCloseMenu} key='menu-link3'>
+                                            <Link sx={{color: 'inherit'}} component={NavLink} to='/about' underline="none" px={2} fontSize='1.25rem'>Sobre</Link>
                                         </MenuItem>
 
                                         <Divider />
@@ -76,9 +80,10 @@ export function AppHeader() {
                                 </Box>
 
                                 {/* Full Menu */}
-                                <Box component='nav' display={{ xs: 'none', md: 'initial' }}>
+                                <Box component='nav' display={{ xs: 'none', md: 'flex'}} alignItems={{xs: 'none', md: 'center'}}>
                                     <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/functionalities' underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Funcionalidades</Link>
-                                    <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/prices'  underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Preços</Link>
+                                    <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/prices' underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Preços</Link>
+                                    <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/about' underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Sobre</Link>
                                     {
                                         currentUser ? 
                                         <>
@@ -88,9 +93,9 @@ export function AppHeader() {
                                         <>
                                             <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/auth/login/select-account' underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Entrar</Link>
                                             <AppButton 
-                                                sx={{ height: '2.5rem', backgroundColor: '#525252', fontSize:'1.15rem', color: 'inherit', borderRadius: '.625rem', px: 2.25, py: 1.25, 
+                                                sx={{ height: '2.5rem', backgroundColor: '#404040', fontSize:'1.15rem', color: 'inherit', borderRadius: '.625rem', px: 2.25, py: 1.25, 
                                                     '&:hover': {
-                                                        backgroundColor: '#555555'
+                                                        backgroundColor: '#525252'
                                                     } 
                                                 }}
                                                 variant='text'

@@ -1,3 +1,10 @@
+* {
+    margin: 0;
+	padding: 0;
+	border: 0;
+    box-sizing: border-box;
+}
+
 .authButton {
     &:hover {
         background-color: #9e9e9e;

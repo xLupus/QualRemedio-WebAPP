@@ -3,7 +3,7 @@ import { Box, Stack, Typography, Button, Card, CardContent } from '@mui/material
 export function HomePage() {
 
   return (
-    <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
+    <Box component='main'>
       {/* Jumbotroon - O que fazemos */}
       <Stack alignItems='center' justifyContent='center' spacing={2} useFlexGap padding={2} textAlign='center' paddingTop={5} sx={{ bgcolor: 'yellow' }}>
         <Typography variant='h5' fontWeight='bold'>Lorem ipsum dolor sit amet consectetur.</Typography>

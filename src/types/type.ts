@@ -1,6 +1,7 @@
 import { SxProps, TextFieldVariants, Theme, } from "@mui/material";
 import { ChangeEventHandler, FocusEventHandler, FormEventHandler, ForwardRefExoticComponent, HTMLInputTypeAttribute, Key, KeyboardEventHandler, ReactNode, RefAttributes } from "react";
 import { NavLinkProps, To } from "react-router-dom";
+import { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 
 interface AppButtonProps {
     id?: string | undefined;
@@ -72,6 +73,12 @@ interface AppInputAdornmentProps {
     endAdornment?: React.ReactNode | undefined;
 }
 
+interface AppCardProps {
+    key?: Key | null | undefined
+    children: ReactNode | undefined;
+    sx?: SxProps<Theme> | undefined;
+}
+
 //Services
 interface RegisterService {
     name: string;
@@ -93,12 +100,20 @@ interface LoginService {
     role: number;
 }
 
+//Components
+interface AppBarProps extends MuiAppBarProps {
+    open?: boolean;
+}
+
 //Exports
 export type {
     AppButtonProps,
     AppInputProps,
     AppInputAdornmentProps,
+    AppCardProps,
 
     RegisterService,
-    LoginService
+    LoginService,
+
+    AppBarProps
 }
