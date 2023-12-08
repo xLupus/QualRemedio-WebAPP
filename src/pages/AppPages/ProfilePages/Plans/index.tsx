@@ -63,9 +63,7 @@ export function ProfilePlans() {
                         </AppCard>
                     </Box>
                 ))
-            }
-
-            
+            }       
         </>
     )
 }

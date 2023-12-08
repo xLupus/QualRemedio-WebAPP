@@ -42,7 +42,7 @@ export function ProfileAccountSecurity() {
                                 }}
                                 id='btn-forgot-pass'
                                 variant='text'   
-                                disableRipple    
+                                disableRipple
                             >
                                 Esqueci minha senha
                             </AppButton>       

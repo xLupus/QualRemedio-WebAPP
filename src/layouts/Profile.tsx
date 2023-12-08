@@ -21,7 +21,7 @@ export function Profile() {
         {
             name: 'Aparência e acessibilidade',
             desc: 'Lizards are a widespread group of squamate reptiles.',
-            path: ''
+            path: '/profile/system'
         },
         {
             name: 'Planos',

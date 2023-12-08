@@ -19,6 +19,7 @@ import { Profile } from "./layouts/Profile";
 import { Index } from "./layouts/Index";
 import { ProfileAccountSecurity } from "./pages/AppPages/ProfilePages/Security";
 import { ProfilePlans } from "./pages/AppPages/ProfilePages/Plans";
+import { ProfileSystem } from "./pages/AppPages/ProfilePages/System";
 
 export function Routes() {
     const Protected = () => {
@@ -67,11 +68,12 @@ export function Routes() {
                         <Route element={<Profile />}>
                             <Route path="/profile/account-config" element={<ProfileAccountConfiguration />} />
                             <Route path="/profile/security" element={<ProfileAccountSecurity />} />
-                            <Route path="/profile/system" element={<ProfileAccountConfiguration />} />
+                            <Route path="/profile/system" element={<ProfileSystem />} />
                             <Route path="/profile/plans" element={<ProfilePlans />} />
                         </Route>
                         
                         <Route element={<Protected />}>
+                            
                         </Route>
                     </Route>
                 
