@@ -18,6 +18,16 @@ export function AppButton({
             lineHeight: 'lineHeight' in props.sx ? props.sx.lineHeight : 'normal',
             borderRadius: 'borderRadius' in props.sx ? props.sx.borderRadius : '.25rem',
         }
+    } else {
+        defaultProps = {
+            textTransform: 'none',
+            color: '#00000077',
+            boxShadow: 2,
+            backgroundColor: '#BBBBBB',
+            fontSize: '1rem',
+            lineHeight: 'normal',
+            borderRadius: '.25rem'
+        }
     }
 
     props.sx = {...defaultProps, ...props.sx};

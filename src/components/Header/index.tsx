@@ -7,7 +7,7 @@ import { AppButton } from '../Button';
 import { Logo } from '../Logo';
 import { HiMenu } from 'react-icons/hi'
 import { useAuthContext } from "../../hooks/AuthContext"
-import AuthService from '../../services/Auth/Login';
+import AuthService from '../../services/Auth';
 import { useNavigate } from 'react-router-dom';
 
 export function AppHeader() {
@@ -18,7 +18,7 @@ export function AppHeader() {
         const result = await AuthService.logout();
     
         if(result?.status === 200) {
-            navigate('/auth/login');
+            navigate('/auth/login/select-account');
         }
     }
 
@@ -87,7 +87,17 @@ export function AppHeader() {
                                     {
                                         currentUser ? 
                                         <>
-                                            <Link variant='body2' sx={{color: 'inherit'}} onClick={handleLogout}>Logout</Link>
+                                            <AppButton 
+                                                sx={{ height: '2.5rem', backgroundColor: '#404040', fontSize:'1.15rem', color: 'inherit', borderRadius: '.625rem', px: 2.25, py: 1.25, 
+                                                    '&:hover': {
+                                                        backgroundColor: '#525252'
+                                                    } 
+                                                }}
+                                                variant='text'
+                                                onClick={handleLogout}
+                                            >
+                                                Logout
+                                            </AppButton>
                                         </>
                                         :
                                         <>
@@ -108,7 +118,7 @@ export function AppHeader() {
                                     }
                                 </Box>
                 </Toolbar> 
-        </Container>
-            </AppBar>
+            </Container>
+        </AppBar>
     );
 }

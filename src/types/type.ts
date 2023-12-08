@@ -1,7 +1,8 @@
 import { SxProps, TextFieldVariants, Theme, } from "@mui/material";
-import { ChangeEventHandler, FocusEventHandler, FormEventHandler, ForwardRefExoticComponent, HTMLInputTypeAttribute, Key, KeyboardEventHandler, ReactNode, RefAttributes } from "react";
+import { ChangeEventHandler, Dispatch, FocusEventHandler, FormEventHandler, ForwardRefExoticComponent, HTMLInputTypeAttribute, Key, KeyboardEventHandler, MouseEventHandler, ReactNode, RefAttributes, SetStateAction } from "react";
 import { NavLinkProps, To } from "react-router-dom";
 import { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import { FieldError } from "react-hook-form";
 
 interface AppButtonProps {
     id?: string | undefined;
@@ -16,8 +17,10 @@ interface AppButtonProps {
     hidden?: boolean | undefined;
     href?: string | undefined;
     children: ReactNode | undefined;
+    helperText?: ReactNode |  undefined;
     component?: ForwardRefExoticComponent<NavLinkProps & RefAttributes<HTMLAnchorElement>>
     to?: To | undefined;
+    onClick?: MouseEventHandler<Element> | undefined;
 }
 
 interface AppInputProps {
@@ -37,6 +40,7 @@ interface AppInputProps {
     min?: string | number | undefined;
     max?: string | number | undefined;
     sx?: SxProps<Theme> | undefined;
+    error?: boolean | undefined;
     onChange?: ChangeEventHandler<Element> | undefined;
     onKeyDown?: KeyboardEventHandler<Element> | undefined;
     onFocus?: FocusEventHandler<Element> | undefined;
@@ -64,6 +68,7 @@ interface AppInputAdornmentProps {
     handleMouseDown?: unknown;
     min?: string | number | undefined;
     max?: string | number | undefined;
+    error?: boolean | undefined;
     sx?: SxProps<Theme> | undefined;
     onChange?: ChangeEventHandler<Element> | undefined;
     onKeyDown?: KeyboardEventHandler<Element> | undefined;
@@ -105,6 +110,11 @@ interface AppBarProps extends MuiAppBarProps {
     open?: boolean;
 }
 
+interface LoginContextType {
+    accountType: string | null;
+    setAccountType: Dispatch<SetStateAction<string>>;
+}
+
 //Exports
 export type {
     AppButtonProps,
@@ -115,5 +125,7 @@ export type {
     RegisterService,
     LoginService,
 
-    AppBarProps
+    AppBarProps,
+
+    LoginContextType
 }

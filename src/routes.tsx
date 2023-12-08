@@ -22,11 +22,21 @@ import { ProfilePlans } from "./pages/AppPages/ProfilePages/Plans";
 import { ProfileSystem } from "./pages/AppPages/ProfilePages/System";
 
 export function Routes() {
+    const PreventBackHistory = () => {
+        const currentUser = useAuthContext();
+
+        if(currentUser) {
+            return <Navigate to='/' replace={true} />
+        }
+
+        return <Outlet />;
+    }
+
     const Protected = () => {
         const currentUser = useAuthContext();
 
         if(!currentUser) {
-            return <Navigate to='/auth/login' />
+            return <Navigate to='/auth/login' replace={true} />
         }
 
         return <Outlet />;
@@ -44,24 +54,26 @@ export function Routes() {
                     </Route>
 
                     <Route element={<Auth />}>
-                        {/* Login */}
-                        <Route path="auth/login/select-account" element={<LoginAccountSelection />} />
-                        <Route path="auth/login" element={<Login />} />
-        
-                        {/* Registro */}
-                        <Route path="auth/register/select-account" element={<RegisterAccountSelection />} />
-                        <Route path="auth/register/email-verification" element={<MailVerification isFromPath={'register'} />} />
-                        <Route path="auth/register/account-info" element={<RegisterAccountInformation />} />
-                        <Route path="auth/register/create-password" element={<CreatePassword isFromPath="register" />} />
-                        <Route path="auth/register/email-send" element={<SendMail isFromPath={'register'} />} />
-                        <Route path="auth/register/account-created" element={<RegisterAccountCreated />} />
-                       
-                        {/* Recuperação de senha */}
-                        <Route path="recover-password/email-verification" element={<MailVerification isFromPath={'recover-password'} />} />
-                        <Route path="recover-password/email-send" element={<SendMail isFromPath={'recover-password'} />} />
-        
-                        <Route path="recover-password/create-password" element={<CreatePassword isFromPath="recover-password"/>} />
-                        <Route path="recover-password/password-changed" element={<RecoverPasswordChangedPassword />} />
+                        <Route element={<PreventBackHistory />}>
+                            {/* Login */}
+                            <Route path="auth/login/select-account" element={<LoginAccountSelection />} />
+                            <Route path="auth/login" element={<Login />} />
+            
+                            {/* Registro */}
+                            <Route path="auth/register/select-account" element={<RegisterAccountSelection />} />
+                            <Route path="auth/register/email-verification" element={<MailVerification isFromPath={'register'} />} />
+                            <Route path="auth/register/account-info" element={<RegisterAccountInformation />} />
+                            <Route path="auth/register/create-password" element={<CreatePassword isFromPath="register" />} />
+                            <Route path="auth/register/email-send" element={<SendMail isFromPath={'register'} />} />
+                            <Route path="auth/register/account-created" element={<RegisterAccountCreated />} />
+                        
+                            {/* Recuperação de senha */}
+                            <Route path="recover-password/email-verification" element={<MailVerification isFromPath={'recover-password'} />} />
+                            <Route path="recover-password/email-send" element={<SendMail isFromPath={'recover-password'} />} />
+            
+                            <Route path="recover-password/create-password" element={<CreatePassword isFromPath="recover-password"/>} />
+                            <Route path="recover-password/password-changed" element={<RecoverPasswordChangedPassword />} />
+                        </Route>
                     </Route>   
                             
                     <Route element={<App />}>
@@ -69,10 +81,10 @@ export function Routes() {
                             <Route path="/profile/account-config" element={<ProfileAccountConfiguration />} />
                             <Route path="/profile/security" element={<ProfileAccountSecurity />} />
                             <Route path="/profile/system" element={<ProfileSystem />} />
-                            <Route path="/profile/plans" element={<ProfilePlans />} />
                         </Route>
                         
                         <Route element={<Protected />}>
+                            <Route path="/profile/plans" element={<ProfilePlans />} />
                             
                         </Route>
                     </Route>

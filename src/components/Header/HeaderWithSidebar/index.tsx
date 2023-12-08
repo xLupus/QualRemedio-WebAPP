@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 import { AppButton } from '../../Button';
 import { Logo } from '../../Logo';
 import { useAuthContext } from "../../../hooks/AuthContext"
-import AuthService from '../../../services/Auth/Login';
+import AuthService from '../../../services/Auth';
 import { useNavigate } from 'react-router-dom';
 import { Add, Inbox, Mail, MenuOpen } from '@mui/icons-material';
 import HiMenu from '@mui/icons-material/Menu';

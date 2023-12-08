@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Box, Checkbox, Divider, FormControlLabel, FormGroup, IconButton, InputAdornment, Link, Typography, Stack } from "@mui/material";
+import { Box, Checkbox, Divider, FormControlLabel, FormGroup, IconButton, InputAdornment, Link, Typography, Stack, CircularProgress } from "@mui/material";
 import { AppButton } from '../../../../components/Button';
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -7,8 +7,10 @@ import { Google, Microsoft, Visibility, VisibilityOff } from '@mui/icons-materia
 import { LoginService } from '../../../../types/type';
 import { z } from 'zod';
 import { AppInput } from '../../../../components/Input';
-import { useState } from 'react';
+import { MouseEvent, useContext, useState } from 'react';
 import { AppInputAdornment } from '../../../../components/Input/InputAdornment';
+import { LoginContext } from '../../../../hooks/LoginContext';
+import AuthService from '../../../../services/Auth/index'
 
 const validator = z.object({
     email: z
@@ -25,7 +27,10 @@ const validator = z.object({
 
 export function Login() {
     const [showPassword, setShowPassword] = useState<boolean>(false);
-    
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    const { accountType } = useContext(LoginContext);
+
     const navigate = useNavigate();
 
     const { register, handleSubmit, formState: { errors } } = useForm<LoginService>({
@@ -34,22 +39,16 @@ export function Login() {
 
     //password
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const handleMouseDownPassword = (e: any) => e.preventDefault();
+    const handleMouseDownPassword = (e: MouseEvent<HTMLButtonElement>) => e.preventDefault();
 
-    const handleLogin = (data: LoginService) => {
+    const handleLogin = async (data: LoginService) => {
         const { email, password, role } = data;
-        console.log('2')
-        const loginData = {
-            email,
-            password,
-            role
-        }
     
-      /*   const result = await AuthService.login(loginData);
+        setIsLoading(true);
+        const result = await AuthService.login({email, password, role});
+        setIsLoading(false);
 
-        if(result?.status === 200) {
-            navigate('/');
-        } */
+        if(result?.status === 200) navigate('/');
     }
     
     return (
@@ -62,7 +61,7 @@ export function Login() {
                         Não tem uma conta? 
                     <Link component={NavLink} to='/auth/register/select-account' ml='0.2rem' color='#50505080' underline='none'>Registre-se</Link>
                 </Typography>
-                <Typography typography='body1' fontSize='0.77344rem' color='#50505080'>Opção: Paciente</Typography>
+                <Typography typography='body1' fontSize='0.77344rem' color='#50505080'>Opção: {accountType === '1' ? 'Paciente' : (accountType === '2' ? 'Cuidador' : 'Médico')}</Typography>
             </Box>
 
             <Box component='form' onSubmit={handleSubmit(handleLogin)}>
@@ -74,6 +73,8 @@ export function Login() {
                         type='email'
                         label='E-mail'
                         {...register('email')}
+                        error={errors.email ? true : false}
+                       // helperText={errors.email}
                         required
                         fullWidth
                         autoComplete='off'
@@ -85,6 +86,7 @@ export function Login() {
                         color='primary'
                         type={showPassword ? 'text' : 'password'}
                         label='Senha'
+                        error={errors.password ? true : false}
                         {...register('password')}
                         required
                         fullWidth
@@ -109,7 +111,7 @@ export function Login() {
                         color='primary'
                         variant='filled'
                         type='hidden'
-                        {...register('role', { value: 1 })}
+                        {...register('role', { value: Number(accountType) })}
                         fullWidth
                         sx={{display: 'none'}}
                     />
@@ -130,7 +132,21 @@ export function Login() {
                         type='submit'
                         className='authButton'
                     >
-                        Login
+                    {
+                        isLoading? (
+                            <CircularProgress
+                                size={24}
+                                sx={{
+                                    position: 'absolute',
+                                    top: '50%',
+                                    left: '50%',
+                                    marginTop: '-12px',
+                                    marginLeft: '-12px',
+                                }}
+                            />
+                        )
+                        : 'Login'
+                    }
                     </AppButton>
                 </Box>
                 
