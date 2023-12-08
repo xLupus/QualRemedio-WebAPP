@@ -22,7 +22,7 @@ export function ProfileSystem() {
                         <Grid xs={3.5} key={i}>
                             {
                                 el === 'Claro' ? 
-                                <Stack direction='row' alignItems='center'>
+                                <Stack direction='row' alignItems='center' justifyContent='space-between'>
                                     <Typography typography='h3' fontSize='1.375rem' color='#00000077' fontWeight='bold'>{el}</Typography>
                                     <Typography typography='body1' fontSize='.875rem' color='#00000077' ml={8}>Tema atual</Typography>
                                 </Stack>
