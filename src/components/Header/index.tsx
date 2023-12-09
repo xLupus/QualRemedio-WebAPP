@@ -9,6 +9,7 @@ import { HiMenu } from 'react-icons/hi'
 import { useAuthContext } from "../../hooks/authContext"
 import AuthService from '../../services/Auth';
 import { useNavigate } from 'react-router-dom';
+import { grey } from '@mui/material/colors';
 
 export function AppHeader() {
     const navigate = useNavigate();
@@ -29,9 +30,9 @@ export function AppHeader() {
     const handleCloseMenu = () => setAnchorEl(null);
 
     return (
-        <AppBar position="fixed">
+        <AppBar position="fixed" sx={{bgcolor: grey[50] }}>
             <Container maxWidth='xl'>
-                <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', }}>
 
                     <Link component={NavLink} to='/' underline="none" color='inherit'>
                         <Logo />
@@ -83,13 +84,13 @@ export function AppHeader() {
 
                     {/* Full Menu */}
                     <Box component='nav' display={{ xs: 'none', md: 'flex' }} alignItems={{ xs: 'none', md: 'center' }}>
-                        <Link variant='body2' sx={{ color: 'inherit' }} component={NavLink} to='/prices' underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Preços</Link>
-                        <Link variant='body2' sx={{ color: 'inherit' }} component={NavLink} to='/about' underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Sobre</Link>
+                        <Link variant='body2' sx={{ color: 'black' }} component={NavLink} to='/prices' underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Preços</Link>
+                        <Link variant='body2' sx={{ color: 'black' }} component={NavLink} to='/about' underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Sobre</Link>
 
                         {
                             currentUser ?
                                 <>
-                                    <Link variant='body2' sx={{ color: 'inherit' }} component={NavLink} to='/dashboard' underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Dashboard</Link>
+                                    <Link variant='body2' sx={{ color: 'black' }} component={NavLink} to='/dashboard' underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Dashboard</Link>
 
                                     <AppButton
                                         sx={{
