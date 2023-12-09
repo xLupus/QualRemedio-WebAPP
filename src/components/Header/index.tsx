@@ -6,13 +6,13 @@ import { NavLink } from 'react-router-dom';
 import { AppButton } from '../Button';
 import { Logo } from '../Logo';
 import { HiMenu } from 'react-icons/hi'
-import { useAuthContext } from "../../hooks/AuthContext"
+import { useCurrentUserContext } from "../../hooks/CurrentUserContext"
 import AuthService from '../../services/Auth';
 import { useNavigate } from 'react-router-dom';
 
 export function AppHeader() {
     const navigate = useNavigate();
-    const currentUser = useAuthContext();
+    const currentUser = useCurrentUserContext();
 
     const handleLogout = async () => {
         const result = await AuthService.logout();
@@ -103,7 +103,7 @@ export function AppHeader() {
                                         <>
                                             <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/auth/login/select-account' underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Entrar</Link>
                                             <AppButton 
-                                                sx={{ height: '2.5rem', backgroundColor: '#404040', fontSize:'1.15rem', color: 'inherit', borderRadius: '.625rem', px: 2.25, py: 1.25, 
+                                                sx={{ height: '2.5rem', backgroundColor: '#404040', fontSize:'1.15rem', color: 'inherit', borderRadius: '.625rem', px: 2.25, py: 1.25, ml: 2,
                                                     '&:hover': {
                                                         backgroundColor: '#525252'
                                                     } 

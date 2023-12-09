@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-export const useAuthContext = () => {
+export const useCurrentUserContext = () => {
     const currentUser = {
         user_id: Cookies.get('user_id'),
         user_role: Cookies.get('user_role'),

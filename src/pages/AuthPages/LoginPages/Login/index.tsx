@@ -10,7 +10,7 @@ import { AppInput } from '../../../../components/Input';
 import { MouseEvent, useContext, useState } from 'react';
 import { AppInputAdornment } from '../../../../components/Input/InputAdornment';
 import { LoginContext } from '../../../../hooks/LoginContext';
-import AuthService from '../../../../services/Auth/index'
+import AuthService from '../../../../services/Auth'
 
 const validator = z.object({
     email: z
