@@ -72,10 +72,10 @@ export const UpdateConsultationPage = () => {
   })
 
   const specialties = results[0].data
-  //const bonds = results[1].data
   const consultation_status = results[1].data
   const consultation_data = results[2].data
   const consultation_data_loading = results[2].isLoading
+  //const bonds = results[3].data
 
   useEffect(() => {
     if (consultation_data) {
@@ -106,11 +106,11 @@ export const UpdateConsultationPage = () => {
     const response = await Consultations.update(Number(consultation_id), update_consultation_request_data)
 
     if (response.status == 200)
-      navigate(`/d/consultas/${consultation_id}`, { replace: true })
+      navigate(`/consultations/${consultation_id}`, { replace: true })
   }
 
   return (
-    <Stack spacing={3} maxWidth='md'>
+    <Stack spacing={3} maxWidth='md' width={'100%'}>
       <Typography variant='h5' component='h1'>Editar Consultas</Typography>
 
       {consultation_data_loading && (
@@ -215,7 +215,7 @@ export const UpdateConsultationPage = () => {
                 {isSubmitting ? <CircularProgress color="inherit" size={30} /> : 'Atualizar Consulta'}
               </Button>
 
-              <MUILink component={Link} to='/d/consultas'>Voltar</MUILink>
+              <MUILink component={Link} to='/consultations'>Voltar</MUILink>
             </Stack>
           </Stack>
         </form>

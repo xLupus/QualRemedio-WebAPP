@@ -43,19 +43,17 @@ export const CreatePrescriptionPage = () => {
     }
 
     if (response.status == 200)
-      navigate(`/d/consultas/${consultation_id}`)
+      navigate(`/consultations/${consultation_id}`, { replace: true })
 
     console.log({ response, data, consultation_id });
   }
 
   return (
-    <Stack maxWidth={'md'}>
-
-
+    <Stack maxWidth={'md'} width='100%'>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <Stack spacing={3}>
           <Stack spacing={1} >
-            <Typography fontWeight='bold'>Label</Typography>
+            <Typography fontWeight='bold'>Rotulo</Typography>
 
             <TextField
               type="text"
@@ -68,7 +66,7 @@ export const CreatePrescriptionPage = () => {
           </Stack>
 
           <Stack spacing={1}>
-            <Typography fontWeight='bold'>Observation</Typography>
+            <Typography fontWeight='bold'>Observação</Typography>
 
             <TextField
               type="text"
@@ -108,7 +106,7 @@ export const CreatePrescriptionPage = () => {
 
           <Stack direction='row' alignItems={'center'} spacing={3}>
             <Button type="submit" variant='contained' sx={{ width: 'fit-content' }}>Adicionar Prescrição</Button>
-            <MUILink component={Link} to={`/d/consultas/${consultation_id}`}>Voltar</MUILink>
+            <MUILink component={Link} to={`/consultations/${consultation_id}`}>Voltar</MUILink>
           </Stack>
         </Stack>
       </form>

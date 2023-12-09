@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Button, CircularProgress, Paper, Stack, TextField, Typography } from "@mui/material"
 import { SubmitHandler, useForm } from 'react-hook-form'
 import z from 'zod'
-import User from "../../../services/User"
+import User from "../../../../services/User"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from 'react'
 import { grey } from "@mui/material/colors"
@@ -83,7 +83,7 @@ export const ChangePassword = () => {
   }
 
   return (
-    <Stack maxWidth={'sm'}>
+    <Stack maxWidth={'md'} width='100%'>
 
       {isLoading && (
         <Paper sx={{ bgcolor: grey[50] }}>

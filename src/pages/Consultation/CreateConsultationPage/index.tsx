@@ -77,12 +77,12 @@ export const CreateConsultationPage = () => {
     const response = await Consultations.create(Number(professional), create_consultation_request_data)
 
     if (response.status == 200)
-      navigate('/d/consultas', { replace: true })
+      navigate('/consultations', { replace: true })
   }
 
   return (
     <Stack spacing={3} maxWidth='md'>
-      <Typography variant='h5' component='h1'>Registrar Consultas</Typography>
+      <Typography variant='h5' component='h1'>Registrar Consulta</Typography>
 
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <Stack direction={'row'} spacing={3} useFlexGap>
@@ -201,7 +201,7 @@ export const CreateConsultationPage = () => {
               Registrar Consulta
             </Button>
 
-            <MUILink component={Link} to='/d/consultas'>Voltar</MUILink>
+            <MUILink component={Link} to='/consultations'>Voltar</MUILink>
           </Stack>
         </Stack>
       </form>

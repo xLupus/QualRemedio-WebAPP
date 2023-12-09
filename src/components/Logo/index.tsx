@@ -1,11 +1,12 @@
-import iconBranch from '../../assets/icon_branch.svg'
+import logoSVG from '../../assets/logo.svg'
 import { Box, Typography } from '@mui/material'
 
 export function Logo() {
   return (
     <Box display='flex' alignItems='center' justifyContent='center'>
-      <img src={iconBranch} alt="" />
-      <Typography marginLeft={2}>Qual Remedio?</Typography>
+      <img src={logoSVG} height='60' alt="" />
+      
+      <Typography >HealthSync</Typography>
     </Box>
   )
 }

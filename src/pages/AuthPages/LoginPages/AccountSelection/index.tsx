@@ -16,11 +16,11 @@ export function LoginAccountSelection() {
             type: 'Paciente'
         },
         {
-            id: 2,
+            id: 3,
             type: 'Cuidador'
         },
         {
-            id: 3,
+            id: 2,
             type: 'Médico'
         }
     ];

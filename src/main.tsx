@@ -16,11 +16,11 @@ const query_client = new QueryClient({
 })
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-    <LoginContextProvider>
-        <React.StrictMode>
-        <QueryClientProvider client={query_client}>
+  <LoginContextProvider>
+    <React.StrictMode>
+      <QueryClientProvider client={query_client}>
         <RouterProvider router={Routes()} />
-        </QueryClientProvider>
-        </React.StrictMode>,
-    </LoginContextProvider>
+      </QueryClientProvider>
+    </React.StrictMode>,
+  </LoginContextProvider>
 )

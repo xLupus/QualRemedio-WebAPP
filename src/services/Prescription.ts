@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
-import { axios_instance } from "../config/axios";
-
+import { axiosInstanceAPI } from "../config/axios";
+import Cookies from 'js-cookie'
 interface PrescriptionStoreData {
   label: string,
   observation: string,
@@ -8,6 +8,8 @@ interface PrescriptionStoreData {
 }
 
 class Prescription {
+  auth_token = Cookies.get('auth_token')
+
   async store(consultation_id: number, data: PrescriptionStoreData, file?: FileList) {
     try {
       const formData = new FormData()
@@ -21,9 +23,10 @@ class Prescription {
       if (data.physical?.trim())
         formData.append('physical', data.physical.trim())
 
-      const response = await axios_instance.post(
+      const response = await axiosInstanceAPI.post(
         `consultations/${consultation_id}/prescriptions`,
         formData,
+        { headers: { Authorization: `Bearer ${this.auth_token}` } }
       )
 
       return response.data
@@ -40,8 +43,9 @@ class Prescription {
 
   async show(consultation_id: number, prescription_id: number) {
     try {
-      const response = await axios_instance.get(
+      const response = await axiosInstanceAPI.get(
         `consultations/${consultation_id}/prescriptions/${prescription_id}`,
+        { headers: { Authorization: `Bearer ${this.auth_token}` } }
       )
 
       return response.data
@@ -54,7 +58,10 @@ class Prescription {
 
   async destroy(consultation_id: number, prescription_id: number) {
     try {
-      const response = await axios_instance.delete(`consultations/${consultation_id}/prescriptions/${prescription_id}`)
+      const response = await axiosInstanceAPI.delete(
+        `consultations/${consultation_id}/prescriptions/${prescription_id}`,
+        { headers: { Authorization: `Bearer ${this.auth_token}` } }
+        )
 
       return response.data
     } catch (err: unknown) {
@@ -77,9 +84,10 @@ class Prescription {
       formData.append('physical', data.physical.trim())
 
     try {
-      const response = await axios_instance.patch(
+      const response = await axiosInstanceAPI.patch(
         `consultations/${consultation_id}/prescriptions/${prescription_id}`,
         formData,
+        { headers: { Authorization: `Bearer ${this.auth_token}` } }
       )
 
       return response.data

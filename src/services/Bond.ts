@@ -1,9 +1,12 @@
-import { axios_instance } from "../config/axios";
-
+import { axiosInstanceAPI } from "../config/axios";
+import Cookies from 'js-cookie'
 class Bond {
   async index() {
     try {
-      const response = await axios_instance.get('user/bond')
+      const response = await axiosInstanceAPI.get(
+        'user/bond',
+        { headers: { Authorization: `Bearer ${Cookies.get('auth_token')}` } }
+      )
 
       return response.data
 

@@ -55,13 +55,13 @@ export const UpdatePrescriptionPage = () => {
     const response = await Prescription.update(Number(consultation_id), Number(prescription_id), form_data, form_data.digital)
 
     if (response.data.success)
-      navigate(`/d/consultas/${consultation_id}`
+      navigate(`/consultations/${consultation_id}`
       )
     console.log(response);
   }
 
   return (
-    <Stack maxWidth='md'>
+    <Stack maxWidth='md' width={'100%'}>
       {isLoading || isFetching
         ? (
           <p>Carregando</p>
@@ -117,7 +117,7 @@ export const UpdatePrescriptionPage = () => {
 
               <Stack direction={'row'} spacing={3} alignItems={'center'} >
                 <Button type="submit" sx={{ width: 'fit-content' }} variant='contained'>Atualizar</Button>
-                <MUILink component={Link} to={`/d/consultas/${consultation_id}`} >Voltar</MUILink>
+                <MUILink component={Link} to={`/consultations/${consultation_id}`} >Voltar</MUILink>
               </Stack>
             </Stack>
           </form>

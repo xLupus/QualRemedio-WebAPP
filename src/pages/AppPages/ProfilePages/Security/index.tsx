@@ -1,69 +1,73 @@
-import { Box, Typography, CardContent, CardActions, Divider, Paper, Switch, Stack, IconButton } from '@mui/material';
+import { Typography, CardContent, CardActions, Divider, Paper, Link as MUILink } from '@mui/material';
 import { AppCard } from '../../../../components/Card';
 import { AppButton } from '../../../../components/Button';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
-import { Devices, Close } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 export function ProfileAccountSecurity() {
     return (
-        <>  
+        <>
             <Typography typography='h3' fontSize='1.375rem' color='#00000077' fontWeight='bold'>Senha</Typography>
-            <Divider sx={{mt: 2, mb: 3}} />
-            
-            <AppCard sx={{ height: '7.5rem', mt: 8}}>
+            <Divider sx={{ mt: 2, mb: 3 }} />
+
+            <AppCard sx={{ height: '7.5rem', mt: 8 }}>
                 <Grid container>
-                    <Grid xs={6}> 
-                        <CardContent sx={{height: '50%'}}>
+                    <Grid xs={6}>
+                        <CardContent sx={{ height: '50%' }}>
                             <Typography typography='h4' fontSize='1.125rem' mb={2}>Nome</Typography>
-                            <Paper sx={{ height: '2.8125rem', display:'flex', alignItems: 'center', typography: 'body1', color:'#00000077', p: 2}} elevation={2}>*********************</Paper>
+                            <Paper sx={{ height: '2.8125rem', display: 'flex', alignItems: 'center', typography: 'body1', color: '#00000077', p: 2 }} elevation={2}>*********************</Paper>
                         </CardContent>
                     </Grid>
 
                     <Grid xs={6} alignItems='center'>
-                        <CardActions sx={{display: 'flex', justifyContent: 'center', mt: 6}}>
+                        <CardActions sx={{ display: 'flex', justifyContent: 'center', mt: 6 }}>
                             <AppButton
-                                sx={{ width: '12.5rem', height: '2.8125rem', backgroundColor: 'transparent', boxShadow: 'none', fontSize: '1.125rem', mr: 3,
+                                sx={{
+                                    width: '12.5rem', height: '2.8125rem', backgroundColor: 'transparent', boxShadow: 'none', fontSize: '1.125rem', mr: 3,
                                     '&:hover': {
-                                            backgroundColor: 'transparent'
-                                        }
-                                    }}
-                                    id='btn-upd-pass'
-                                    variant='text'   
-                                    disableRipple    
-                                >
-                                    Alterar minha senha
+                                        backgroundColor: 'transparent'
+                                    }
+                                }}
+                                id='btn-upd-pass'
+                                variant='text'
+                                disableRipple
+                            >
+                                <MUILink component={Link} to={'change-password'}>Alterar minha senha</MUILink>
                             </AppButton>
 
                             <AppButton
-                                sx={{ width: '12.5rem', height: '2.8125rem', backgroundColor: 'transparent', boxShadow: 'none', fontSize: '1.125rem',
-                                '&:hover': {
+                                sx={{
+                                    width: '12.5rem', height: '2.8125rem', backgroundColor: 'transparent', boxShadow: 'none', fontSize: '1.125rem',
+                                    '&:hover': {
                                         backgroundColor: 'transparent'
-                                 }
+                                    }
                                 }}
                                 id='btn-forgot-pass'
-                                variant='text'   
+                                variant='text'
                                 disableRipple
                             >
                                 Esqueci minha senha
-                            </AppButton>       
+                            </AppButton>
                         </CardActions>
                     </Grid>
                 </Grid>
             </AppCard>
 
+            {/*
+        
+        
             <Typography typography='h3' fontSize='1.125rem' color='#00000077' mt={8}>Segurança</Typography>
             <Divider sx={{mt: 2, mb: 3}} />
 
-            {/*  */}
             <Typography typography='h3' fontSize='1.375rem' color='#00000077' fontWeight='bold' mt={8}>Verificação em dois fatores</Typography>
             <Typography typography='h3' fontSize='1.125rem' color='#00000077' mt={4}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus repudiandae nihil incidunt numquam 
-                delectus vitae architecto! Eum dicta 
-                laboriosam accusantium ut inventore earum 
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus repudiandae nihil incidunt numquam
+                delectus vitae architecto! Eum dicta
+                laboriosam accusantium ut inventore earum
                 in odit doloremque, dolorem ad voluptatem similique.
             </Typography>
-                
-            <AppCard sx={{height: '6.125rem', mt: 5}}>
+
+            <AppCard sx={{ height: '6.125rem', mt: 5 }}>
                 <CardContent>
                     <Stack direction='row' alignItems='center' justifyContent='space-between'>
                         <Typography typography='h3' fontSize='1.125rem'>E-mail</Typography>
@@ -73,10 +77,10 @@ export function ProfileAccountSecurity() {
                     <Typography typography='h3' fontSize='1.125rem' color='#00000077' mt={.5}>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus repudiandae nihil incidunt numquam.
                     </Typography>
-                </CardContent>                              
+                </CardContent>
             </AppCard>
 
-            <AppCard sx={{height: '6.125rem', mt: 5}}>
+            <AppCard sx={{ height: '6.125rem', mt: 5 }}>
                 <CardContent>
                     <Stack direction='row' alignItems='center' justifyContent='space-between'>
                         <Typography typography='h3' fontSize='1.125rem'>Aplicativo de autenticação</Typography>
@@ -86,28 +90,27 @@ export function ProfileAccountSecurity() {
                     <Typography typography='h3' fontSize='1.125rem' color='#00000077' mt={.5}>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus repudiandae nihil incidunt numquam.
                     </Typography>
-                </CardContent>                              
+                </CardContent>
             </AppCard>
 
-            {/*  */}
             <Typography typography='h3' fontSize='1.375rem' color='#00000077' fontWeight='bold' mt={8}>Sessões ativas</Typography>
             <Typography typography='h3' fontSize='1.125rem' color='#00000077' mt={4} mb={3}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus repudiandae nihil incidunt numquam 
-                delectus vitae architecto! Eum dicta 
-                laboriosam accusantium ut inventore earum 
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus repudiandae nihil incidunt numquam
+                delectus vitae architecto! Eum dicta
+                laboriosam accusantium ut inventore earum
                 in odit doloremque, dolorem ad voluptatem similique.
             </Typography>
-                
-            <AppCard sx={{height: '6.125rem', mt: 2}}>
+
+            <AppCard sx={{ height: '6.125rem', mt: 2 }}>
                 <CardContent>
                     <Stack direction='row' alignItems='center' justifyContent='space-between'>
-                       <Stack direction='row' alignItems='center'>
-                            <Devices sx={{width: 70, height: 70}} />
+                        <Stack direction='row' alignItems='center'>
+                            <Devices sx={{ width: 70, height: 70 }} />
                             <Stack ml={6}>
                                 <Typography typography='h3' fontSize='1.125rem' mb={2}>São Paulo, Brasil - 255.255.255.1</Typography>
                                 <Typography typography='h3' fontSize='1.125rem'>Sessão Atual</Typography>
                             </Stack>
-                       </Stack>
+                        </Stack>
 
                         <Stack direction='row' alignItems='center'>
                             <Typography typography='h3' fontSize='1.125rem' alignSelf='flex-start' mr={6}>Sistema Operacional - Windows</Typography>
@@ -122,19 +125,19 @@ export function ProfileAccountSecurity() {
                             </Box>
                         </Stack>
                     </Stack>
-                </CardContent>                              
+                </CardContent>
             </AppCard>
 
-            <AppCard sx={{height: '6.125rem', mt: 2}}>
+            <AppCard sx={{ height: '6.125rem', mt: 2 }}>
                 <CardContent>
                     <Stack direction='row' alignItems='center' justifyContent='space-between'>
-                       <Stack direction='row' alignItems='center'>
-                            <Devices sx={{width: 70, height: 70}} />
+                        <Stack direction='row' alignItems='center'>
+                            <Devices sx={{ width: 70, height: 70 }} />
                             <Stack ml={6}>
                                 <Typography typography='h3' fontSize='1.125rem' mb={2}>São Paulo, Brasil - 255.255.255.2</Typography>
                                 <Typography typography='h3' fontSize='1.125rem'>Sessão Atual</Typography>
                             </Stack>
-                       </Stack>
+                        </Stack>
 
                         <Stack direction='row' alignItems='center'>
                             <Typography typography='h3' fontSize='1.125rem' alignSelf='flex-start' mr={6}>Sistema Operacional - Linux</Typography>
@@ -149,19 +152,19 @@ export function ProfileAccountSecurity() {
                             </Box>
                         </Stack>
                     </Stack>
-                </CardContent>                              
+                </CardContent>
             </AppCard>
 
-            <AppCard sx={{height: '6.125rem', mt: 2}}>
+            <AppCard sx={{ height: '6.125rem', mt: 2 }}>
                 <CardContent>
                     <Stack direction='row' alignItems='center' justifyContent='space-between'>
-                       <Stack direction='row' alignItems='center'>
-                            <Devices sx={{width: 70, height: 70}} />
+                        <Stack direction='row' alignItems='center'>
+                            <Devices sx={{ width: 70, height: 70 }} />
                             <Stack ml={6}>
                                 <Typography typography='h3' fontSize='1.125rem' mb={2}>São Paulo, Brasil - 255.255.255.2</Typography>
                                 <Typography typography='h3' fontSize='1.125rem'>Sessão Atual</Typography>
                             </Stack>
-                       </Stack>
+                        </Stack>
 
                         <Stack direction='row' alignItems='center'>
                             <Typography typography='h3' fontSize='1.125rem' alignSelf='flex-start' mr={6}>Sistema Operacional - Linux</Typography>
@@ -176,21 +179,25 @@ export function ProfileAccountSecurity() {
                             </Box>
                         </Stack>
                     </Stack>
-                </CardContent>                              
+                </CardContent>
             </AppCard>
 
             <Box display='flex' justifyContent='flex-end' mt={8}>
                 <AppButton
-                    sx={{ width: '18.5rem', height: '2.5rem', backgroundColor: '#D9D9D9', 
+                    sx={{
+                        width: '18.5rem', height: '2.5rem', backgroundColor: '#D9D9D9',
                         '&:hover': {
-                        backgroundColor: '#C6C6C6'
-                    }}}
+                            backgroundColor: '#C6C6C6'
+                        }
+                    }}
                     id='btn-logout-all-sessions'
                     variant='text'
                 >
                     Deslogar de todas as sessões
                 </AppButton>
             </Box>
+        
+        */}
         </>
     )
 }
