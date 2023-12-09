@@ -1,19 +1,10 @@
-import ReactDOM from 'react-dom/client'
 import { RouterProvider } from "react-router-dom"
-import './style.css'
 import { Routes } from './routes'
-
-import { LoginContextProvider } from './hooks/LoginContext'
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <LoginContextProvider>
-    <React.StrictMode>
-      <RouterProvider router={Routes()} />
-    </React.StrictMode>,
-  </LoginContextProvider>
-)
-        
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { LoginContextProvider } from './hooks/LoginContext'
+import ReactDOM from 'react-dom/client'
+import React from 'react'
+import './style.css'
 
 const query_client = new QueryClient({
   defaultOptions: {
@@ -25,7 +16,11 @@ const query_client = new QueryClient({
 })
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-    <QueryClientProvider client={query_client}>
-      <RouterProvider router={Routes()} />
-    </QueryClientProvider>
-  )
+    <LoginContextProvider>
+        <React.StrictMode>
+        <QueryClientProvider client={query_client}>
+        <RouterProvider router={Routes()} />
+        </QueryClientProvider>
+        </React.StrictMode>,
+    </LoginContextProvider>
+)

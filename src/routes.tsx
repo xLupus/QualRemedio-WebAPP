@@ -22,19 +22,17 @@ import { ProfilePlans } from "./pages/AppPages/ProfilePages/Plans";
 import { ProfileSystem } from "./pages/AppPages/ProfilePages/System";
 
 export function Routes() {
-    const PreventBackHistory = () => {
-        const currentUser = useAuthContext();
+    const currentUser = useAuthContext();
 
+   /*  const PreventBackHistory = () => {
         if(currentUser) {
             return <Navigate to='/' replace={true} />
         }
 
         return <Outlet />;
-    }
+    } */
 
     const Protected = () => {
-        const currentUser = useAuthContext();
-
         if(!currentUser) {
             return <Navigate to='/auth/login' replace={true} />
         }
@@ -54,7 +52,7 @@ export function Routes() {
                     </Route>
 
                     <Route element={<Auth />}>
-                        <Route element={<PreventBackHistory />}>
+                       
                             {/* Login */}
                             <Route path="auth/login/select-account" element={<LoginAccountSelection />} />
                             <Route path="auth/login" element={<Login />} />
@@ -73,7 +71,7 @@ export function Routes() {
             
                             <Route path="recover-password/create-password" element={<CreatePassword isFromPath="recover-password"/>} />
                             <Route path="recover-password/password-changed" element={<RecoverPasswordChangedPassword />} />
-                        </Route>
+                 
                     </Route>   
                             
                     <Route element={<App />}>
@@ -91,7 +89,6 @@ export function Routes() {
                 
                 </Route>
             )
-          )
         )
     )
 }
