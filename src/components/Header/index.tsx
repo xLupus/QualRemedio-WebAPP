@@ -1,99 +1,124 @@
-import { AppBar, Container, Toolbar, Box, Button, Menu, MenuItem } from "@mui/material"
-import { NavLink } from "react-router-dom"
 import { useState, MouseEvent } from 'react'
-import { Logo } from "../Logo"
+import Toolbar from '@mui/material/Toolbar';
+import Divider from '@mui/material/Divider';
+import { AppBar, Button, Menu, MenuItem, Box, Link, Container } from '@mui/material';
+import { NavLink } from 'react-router-dom';
+import { AppButton } from '../Button';
+import { Logo } from '../Logo';
 import { HiMenu } from 'react-icons/hi'
-import { useAuthContext } from "../../hooks/authContext"
-import AuthService from '../../services/Auth/Login';
+import { useAuthContext } from "../../hooks/AuthContext"
+import AuthService from '../../services/Auth';
 import { useNavigate } from 'react-router-dom';
 
-export function Header() {
-  const navigate = useNavigate();
+export function AppHeader() {
+    const navigate = useNavigate();
+    const currentUser = useAuthContext();
 
-  const handleLogout = async () => {
+    const handleLogout = async () => {
+        const result = await AuthService.logout();
+    
+        if(result?.status === 200) {
+            navigate('/auth/login/select-account');
+        }
+    }
 
-    const result = await AuthService.logout();
-  
-      if(result?.status === 200) {
-        navigate('/auth/login');
-      }
-  }
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const openMenu: boolean = Boolean(anchorEl);
 
-  const currentUser = useAuthContext();
-  console.log(currentUser)
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-  const open = Boolean(anchorEl)
+    const handleClickMenu = (event: MouseEvent<HTMLButtonElement>) => setAnchorEl(event.currentTarget);
+    const handleCloseMenu = () => setAnchorEl(null);
 
-  const handleClickMenu = (event: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleCloseMenu = () => {
-    setAnchorEl(null);
-  };
+    return (
+        <AppBar position="fixed">
+                <Container maxWidth='xl'>
+                <Toolbar sx={{display: 'flex', justifyContent: 'space-between', alignItems:'center'}}>
+                       
+                                <Link component={NavLink} to='/' underline="none" color='inherit'>
+                                    <Logo />
+                                </Link>
+                       
+                                {/* Mobile Menu */}
+                                <Box display={{ md: 'none' }}>
+                                    <Button id="mobile-menu-button" color="inherit" onClick={handleClickMenu}>
+                                        <HiMenu size={24} />
+                                    </Button>
 
-  return (
-    <AppBar position='sticky'>
-      <Container maxWidth='xl'>
-        <Toolbar>
-          <NavLink to='/'>
-            <Logo />
-          </NavLink>
+                                    <Menu id="mobile-menu" anchorEl={anchorEl} open={openMenu} onClose={() => handleCloseMenu()}>
+                                        <MenuItem onClick={handleCloseMenu} key='menu-link1'>
+                                            <Link sx={{color: 'inherit'}} component={NavLink} to='/functionalities' underline="none" px={2} fontSize='1.25rem'>Funcionalidades</Link>
+                                        </MenuItem>
+                                        
+                                        <MenuItem onClick={handleCloseMenu} key='menu-link2'>
+                                            <Link sx={{color: 'inherit'}} component={NavLink} to='/prices' underline="none" px={2} fontSize='1.25rem'>Preços</Link>
+                                        </MenuItem>
 
-          <Box display='flex' flexGrow={1}></Box>
+                                        <MenuItem onClick={handleCloseMenu} key='menu-link3'>
+                                            <Link sx={{color: 'inherit'}} component={NavLink} to='/about' underline="none" px={2} fontSize='1.25rem'>Sobre</Link>
+                                        </MenuItem>
 
-          {/* Mobile Menu */}
-          <Box display={{ md: 'none' }}>
-            <Button id="mobile-menu-button" color="inherit" onClick={handleClickMenu}>
-              <HiMenu size={24} />
-            </Button>
+                                        <Divider />
+                                        
+                                        {
+                                            currentUser ? 
+                                                <MenuItem onClick={handleLogout} key='menu-link3'>
+                                                    <Link sx={{color: 'inherit'}} component={NavLink} to='/auth/login/select-account' underline="none" px={2} fontSize='1.25rem'>Logout</Link>
+                                                </MenuItem>
+                                    
+                                            :
+                                                [
+                                                
+                                                    <MenuItem onClick={handleCloseMenu} key='menu-link3'>
+                                                        <Link sx={{color: 'inherit'}} component={NavLink} to='/auth/login/select-account' underline="none" px={2} fontSize='1.25rem'>Entrar</Link>
+                                                    </MenuItem>,
 
-            <Menu id="mobile-menu" anchorEl={anchorEl} open={open} onClose={() => handleCloseMenu()}>
-              <MenuItem onClick={handleCloseMenu}>
-                <NavLink to='/funcionalidades'>Funcionalidades</NavLink>
-              </MenuItem>
-              <MenuItem onClick={handleCloseMenu}>
-                  <NavLink to='/precos'>Preços</NavLink>
-              </MenuItem>
-              {
-                currentUser ? 
-                  <>
-                    <MenuItem onClick={handleLogout}>
-                      <NavLink to='/auth/select-account'>Logout</NavLink>
-                    </MenuItem>
-                  </>
-                  :
-                  <>
-                    <MenuItem onClick={handleCloseMenu}>
-                      <NavLink to='/auth/login/select-account'>Entrar</NavLink>
-                    </MenuItem>
+                                                    <MenuItem onClick={handleCloseMenu} key='menu-link4'>
+                                                        <Link sx={{color: 'inherit'}} component={NavLink} to='/auth/register/select-account'  underline="none" pl={2} fontSize='1.25rem'>Cadastrar</Link>
+                                                    </MenuItem>
+                                                ]
+                                        }  
+                                    </Menu>
+                                </Box>
 
-                    <MenuItem onClick={handleCloseMenu}>
-                      <NavLink to=''>Cadastrar</NavLink>
-                    </MenuItem>
-                  </>
-                }  
-            </Menu>
-          </Box>
-
-          {/* Full Menu */}
-          <Box component='nav' display={{ xs: 'none', md: 'initial' }}>
-            <Button color='inherit' component={NavLink} to='/funcionalidades'>Funcionalidades</Button>
-            <Button color='inherit' component={NavLink} to='/precos'>Preços</Button>
-            {
-                currentUser ? 
-                  <>
-                    <Button color='inherit' onClick={handleLogout}>Logout</Button>
-                  </>
-                  :
-                  <>
-                    <Button color='inherit' component={NavLink} to='/auth/login/select-account'>Entrar</Button>
-                    <Button color='inherit' component={NavLink} to=''>Cadastrar</Button>
-                  </>
-              }  
-            
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
-  )
+                                {/* Full Menu */}
+                                <Box component='nav' display={{ xs: 'none', md: 'flex'}} alignItems={{xs: 'none', md: 'center'}}>
+                                    <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/functionalities' underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Funcionalidades</Link>
+                                    <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/prices' underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Preços</Link>
+                                    <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/about' underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Sobre</Link>
+                                    {
+                                        currentUser ? 
+                                        <>
+                                            <AppButton 
+                                                sx={{ height: '2.5rem', backgroundColor: '#404040', fontSize:'1.15rem', color: 'inherit', borderRadius: '.625rem', px: 2.25, py: 1.25, 
+                                                    '&:hover': {
+                                                        backgroundColor: '#525252'
+                                                    } 
+                                                }}
+                                                variant='text'
+                                                onClick={handleLogout}
+                                            >
+                                                Logout
+                                            </AppButton>
+                                        </>
+                                        :
+                                        <>
+                                            <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/auth/login/select-account' underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Entrar</Link>
+                                            <AppButton 
+                                                sx={{ height: '2.5rem', backgroundColor: '#404040', fontSize:'1.15rem', color: 'inherit', borderRadius: '.625rem', px: 2.25, py: 1.25, 
+                                                    '&:hover': {
+                                                        backgroundColor: '#525252'
+                                                    } 
+                                                }}
+                                                variant='text'
+                                                component={NavLink}
+                                                to='/auth/register/select-account'
+                                            >
+                                                Cadastrar
+                                            </AppButton>
+                                        </>
+                                    }
+                                </Box>
+                </Toolbar> 
+            </Container>
+        </AppBar>
+    );
 }

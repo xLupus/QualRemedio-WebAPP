@@ -1,15 +1,16 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Box, Checkbox, Divider, FormControlLabel, FormGroup, Link, TextField, Typography } from "@mui/material";
-import Stack from '@mui/material/Stack';
-import  '../../../../style.css';
-//import { AppInput } from '../../../../components/Input';
+import { Box, Checkbox, Divider, FormControlLabel, FormGroup, IconButton, InputAdornment, Link, Typography, Stack, CircularProgress } from "@mui/material";
 import { AppButton } from '../../../../components/Button';
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Google, Microsoft } from '@mui/icons-material';
+import { Google, Microsoft, Visibility, VisibilityOff } from '@mui/icons-material';
 import { LoginService } from '../../../../types/type';
 import { z } from 'zod';
-import AuthService from '../../../../services/Auth/Login/index';
+import { AppInput } from '../../../../components/Input';
+import { MouseEvent, useContext, useState } from 'react';
+import { AppInputAdornment } from '../../../../components/Input/InputAdornment';
+import { LoginContext } from '../../../../hooks/LoginContext';
+import AuthService from '../../../../services/Auth/index'
 
 const validator = z.object({
     email: z
@@ -25,31 +26,34 @@ const validator = z.object({
 });
 
 export function Login() {
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    const { accountType } = useContext(LoginContext);
+
     const navigate = useNavigate();
 
     const { register, handleSubmit, formState: { errors } } = useForm<LoginService>({
         resolver: zodResolver(validator),
     })
 
+    //password
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleMouseDownPassword = (e: MouseEvent<HTMLButtonElement>) => e.preventDefault();
+
     const handleLogin = async (data: LoginService) => {
         const { email, password, role } = data;
-
-        const loginData = {
-            email,
-            password,
-            role
-        }
     
-        const result = await AuthService.login(loginData);
+        setIsLoading(true);
+        const result = await AuthService.login({email, password, role});
+        setIsLoading(false);
 
-        if(result?.status === 200) {
-            navigate('/');
-        }
+        if(result?.status === 200) navigate('/');
     }
-
+    
     return (
         <>
-            <Box typography='h1' fontSize={'2rem'} color='#00000077' mb={1.25}>Bem-Vindo de volta!</Box>
+            <Box typography='h1' fontSize='2rem' color='#00000077' mb={1.25}>Bem-Vindo de volta!</Box>
             <Box typography='body1' fontSize='0.77344rem' color='#00000077' mb={3}>Logue-se para explorar tudo de melhor aqui.</Box>
 
             <Box display='flex' justifyContent='space-between' alignItems='center' mb={5}>
@@ -57,50 +61,93 @@ export function Login() {
                         Não tem uma conta? 
                     <Link component={NavLink} to='/auth/register/select-account' ml='0.2rem' color='#50505080' underline='none'>Registre-se</Link>
                 </Typography>
-                <Typography typography='body1' fontSize='0.77344rem' color='#50505080'>Opção: Paciente</Typography>
+                <Typography typography='body1' fontSize='0.77344rem' color='#50505080'>Opção: {accountType === '1' ? 'Paciente' : (accountType === '2' ? 'Cuidador' : 'Médico')}</Typography>
             </Box>
 
             <Box component='form' onSubmit={handleSubmit(handleLogin)}>
                 <Stack spacing={3}>
-                    <TextField 
+                    <AppInput 
                         id='email-field'
                         color='primary'
                         variant='filled'
                         type='email'
                         label='E-mail'
                         {...register('email')}
+                        error={errors.email ? true : false}
+                       // helperText={errors.email}
                         required
-                        autoComplete="off"
+                        fullWidth
+                        autoComplete='off'
                     />
 
-                    <TextField 
+                    <AppInputAdornment
                         id='password-field'
-                        color='primary'
                         variant='filled'
-                        type='password'
+                        color='primary'
+                        type={showPassword ? 'text' : 'password'}
                         label='Senha'
+                        error={errors.password ? true : false}
                         {...register('password')}
                         required
-                        autoComplete="off"
+                        fullWidth
+                        autoComplete='off'
+                        endAdornment={
+                            <InputAdornment position='end'>
+                                    <IconButton
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge='end'
+                                        sx={{marginRight: '.25rem'}}
+                                        size='small'
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                            </InputAdornment>
+                        }
                     />
 
-                    <TextField 
-                        id='hidden-field'
+                    <AppInput 
+                        id='role-field'
+                        color='primary'
+                        variant='filled'
                         type='hidden'
-                        {...register('role', { value: 1 })}
-                        required
-                    />                    
+                        {...register('role', { value: Number(accountType) })}
+                        fullWidth
+                        sx={{display: 'none'}}
+                    />
                 </Stack>
 
                 <Box display='flex' justifyContent='space-between' alignItems='center' mb={6} mt={2}>
                     <FormGroup>
                         <FormControlLabel control={<Checkbox color="default" defaultChecked />} label={<Typography fontSize='0.77344rem' color='#50505080'>Lembrar-me</Typography>} />
                     </FormGroup>
-                    <Link component={NavLink} to='/auth/register/select-account' ml='0.2rem' typography='body1' fontSize='0.77344rem' color='#50505080' underline='none'>Esqueceu a senha?</Link>
+                    <Link component={NavLink} to='/recover-password/email-verification' ml='0.2rem' typography='body1' fontSize='0.77344rem' color='#50505080' underline='none'>Esqueceu a senha?</Link>
                 </Box>
 
                 <Box display='flex' justifyContent='center'>
-                    <AppButton height='2.5rem' width='18.75rem' variant='text' type='submit' fontSize='1rem' className='authButton' color='#00000077' backgroundColor='#BBBBBB' boxShadow={2} id='btn-login' isFullWidth={false}>Login</AppButton>
+                    <AppButton 
+                        sx={{ width: '18.75rem', height: '2.5rem' }}
+                        id='btn-login'
+                        variant='text'
+                        type='submit'
+                        className='authButton'
+                    >
+                    {
+                        isLoading? (
+                            <CircularProgress
+                                size={24}
+                                sx={{
+                                    position: 'absolute',
+                                    top: '50%',
+                                    left: '50%',
+                                    marginTop: '-12px',
+                                    marginLeft: '-12px',
+                                }}
+                            />
+                        )
+                        : 'Login'
+                    }
+                    </AppButton>
                 </Box>
                 
                 <Divider sx={{
@@ -118,11 +165,24 @@ export function Login() {
                 }}>Ou</Divider>
 
                 <Stack spacing={2.5} alignItems="center">
-                    <AppButton height='2.5rem' width='18.75rem' variant='text' className='authButton' color='#00000077' backgroundColor='#BBBBBB' boxShadow={2} id='btn-login-google' isFullWidth={false}>
+                    <AppButton 
+                        sx={{ width: '18.75rem', height: '2.5rem' }}
+                        id='btn-login-google'
+                        variant='text'
+                        className='authButton' 
+                        fullWidth
+                    >
                         <Google />
                         <Typography ml='.5rem' typography='body1' fontSize='1rem' color='00000077'>Continuar com Google</Typography>
                     </AppButton>
-                    <AppButton height='2.5rem' width='18.75rem' variant='text' className='authButton' color='#00000077' backgroundColor='#BBBBBB' boxShadow={2} id='btn-login-ms' isFullWidth={false}>
+
+                    <AppButton 
+                        sx={{ width: '18.75rem', height: '2.5rem' }}
+                        id='btn-login-ms'
+                        variant='text'
+                        className='authButton'
+                        fullWidth
+                    >
                         <Microsoft />
                         <Typography ml='.5rem' typography='body1' fontSize='1rem' color='#00000077'>Continuar com Microsoft</Typography>
                     </AppButton>

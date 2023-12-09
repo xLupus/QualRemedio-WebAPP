@@ -1,9 +1,11 @@
-export const useAuthContext = () => {
-    const token = localStorage.getItem('token');
+import Cookies from 'js-cookie';
 
-    if(token?.length === 0) {
+export const useAuthContext = () => {
+    const currentUser = Cookies.get('auth_token');
+
+    if(currentUser?.length === 0) {
         return;
     }
 
-    return token;
+    return currentUser;
 };

@@ -1,10 +1,15 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Box, Link } from "@mui/material";
 import Stack from '@mui/material/Stack';
 import  '../../../../style.css';
 import { AppButton } from '../../../../components/Button';
+import { useContext } from 'react';
+import { LoginContext } from '../../../../hooks/LoginContext';
 
 export function LoginAccountSelection() {
+    const navigate = useNavigate();
+    const { setAccountType } = useContext(LoginContext);
+
     const accountsType = [
         {
             id: 1,
@@ -20,6 +25,12 @@ export function LoginAccountSelection() {
         }
     ];
 
+    const handleSelectAccount = (e: HTMLElement) => {
+        setAccountType(e.id);
+
+        navigate('/auth/login');
+    }
+
     return (
         <>
             <Box typography='h1' fontSize='2rem' color='#00000077' mb={1.25}>Bem-Vindo de volta!</Box>
@@ -34,7 +45,14 @@ export function LoginAccountSelection() {
             <Stack spacing={3}>
                 {
                     accountsType.map((el, i) => (
-                        <AppButton height='2.5rem' variant='text' className='authButton' color='#00000077' backgroundColor='#BBBBBB' boxShadow={2} id={el.id} key={i}>
+                        <AppButton 
+                            sx={{ height: '2.5rem' }}
+                            id={String(el.id)}
+                            key={i}
+                            variant='text'
+                            className='authButton'
+                            onClick={e => handleSelectAccount(e.target as HTMLElement)}
+                        >
                             {el.type}
                         </AppButton>
                     ))

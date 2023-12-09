@@ -1,10 +1,17 @@
-import { Box, Unstable_Grid2 as Grid, Stack, Typography } from "@mui/material";
+import { Box, Unstable_Grid2 as Grid, IconButton, InputAdornment, Stack, Typography } from "@mui/material";
 import { AppButton } from '../../../../components/Button';
-import { Square } from '@mui/icons-material';
-import { AppInput } from "../../../../components/Input";
+import { Square, Visibility, VisibilityOff } from '@mui/icons-material';
+import { AppInputAdornment } from "../../../../components/Input/InputAdornment";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export function CreatePassword({ isFromPath }: { isFromPath: string}) {
     const passwordValidationTexts: string[] = ['Letras maiúsculas', 'Caracteres especiais', 'Letras minúsculas', 'Mínimo de 8 caracteres', 'Números'];
+
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleMouseDownPassword = (e: any) => e.preventDefault();
 
     return (
         <>
@@ -39,29 +46,80 @@ export function CreatePassword({ isFromPath }: { isFromPath: string}) {
             </Grid>
 
             <Stack spacing={3} mt={5}>
-                <AppInput 
-                    id='email-field'
-                    color='primary'
-                    variant='filled'
-                    type='password'
-                    label='Senha'
-                    isRequired={true}
-                />
+                <AppInputAdornment
+                        id='password-field'
+                        variant='filled'
+                        color='primary'
+                        type={showPassword ? 'text' : 'password'}
+                        label='Senha'
+                       // {...register('password')}
+                        required
+                        fullWidth
+                        autoComplete='off'
+                        endAdornment={
+                            <InputAdornment position='end'>
+                                    <IconButton
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge='end'
+                                        sx={{marginRight: '.25rem'}}
+                                        size='small'
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                            </InputAdornment>
+                        }
+                    />
 
-                <AppInput 
-                    id='password-filed'
-                    color='primary'
-                    variant='filled'
-                    type='password'
-                    label='Confirme sua senha'
-                    isRequired={true}
-                />
+                    <AppInputAdornment
+                        id='confirm-pass-field'
+                        variant='filled'
+                        color='primary'
+                        type={showPassword ? 'text' : 'password'}
+                        label='Confirmar senha'
+                        //{...register('password')}
+                        required
+                        fullWidth
+                        autoComplete='off'
+                        endAdornment={
+                            <InputAdornment position='end'>
+                                    <IconButton
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge='end'
+                                        sx={{marginRight: '.25rem'}}
+                                        size='small'
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                            </InputAdornment>
+                        }
+                    />
             </Stack>
 
             <Box display='flex' justifyContent='flex-end' alignItems='center' mt={8}>
                 <Box>
-                    <AppButton height='1.875rem' width='5rem' variant='text' className='authBackButton' fontSize='0.75rem' isRippleDisabled={true} >Voltar</AppButton>
-                    <AppButton height='1.875rem' width='5rem' variant='contained' className='authButton authNextButton' backgroundColor='#BBBBBB' boxShadow={2} fontSize='0.75rem'>Avançar</AppButton>
+                    <AppButton
+                        sx={{ width: '5rem', height: '1.875rem', fontSize: '.75rem', boxShadow: 'none', backgroundColor: 'none' }}
+                        id='btn-login'
+                        variant='text'
+                        component={NavLink}
+                        to='/auth/register/email-verification'
+                        className='authBackButton' 
+                        disableRipple
+                    >
+                        Voltar
+                    </AppButton>
+
+                    <AppButton 
+                        sx={{ width: '5rem', height: '1.875rem', fontSize: '.75rem' }}
+                        id='btn-login'
+                        variant='text'
+                        type='submit'
+                        className='authButton authNextButton'
+                    >
+                        Avançar
+                    </AppButton>
                 </Box>
             </Box>
         </>

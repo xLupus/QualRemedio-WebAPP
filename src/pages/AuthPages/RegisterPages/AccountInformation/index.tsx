@@ -2,6 +2,7 @@ import { Box, Unstable_Grid2 as Grid } from "@mui/material";
 import { AppButton } from '../../../../components/Button';
 import { AppInput } from '../../../../components/Input';
 import { AppSelectInput } from '../../../../components/Input/InputSelect';
+import { NavLink } from "react-router-dom";
 
 export function RegisterAccountInformation() {
     const accountType: number = 1;
@@ -17,45 +18,50 @@ export function RegisterAccountInformation() {
                     <>
                         <Grid xs={12}>
                             <AppInput 
-                                id='email-field'
+                                id='name-field'
                                 color='primary'
                                 variant='filled'
                                 type='text'
                                 label='Nome'
-                                isRequired={true}
+                                required
+                                fullWidth
                             />
                         </Grid>
 
                         <Grid xs={6}>
                             <AppInput 
-                                id='email-field'
+                                id='cpf-field'
                                 color='primary'
                                 variant='filled'
-                                type='text'
+                                type='number'
                                 label='CPF'
-                                isRequired={true}
+                                required
+                                fullWidth
                             />
                         </Grid>
 
                         <Grid xs={6}>
                             <AppInput 
-                                id='email-field'
+                                id='nasc-field'
                                 color='primary'
                                 variant='filled'
                                 type='date'
                                 label='Nasc.:'
-                                isRequired={true}
+                                min="1900-01-01"
+                                required
+                                fullWidth
                             />
                         </Grid>
 
                         <Grid xs={12}>
                             <AppInput 
-                                id='email-field'
+                                id='tel-field'
                                 color='primary'
                                 variant='filled'
                                 type='tel'
                                 label='Telefone'
-                                isRequired={true}
+                                required
+                                fullWidth
                             />
                         </Grid>
                     </>
@@ -71,7 +77,8 @@ export function RegisterAccountInformation() {
                                 variant='filled'
                                 type='text'
                                 label='Nome'
-                                isRequired={true}
+                                required
+                                fullWidth
                             />
                         </Grid>
 
@@ -80,9 +87,10 @@ export function RegisterAccountInformation() {
                                 id='cpf-field'
                                 color='primary'
                                 variant='filled'
-                                type='text'
+                                type='number'
                                 label='CPF'
-                                isRequired={true}
+                                required
+                                fullWidth
                             />
                         </Grid>
 
@@ -93,7 +101,8 @@ export function RegisterAccountInformation() {
                                 variant='filled'
                                 type='date'
                                 label='Nasc.:'
-                                isRequired={true}
+                                required
+                                fullWidth
                             />
                         </Grid>
 
@@ -104,18 +113,20 @@ export function RegisterAccountInformation() {
                                 variant='filled'
                                 type='tel'
                                 label='Telefone'
-                                isRequired={true}
+                                required
+                                fullWidth
                             />
                         </Grid>
 
                         <Grid xs={6}>
                             <AppInput 
-                                id='crm-field'
+                                id={ accountType === 2 ? 'crm-field' : 'doc-field'}
                                 color='primary'
                                 variant='filled'
                                 type='text'
-                                label={accountType === 2 ? 'CRM' : 'Documento'}
-                                isRequired={true}
+                                label={ accountType === 2 ? 'CRM' : 'Documento' }
+                                required
+                                fullWidth
                             />
                         </Grid>
 
@@ -126,7 +137,8 @@ export function RegisterAccountInformation() {
                                 variant='filled'
                                 type='text'
                                 label='Especialidade'
-                                isRequired={true}
+                                required
+                                fullWidth
                             />
                         </Grid>
                     </>
@@ -138,8 +150,27 @@ export function RegisterAccountInformation() {
                     <AppSelectInput />
                 </Box>
                 <Box>
-                    <AppButton height='1.875rem' width='5rem' variant='text' className='authBackButton' fontSize='0.75rem' isRippleDisabled={true} >Voltar</AppButton>
-                    <AppButton height='1.875rem' width='5rem' variant='contained' className='authButton authNextButton' backgroundColor='#BBBBBB' boxShadow={2} fontSize='0.75rem'>Avançar</AppButton>
+                    <AppButton
+                        sx={{ width: '5rem', height: '1.875rem', fontSize: '.75rem', boxShadow: 'none', backgroundColor: 'none' }}
+                        id='btn-login'
+                        variant='text'
+                        component={NavLink}
+                        to='/auth/register/email-verification'
+                        className='authBackButton' 
+                        disableRipple
+                    >
+                        Voltar
+                    </AppButton>
+
+                    <AppButton 
+                        sx={{ width: '5rem', height: '1.875rem', fontSize: '.75rem' }}
+                        id='btn-login'
+                        variant='contained'
+                        type='submit'
+                        className='authButton authNextButton'
+                    >
+                        Avançar
+                    </AppButton>
                </Box>
             </Box>
         </>
