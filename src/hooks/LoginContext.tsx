@@ -8,7 +8,7 @@ export const LoginContext = createContext<LoginContextType>({
 });
 
 export function LoginContextProvider({ children }: { children: ReactNode }) {
-    const [accountType, setAccountType] = useState('');
+    const [accountType, setAccountType] = useState<string>('');
 
     accountType ? Cookies.set('account_type_selected', accountType, { expires: 1 }) : setAccountType(Cookies.get('account_type_selected') || ' ');
 

@@ -3,25 +3,44 @@ import Cookies from 'js-cookie';
 import { axiosInstanceAPI } from "../config/axios";
 
 class AuthService {
- /*    async register({ name, email, password, cpf, telephone, birth_day, crm, crm_state, specialty_name, account_type }: RegisterService) {
+    async register({ name, email, password, cpf, telephone, birth_day, crm, crm_state, specialty_name, account_type }: RegisterService) {
         try {
-            
+            const res = await axiosInstanceAPI.post('auth/register', { 
+                name,
+                email, 
+                password,
+                cpf,
+                telephone,
+                birth_day,
+                crm,
+                crm_state,
+                specialty_name,
+                account_type 
+            });
+
+            if(res.status === 200) {
+                Cookies.remove('account_type_selected');
+                Cookies.remove('user_name');
+                Cookies.remove('user_email');
+                Cookies.remove('user_cpf');
+                Cookies.remove('user_telephone');
+                Cookies.remove('user_birth_day');
+                Cookies.remove('user_crm_state');
+                Cookies.remove('user_crm');
+                Cookies.remove('user_specialty_name');
+            }
+
+            return res;
         } catch (err: unknown) {
             console.log(err);
         }
     }
- */
-    async login(data: LoginService) {
+ 
+    async login({ email, password, role }: LoginService) {
         try {
             const expires: number = 3;
 
-            const res = await axiosInstanceAPI.post(
-                'auth/login', {
-                    email: data.email,
-                    password: data.password,
-                    role: data.role
-                }
-            )
+            const res = await axiosInstanceAPI.post('auth/login', { email, password, role });
 
             if(res.status === 200) {
                 Cookies.remove('account_type_selected');

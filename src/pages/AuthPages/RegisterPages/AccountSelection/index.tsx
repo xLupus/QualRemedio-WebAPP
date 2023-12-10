@@ -1,8 +1,13 @@
-import { NavLink } from 'react-router-dom';
 import { Box, Link, Stack } from "@mui/material";
 import { AppButton } from '../../../../components/Button';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useContext } from "react";
+import { RegisterContext } from "../../../../hooks/RegisterContext";
 
 export function RegisterAccountSelection() {
+    const navigate = useNavigate();
+    const { registerUserCredentials, setRegisterUserCredentials } = useContext(RegisterContext);
+
     const accountsType = [
         {
             id: 1,
@@ -23,6 +28,18 @@ export function RegisterAccountSelection() {
                 Doloremque sed, perferendis`
         }
     ];
+
+    const handleSelectAccount = (e: HTMLElement) => {
+        setRegisterUserCredentials([
+            ...registerUserCredentials,
+            {
+                name: 'account_type_selected',
+                value: e.id
+            }
+        ]);
+
+        navigate('/auth/register/email-verification');
+    }
 
     return (
         <>
@@ -45,6 +62,7 @@ export function RegisterAccountSelection() {
                             variant='text'
                             type='submit'
                             className='authButton'
+                            onClick={e => handleSelectAccount(e.target as HTMLElement)}
                         >
                             <Box textTransform='none' fontSize='.875rem'>
                                 {el.type}

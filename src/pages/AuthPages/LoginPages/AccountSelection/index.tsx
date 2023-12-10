@@ -1,7 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Box, Link } from "@mui/material";
 import Stack from '@mui/material/Stack';
-import  '../../../../style.css';
 import { AppButton } from '../../../../components/Button';
 import { useContext } from 'react';
 import { LoginContext } from '../../../../hooks/LoginContext';
@@ -46,7 +45,7 @@ export function LoginAccountSelection() {
                 {
                     accountsType.map((el, i) => (
                         <AppButton 
-                            sx={{ height: '2.5rem' }}
+                            sx={{ height: '2.5rem'}}
                             id={String(el.id)}
                             key={i}
                             variant='text'

@@ -58,7 +58,7 @@ export function Login() {
 
             <Box display='flex' justifyContent='space-between' alignItems='center' mb={5}>
                 <Typography typography='body1' fontSize='0.77344rem' color='#50505080'>
-                        Não tem uma conta? 
+                        Não tem uma conta?
                     <Link component={NavLink} to='/auth/register/select-account' ml='0.2rem' color='#50505080' underline='none'>Registre-se</Link>
                 </Typography>
                 <Typography typography='body1' fontSize='0.77344rem' color='#50505080'>Opção: {accountType === '1' ? 'Paciente' : (accountType === '2' ? 'Cuidador' : 'Médico')}</Typography>

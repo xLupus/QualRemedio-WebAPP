@@ -1,10 +1,30 @@
 import { Box } from "@mui/material";
 import { AppButton } from '../../../../components/Button';
-//import { NavLink } from "react-router-dom";
 import { AppInput } from "../../../../components/Input";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useContext, useState } from "react";
+import { RegisterContext } from "../../../../hooks/RegisterContext";
 
 export function MailVerification({ isFromPath }: { isFromPath: string }) {
+    const [value, setValue] = useState<string | number>('');
+
+    const navigate = useNavigate();
+    const { registerUserCredentials, setRegisterUserCredentials } = useContext(RegisterContext);
+
+    const handleValue = (val) => setValue(val);
+
+    const handleSelectAccount = () => {
+        setRegisterUserCredentials([
+            ...registerUserCredentials,
+            {
+                name: 'user_email',
+                value
+            }
+        ]);
+
+        navigate('/auth/register/account-info');
+    }
+
     return (
             isFromPath === 'register' ?  
                 <>
@@ -13,13 +33,15 @@ export function MailVerification({ isFromPath }: { isFromPath: string }) {
                     <Box typography='body1' fontSize='0.875rem' color='#00000077' textAlign='center' mb={1.25}>Muito bem, agora informe o seu e-mail</Box>
                     <Box typography='body1' fontSize='0.875rem' color='#00000077' textAlign='center' mb={4.3} width='80%' mx='auto'>Faremos uma verificação após o seu cadastro para fins de segurança</Box>
 
-                    <Box component='form'>
+                    <Box>
                         <AppInput 
                             id='email-field'
                             color='primary'
                             variant='filled'
                             type='email'
                             label='Email'
+                            value={value}
+                            onChange={e => handleValue(e.target.value)}
                             autoComplete="off"
                             required
                             fullWidth
@@ -45,6 +67,7 @@ export function MailVerification({ isFromPath }: { isFromPath: string }) {
                             variant='text'
                             type='submit'
                             className='authButton authNextButton'
+                            onClick={handleSelectAccount}
                         >
                             Avançar
                         </AppButton>

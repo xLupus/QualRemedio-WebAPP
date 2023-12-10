@@ -115,6 +115,11 @@ interface LoginContextType {
     setAccountType: Dispatch<SetStateAction<string>>;
 }
 
+interface RegisterContextType {
+    registerUserCredentials: any;
+    setRegisterUserCredentials: Dispatch<SetStateAction<any>>;
+}
+
 //Exports
 export type {
     AppButtonProps,
@@ -127,5 +132,6 @@ export type {
 
     AppBarProps,
 
-    LoginContextType
+    LoginContextType,
+    RegisterContextType
 }
