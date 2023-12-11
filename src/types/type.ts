@@ -15,7 +15,6 @@ import {
 } from "react";
 import { NavLinkProps, To } from "react-router-dom";
 import { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-//import { FieldError } from "react-hook-form";
 
 //Props
 interface AppButtonProps {
@@ -46,7 +45,7 @@ interface AppInputProps {
     label?: ReactNode | undefined;
     value?: unknown;
     type?: HTMLInputTypeAttribute | undefined;
-    helperText?: ReactNode | undefined;
+    helperText?: string | ReactNode | undefined;
     size?: "small" | "medium" | undefined;
     placeholder?: string | undefined;
     fullWidth?: boolean | undefined;
@@ -97,7 +96,6 @@ interface AppInputSelectProps {
     id?: string;
     key?: Key | null | undefined
     variant?: TextFieldVariants  | undefined;
-    label?: ReactNode | undefined;
     color?: "error" | "primary" | "secondary" | "info" | "success" | "warning"; 
     size?: "small" | "medium" | undefined;
     message?: string | undefined;
@@ -153,6 +151,16 @@ interface LoginService {
     role: number;
 }
 
+interface CreateBond {
+    email: string;
+    role: string;
+}
+
+interface StoreBond {
+    user_to_id: number;
+    user_to_role_id: number;
+}
+
 interface Mail {
     email?: string;
     urlContext?: string;
@@ -196,6 +204,9 @@ export type {
 
     RegisterService,
     LoginService,
+    
+    CreateBond,
+    StoreBond,
     Mail,
 
     AppBarProps,

@@ -23,7 +23,7 @@ import { ProfileSystem } from "./pages/AppPages/ProfilePages/System";
 import { LoginProviderLayout } from "./layouts/providers/Auth/Login";
 import { RegisterProviderLayout } from "./layouts/providers/Auth/Register";
 import { MailVerified } from "./pages/AuthPages/MailPages/MailVerified";
-import { CreateBond } from "./pages/AppPages/BondPages/CreateBondPage";
+import { CreateBondPage } from "./pages/AppPages/BondPages/CreateBondPage";
 
 export function Routes() {
     const PreventBackHistory = () => {
@@ -95,7 +95,7 @@ export function Routes() {
                         </Route>
                         
                         <Route element={<Protected />}>
-                            <Route path="/users/bond" element={<CreateBond />} />
+                            <Route path="/users/bond" element={<CreateBondPage />} />
                         </Route>
                     </Route>
                 </Route>

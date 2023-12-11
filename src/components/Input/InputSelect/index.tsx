@@ -5,7 +5,6 @@ export function AppSelectInput(props: AppInputSelectProps) {
     return (
         <FormControl 
             {...props}
-            fullWidth
         > 
             <InputLabel id="select-acc-option">{props.message}</InputLabel>
             {props.children}
