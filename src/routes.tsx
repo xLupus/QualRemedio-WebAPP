@@ -39,7 +39,7 @@ export function Routes() {
         const currentUser = useCurrentUserContext();
 
         if(!currentUser) {
-            return <Navigate to='/auth/login' replace={true} />
+            return <Navigate to='/auth/login/select-account' replace={true} />
         }
 
         return <Outlet />;
@@ -90,10 +90,10 @@ export function Routes() {
                             <Route path="/profile/account-config" element={<ProfileAccountConfiguration />} />
                             <Route path="/profile/security" element={<ProfileAccountSecurity />} />
                             <Route path="/profile/system" element={<ProfileSystem />} />
+                            <Route path="/profile/plans" element={<ProfilePlans />} />
                         </Route>
                         
                         <Route element={<Protected />}>
-                            <Route path="/profile/plans" element={<ProfilePlans />} />
                             
                         </Route>
                     </Route>
