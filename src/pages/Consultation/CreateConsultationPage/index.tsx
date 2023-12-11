@@ -53,14 +53,16 @@ export const CreateConsultationPage = () => {
   const results = useQueries({
     queries: [
       { queryKey: ['specialties'], queryFn: () => Specialty.index() },
-      { queryKey: ['bonds'], queryFn: () => Bond.index() },
+      { queryKey: ['bonds'], queryFn: () => Bond.index({ filter: { status: 2 } }) }, //Mudar para o 2
       { queryKey: ['consultation_status'], queryFn: () => Consultations.status() }
     ]
   })
 
   const specialties = results[0].data
-  const bonds = results[1].data
+  const bonds = results[1].data ?? []
   const consultation_status = results[2].data
+
+  console.log(bonds);
 
   const handleFormSubmit: SubmitHandler<ConsultationCreateFormData> = async (form_data) => {
     const { consultation_status, date, observation, professional, reason, specialty } = form_data
@@ -111,9 +113,10 @@ export const CreateConsultationPage = () => {
             >
               <MenuItem value={0} disabled>Selecionar</MenuItem>
 
-              {bonds?.data.map((bond) => (
+              {bonds?.data?.length > 0 && bonds?.data.map((bond) => (
                 <MenuItem value={bond.id} key={bond.id}>{bond.to.name}</MenuItem>
               ))}
+
             </Select>
 
             {errors.professional && (
@@ -164,7 +167,7 @@ export const CreateConsultationPage = () => {
               <FormHelperText error sx={{ paddingX: 1.5 }} >{errors.consultation_status.message}</FormHelperText>
             )}
           </Stack>
-        </Stack>
+        </Stack >
 
         <Stack spacing={3} useFlexGap marginTop={3}>
           <Stack spacing={1}>
@@ -204,7 +207,7 @@ export const CreateConsultationPage = () => {
             <MUILink component={Link} to='/consultations'>Voltar</MUILink>
           </Stack>
         </Stack>
-      </form>
-    </Stack>
+      </form >
+    </Stack >
   )
 }
