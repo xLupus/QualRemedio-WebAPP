@@ -1,16 +1,16 @@
-import { NavLink, useNavigate } from 'react-router-dom';
-import { Box, Checkbox, Divider, FormControlLabel, FormGroup, IconButton, InputAdornment, Link, Typography, Stack, CircularProgress } from "@mui/material";
+import { NavLink, NavigateFunction, useNavigate } from 'react-router-dom';
+import { Box, Checkbox, Divider, FormControlLabel, FormGroup, IconButton, InputAdornment, Link, Typography, Stack, CircularProgress, Snackbar, SnackbarContent } from "@mui/material";
 import { AppButton } from '../../../../components/Button';
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Google, Microsoft, Visibility, VisibilityOff } from '@mui/icons-material';
-import { LoginService } from '../../../../types/type';
+import { LoginContextType, LoginService, State } from '../../../../types/type';
 import { z } from 'zod';
 import { AppInput } from '../../../../components/Input';
 import { MouseEvent, useContext, useState } from 'react';
 import { AppInputAdornment } from '../../../../components/Input/InputAdornment';
 import { LoginContext } from '../../../../hooks/LoginContext';
-import AuthService from '../../../../services/Auth/index'
+import AuthService from '../../../../services/Auth'
 
 const validator = z.object({
     email: z
@@ -28,10 +28,16 @@ const validator = z.object({
 export function Login() {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-
-    const { accountType } = useContext(LoginContext);
-
-    const navigate = useNavigate();
+    const { currentAccountType } = useContext<LoginContextType>(LoginContext);
+    const [state, setState] = useState<State>({
+        open: false,
+        vertical: 'top',
+        horizontal: 'center',
+        message: ''
+    });
+    const { vertical, horizontal, message, open } = state;
+    
+    const navigate: NavigateFunction = useNavigate();
 
     const { register, handleSubmit, formState: { errors } } = useForm<LoginService>({
         resolver: zodResolver(validator),
@@ -48,8 +54,23 @@ export function Login() {
         const result = await AuthService.login({email, password, role});
         setIsLoading(false);
 
-        if(result?.status === 200) navigate('/');
+        if(result?.status === 200) {
+            navigate('/');
+            return;
+        };
+
+        if(result?.code === 'ERR_NETWORK') {
+            setState({ vertical: 'top', horizontal: 'center', message: 'Ocorreu um erro ao logar', open: true });
+            return;
+        }
+
+        setState({ vertical: 'top', horizontal: 'center', message: result?.response.data.message, open: true });
     }
+    
+    const handleClose = () => {
+        setState({ ...state, open: false });
+    };
+     
     
     return (
         <>
@@ -58,10 +79,10 @@ export function Login() {
 
             <Box display='flex' justifyContent='space-between' alignItems='center' mb={5}>
                 <Typography typography='body1' fontSize='0.77344rem' color='#50505080'>
-                        Não tem uma conta? 
+                        Não tem uma conta?
                     <Link component={NavLink} to='/auth/register/select-account' ml='0.2rem' color='#50505080' underline='none'>Registre-se</Link>
                 </Typography>
-                <Typography typography='body1' fontSize='0.77344rem' color='#50505080'>Opção: {accountType === '1' ? 'Paciente' : (accountType === '2' ? 'Cuidador' : 'Médico')}</Typography>
+                <Typography typography='body1' fontSize='0.77344rem' color='#50505080'>Opção: {currentAccountType === '1' ? 'Paciente' : (currentAccountType === '2' ? 'Cuidador' : 'Médico')}</Typography>
             </Box>
 
             <Box component='form' onSubmit={handleSubmit(handleLogin)}>
@@ -111,7 +132,7 @@ export function Login() {
                         color='primary'
                         variant='filled'
                         type='hidden'
-                        {...register('role', { value: Number(accountType) })}
+                        {...register('role', { value: Number(currentAccountType) })}
                         fullWidth
                         sx={{display: 'none'}}
                     />
@@ -131,6 +152,7 @@ export function Login() {
                         variant='text'
                         type='submit'
                         className='authButton'
+                        disabled={isLoading ? true : false}
                     >
                     {
                         isLoading? (
@@ -187,6 +209,17 @@ export function Login() {
                         <Typography ml='.5rem' typography='body1' fontSize='1rem' color='#00000077'>Continuar com Microsoft</Typography>
                     </AppButton>
                 </Stack>
+            </Box>
+            <Box >
+                <Snackbar
+                    anchorOrigin={{ vertical, horizontal }}
+                    autoHideDuration={4000}
+                    open={open}
+                    onClose={handleClose}
+                    key={vertical + horizontal}
+                >
+                    <SnackbarContent  message={message} sx={{ backgroundColor: '#D4D4D4',  color: '#50505080' }}/>
+                </Snackbar>
             </Box>
         </>
     )

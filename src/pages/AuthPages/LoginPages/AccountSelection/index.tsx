@@ -1,14 +1,14 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, NavigateFunction, useNavigate } from 'react-router-dom';
 import { Box, Link } from "@mui/material";
 import Stack from '@mui/material/Stack';
-import  '../../../../style.css';
 import { AppButton } from '../../../../components/Button';
 import { useContext } from 'react';
 import { LoginContext } from '../../../../hooks/LoginContext';
+import { LoginContextType } from '../../../../types/type';
 
 export function LoginAccountSelection() {
-    const navigate = useNavigate();
-    const { setAccountType } = useContext(LoginContext);
+    const navigate: NavigateFunction = useNavigate();
+    const { setCurrentAccountType } = useContext<LoginContextType>(LoginContext);
 
     const accountsType = [
         {
@@ -26,8 +26,7 @@ export function LoginAccountSelection() {
     ];
 
     const handleSelectAccount = (e: HTMLElement) => {
-        setAccountType(e.id);
-
+        setCurrentAccountType(e.id);
         navigate('/auth/login');
     }
 
@@ -46,7 +45,7 @@ export function LoginAccountSelection() {
                 {
                     accountsType.map((el, i) => (
                         <AppButton 
-                            sx={{ height: '2.5rem' }}
+                            sx={{ height: '2.5rem'}}
                             id={String(el.id)}
                             key={i}
                             variant='text'

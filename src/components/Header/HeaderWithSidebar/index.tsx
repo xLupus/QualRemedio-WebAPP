@@ -6,9 +6,9 @@ import { Toolbar, Button, Menu, MenuItem, Box, Link, Typography, ListItem, ListI
 import { NavLink } from 'react-router-dom';
 import { AppButton } from '../../Button';
 import { Logo } from '../../Logo';
-import { useAuthContext } from "../../../hooks/AuthContext"
-import AuthService from '../../../services/Auth';
-import { useNavigate } from 'react-router-dom';
+/* import { useCurrentUserContext } from "../../../hooks/CurrentUserContext"
+import AuthService from '../../../services/Auth'; */
+//import { useNavigate } from 'react-router-dom';
 import { Add, Inbox, Mail, MenuOpen } from '@mui/icons-material';
 import HiMenu from '@mui/icons-material/Menu';
 import { AppBarProps } from '../../../types/type';
@@ -75,9 +75,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export function AppHeaderWithSideBar() {
     const [open, setOpen] = useState(false);
-    const navigate = useNavigate();
+  //  const navigate = useNavigate();
 
-    const currentUser = useAuthContext();
+/*     const currentUser = useCurrentUserContext();
 
     const handleLogout = async () => {
         const result = await AuthService.logout();
@@ -86,7 +86,7 @@ export function AppHeaderWithSideBar() {
             navigate('/auth/login');
         }
     }
-
+ */
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const openMenu: boolean = Boolean(anchorEl);
 

@@ -1,8 +1,18 @@
 import { Box } from "@mui/material";
 import { AppButton } from '../../../../components/Button';
 import { NavLink } from "react-router-dom";
+import Cookies from "js-cookie";
+import MailService from '../../../../services/Mail'
 
 export function SendMail({ isFromPath }: { isFromPath: string }) {
+    const email = Cookies.get('user_email') || '';
+
+    const handeSendMail = async () => {
+        await MailService.send({ email, urlContext: 'http://localhost:5173' });
+    }
+    
+    handeSendMail();
+
     return (
         <>
             {
@@ -10,7 +20,7 @@ export function SendMail({ isFromPath }: { isFromPath: string }) {
             }
 
             <Box typography='body1' fontSize='0.875rem' color='#00000077' textAlign='center' mb={1.25}>Enviamos uma verificação em seu e-mail:</Box>
-            <Box typography='body1' fontSize='0.875rem' color='#00000077' textAlign='center' mb={9} width='80%' mx='auto'>t***e@g***l.com</Box>
+            <Box typography='body1' fontSize='0.875rem' color='#00000077' textAlign='center' mb={9} width='80%' mx='auto'>{email}</Box>
 
             <Box typography='body1' fontSize='0.875rem' color='#00000077' textAlign='center' width='80%' mx='auto'>Não recebeu o e-mail? Olhe em `spam`, `pasta de promoções` ou</Box>
             

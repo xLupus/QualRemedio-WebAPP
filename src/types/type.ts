@@ -1,9 +1,23 @@
-import { SxProps, TextFieldVariants, Theme, } from "@mui/material";
-import { ChangeEventHandler, Dispatch, FocusEventHandler, FormEventHandler, ForwardRefExoticComponent, HTMLInputTypeAttribute, Key, KeyboardEventHandler, MouseEventHandler, ReactNode, RefAttributes, SetStateAction } from "react";
+import { SnackbarOrigin, SxProps, TextFieldVariants, Theme, } from "@mui/material";
+import { 
+    ChangeEventHandler, 
+    Dispatch, 
+    FocusEventHandler, 
+    FormEventHandler, 
+    ForwardRefExoticComponent, 
+    HTMLInputTypeAttribute, 
+    Key, 
+    KeyboardEventHandler, 
+    MouseEventHandler, 
+    ReactNode, 
+    RefAttributes,
+    SetStateAction 
+} from "react";
 import { NavLinkProps, To } from "react-router-dom";
 import { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import { FieldError } from "react-hook-form";
+//import { FieldError } from "react-hook-form";
 
+//Props
 interface AppButtonProps {
     id?: string | undefined;
     key?: Key | null | undefined;
@@ -19,6 +33,7 @@ interface AppButtonProps {
     children: ReactNode | undefined;
     helperText?: ReactNode |  undefined;
     component?: ForwardRefExoticComponent<NavLinkProps & RefAttributes<HTMLAnchorElement>>
+    disabled?: boolean | undefined;
     to?: To | undefined;
     onClick?: MouseEventHandler<Element> | undefined;
 }
@@ -83,7 +98,17 @@ interface AppCardProps {
     children: ReactNode | undefined;
     sx?: SxProps<Theme> | undefined;
 }
+/* 
+interface AppSnackBarProps {
+    key?: Key | null | undefined;
+    sx?: SxProps<Theme> |  undefined;
+    open: boolean;
+    onClose?: MouseEventHandler<Element> | undefined;
+    autoHideDuration?: number | undefined;
+    message: string;
 
+}
+ */
 //Services
 interface RegisterService {
     name: string;
@@ -105,14 +130,37 @@ interface LoginService {
     role: number;
 }
 
+interface Mail {
+    email?: string;
+    urlContext?: string;
+    token?: string | undefined;
+}
+
 //Components
 interface AppBarProps extends MuiAppBarProps {
     open?: boolean;
 }
 
+interface State extends SnackbarOrigin {
+    open: boolean;
+    message: any;
+}
+
+//Auth
 interface LoginContextType {
-    accountType: string | null;
-    setAccountType: Dispatch<SetStateAction<string>>;
+    currentAccountType: string | null;
+    setCurrentAccountType: Dispatch<SetStateAction<string>>;
+}
+
+interface RegisterContextType {
+    registerUserCredentials: RegisterType[];
+    setRegisterUserCredentials: Dispatch<SetStateAction<RegisterType[]>>;
+}
+
+//Array data
+interface RegisterType {
+    name: string;
+    value: string
 }
 
 //Exports
@@ -124,8 +172,13 @@ export type {
 
     RegisterService,
     LoginService,
+    Mail,
 
     AppBarProps,
+    State,
 
-    LoginContextType
+    LoginContextType,
+    RegisterContextType,
+
+    RegisterType
 }
