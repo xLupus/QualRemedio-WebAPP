@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, NavigateFunction, useNavigate } from 'react-router-dom';
 import { Box, Link } from "@mui/material";
 import Stack from '@mui/material/Stack';
 import { AppButton } from '../../../../components/Button';
