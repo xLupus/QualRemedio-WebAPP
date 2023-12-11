@@ -93,6 +93,29 @@ interface AppInputAdornmentProps {
     endAdornment?: React.ReactNode | undefined;
 }
 
+interface AppInputSelectProps {
+    id?: string;
+    key?: Key | null | undefined
+    variant?: TextFieldVariants  | undefined;
+    label?: ReactNode | undefined;
+    color?: "error" | "primary" | "secondary" | "info" | "success" | "warning"; 
+    size?: "small" | "medium" | undefined;
+    message?: string | undefined;
+    type?: HTMLInputTypeAttribute | undefined; 
+    value?: string | undefined;
+    fullWidth?: boolean | undefined;
+    required?: boolean | undefined;
+    autoComplete?: string | undefined;
+    handleClick?: unknown;
+    handleMouseDown?: unknown;
+    error?: boolean | undefined;
+    sx?: SxProps<Theme> | undefined;
+    children: ReactNode;
+    onKeyDown?: KeyboardEventHandler<Element> | undefined;
+    onFocus?: FocusEventHandler<Element> | undefined;
+    onInput?: FormEventHandler<Element> | undefined;
+}
+
 interface AppCardProps {
     key?: Key | null | undefined
     children: ReactNode | undefined;
@@ -168,6 +191,7 @@ export type {
     AppButtonProps,
     AppInputProps,
     AppInputAdornmentProps,
+    AppInputSelectProps,
     AppCardProps,
 
     RegisterService,

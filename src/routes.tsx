@@ -40,7 +40,7 @@ export function Routes() {
         const currentUser = useCurrentUserContext();
 
         if(!currentUser) {
-            return <Navigate to='/auth/login' replace={true} />
+            return <Navigate to='/auth/login/select-account' replace={true} />
         }
 
         return <Outlet />;
