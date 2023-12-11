@@ -21,7 +21,6 @@ class AuthService {
             if(res.status === 200) {
                 Cookies.remove('account_type_selected');
                 Cookies.remove('user_name');
-                Cookies.remove('user_email');
                 Cookies.remove('user_cpf');
                 Cookies.remove('user_telephone');
                 Cookies.remove('user_birth_day');
@@ -51,7 +50,8 @@ class AuthService {
 
             return res;
         } catch (err: unknown) {
-            console.log(err);
+            console.log(err)
+            return err;
         }
     }
 

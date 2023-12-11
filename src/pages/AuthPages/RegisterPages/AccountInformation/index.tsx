@@ -3,7 +3,7 @@ import { AppButton } from '../../../../components/Button';
 import { AppInput } from '../../../../components/Input';
 import { AppSelectInput } from '../../../../components/Input/InputSelect';
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { RegisterContext } from "../../../../hooks/RegisterContext";
 import Cookies from 'js-cookie';
 
@@ -24,10 +24,23 @@ export function RegisterAccountInformation() {
     const navigate = useNavigate();
     const [type, setSome] = useState(Cookies.get('account_type_selected'));
 
-    const handleChange = (e: SelectChangeEvent) => {
-        setSome(String(e.target.value));
-        Cookies.set('account_type_selected', type || ' ')
-    }
+    useEffect(() => {
+        Cookies.set('account_type_selected', type || ' ');
+
+        const updatedRegisterUserCredentials = registerUserCredentials.map(el => {
+            if (el.name === 'account_type_selected') {
+                return {
+                    ...el,
+                    value: type || ''
+                };
+            }
+            return el;
+        })
+
+        setRegisterUserCredentials(updatedRegisterUserCredentials)
+    }, [type, setRegisterUserCredentials, registerUserCredentials])
+
+    const handleChange = (e: SelectChangeEvent) => setSome(String(e.target.value));
     
     const handleAccountInformation = () => {
         const { name_value, cpf_value, birth_day_value, telephone_value, crm_value, crm_state_value, specialty_name_value } = userData;
@@ -180,7 +193,7 @@ export function RegisterAccountInformation() {
                             />
                         </Grid>
 
-                        <Grid xs={12}>
+                        <Grid xs={type === '2' ? 12 : 6}>
                             <AppInput 
                                 id='tel-field'
                                 color='primary'
@@ -194,33 +207,54 @@ export function RegisterAccountInformation() {
                             />
                         </Grid>
 
-                        <Grid xs={6}>
-                            <AppInput 
-                                id={ type === '2' ? 'crm-field' : 'doc-field'}
-                                color='primary'
-                                variant='filled'
-                                type='text'
-                                label={ type === '2' ? 'CRM' : 'Documento' }
-                                value={ type === '2' ? userData.crm_value : userData.doc_value }
-                                onChange={e => setUserData(type === '2' ? {...userData, crm_value: e.target.value} : {...userData, doc_value: e.target.value})}
-                                required
-                                fullWidth
-                            />
-                        </Grid>
+                        {
+                            (type === '2') ? 
+                                <>
+                                    <Grid xs={6}>
+                                        <AppInput 
+                                            id='crm-field'
+                                            color='primary'
+                                            variant='filled'
+                                            type='text'
+                                            label='CRM'
+                                            value={userData.crm_value}
+                                            onChange={e => setUserData({...userData, crm_value: e.target.value})}
+                                            required
+                                            fullWidth
+                                        />
+                                    </Grid>
 
-                        <Grid xs={6}>
-                            <AppInput 
-                                id='tel-field'
-                                color='primary'
-                                variant='filled'
-                                type='tel'
-                                label='Estado - CRM'
-                                value={userData.crm_state_value}
-                                onChange={e => setUserData({...userData, crm_state_value: e.target.value})}
-                                required
-                                fullWidth
-                            />
-                        </Grid>
+                                    <Grid xs={6}>
+                                        <AppInput 
+                                            id='tel-field'
+                                            color='primary'
+                                            variant='filled'
+                                            type='tel'
+                                            label='Estado - CRM'
+                                            value={userData.crm_state_value}
+                                            onChange={e => setUserData({...userData, crm_state_value: e.target.value})}
+                                            required
+                                            fullWidth
+                                        />
+                                    </Grid>
+                                </>
+                                :
+                                <>
+                                    <Grid xs={6}>
+                                        <AppInput 
+                                            id='crm-field'
+                                            color='primary'
+                                            variant='filled'
+                                            type='text'
+                                            label='Documento'
+                                            value={userData.crm_value}
+                                            onChange={e => setUserData({...userData, crm_value: e.target.value})}
+                                            required
+                                            fullWidth
+                                        />
+                                    </Grid>
+                               </>
+                        }
 
                         <Grid xs={12}>
                             <AppInput 

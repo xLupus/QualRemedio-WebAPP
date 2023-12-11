@@ -3,17 +3,17 @@ import { LoginContextType } from "../types/type";
 import Cookies from 'js-cookie';
 
 export const LoginContext = createContext<LoginContextType>({
-    accountType: '',
-    setAccountType: () => {}
+    currentAccountType: '',
+    setCurrentAccountType: () => {}
 });
 
 export function LoginContextProvider({ children }: { children: ReactNode }) {
-    const [accountType, setAccountType] = useState<string>('');
+    const [currentAccountType, setCurrentAccountType] = useState<string>('');
 
-    accountType ? Cookies.set('account_type_selected', accountType, { expires: 1 }) : setAccountType(Cookies.get('account_type_selected') || ' ');
+    if(currentAccountType) Cookies.set('account_type_selected', currentAccountType, { expires: 1 });
 
     return (
-        <LoginContext.Provider value={{accountType, setAccountType}}>
+        <LoginContext.Provider value={{currentAccountType, setCurrentAccountType}}>
             {children}
         </LoginContext.Provider>
     )

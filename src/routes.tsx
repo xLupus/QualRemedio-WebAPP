@@ -22,6 +22,7 @@ import { ProfilePlans } from "./pages/AppPages/ProfilePages/Plans";
 import { ProfileSystem } from "./pages/AppPages/ProfilePages/System";
 import { LoginProviderLayout } from "./layouts/providers/Auth/Login";
 import { RegisterProviderLayout } from "./layouts/providers/Auth/Register";
+import { MailVerified } from "./pages/AuthPages/MailPages/MailVerified";
 
 export function Routes() {
     const PreventBackHistory = () => {
@@ -71,6 +72,8 @@ export function Routes() {
                                 <Route path="auth/register/create-password" element={<CreatePassword isFromPath="register" />} />
                                 <Route path="auth/register/email-send" element={<SendMail isFromPath={'register'} />} />
                                 <Route path="auth/register/account-created" element={<RegisterAccountCreated />} />
+
+                                <Route path="users/mail/verify/:emailToken" element={<MailVerified />} />
                                 
                                 {/* Recuperação de senha */}
                                 <Route path="recover-password/email-verification" element={<MailVerification isFromPath={'recover-password'} />} />

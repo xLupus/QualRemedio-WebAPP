@@ -17,13 +17,13 @@ export function RegisterAccountSelection() {
         },
         {
             id: 2,
-            type: 'Cuidador',
+            type: 'Médico',
             desc: `Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-                Doloremque sed, perferendis`
+            Doloremque sed, perferendis`
         },
         {
             id: 3,
-            type: 'Médico',
+            type: 'Cuidador',
             desc: `Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
                 Doloremque sed, perferendis`
         }

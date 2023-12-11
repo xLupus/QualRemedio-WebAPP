@@ -16,7 +16,7 @@ export function AppButton({
             backgroundColor: 'backgroundColor' in props.sx ? props.sx.backgroundColor : '#BBBBBB',
             fontSize: 'fontSize' in props.sx ? props.sx.fontSize : '1rem',
             lineHeight: 'lineHeight' in props.sx ? props.sx.lineHeight : 'normal',
-            borderRadius: 'borderRadius' in props.sx ? props.sx.borderRadius : '.25rem',
+            borderRadius: 'borderRadius' in props.sx ? props.sx.borderRadius : '.25rem'
         }
     } else {
         defaultProps = {

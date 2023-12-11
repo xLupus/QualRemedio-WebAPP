@@ -6,19 +6,19 @@ import { useContext, useState } from "react";
 import { RegisterContext } from "../../../../hooks/RegisterContext";
 
 export function MailVerification({ isFromPath }: { isFromPath: string }) {
-    const [value, setValue] = useState<string | number>('');
+    const [value, setValue] = useState<string>('');
 
     const navigate = useNavigate();
     const { registerUserCredentials, setRegisterUserCredentials } = useContext(RegisterContext);
 
-    const handleValue = (val) => setValue(val);
+    const handleValue = (val: string) => setValue(val);
 
     const handleSelectAccount = () => {
         setRegisterUserCredentials([
             ...registerUserCredentials,
             {
                 name: 'user_email',
-                value
+                value: value || ''
             }
         ]);
 

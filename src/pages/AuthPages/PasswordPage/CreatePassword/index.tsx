@@ -31,7 +31,6 @@ export function CreatePassword({ isFromPath }: { isFromPath: string}) {
                 value: el.value
             }
         })
-        console.log(userData)
 
         const { user_name, user_email, user_cpf, user_telephone, user_birth_day, account_type_selected, user_crm_state, user_crm, user_specialty_name} = userData;
 
@@ -48,7 +47,7 @@ export function CreatePassword({ isFromPath }: { isFromPath: string}) {
             specialty_name: user_specialty_name?.value
         });
 
-        if(result?.status === 200) navigate('/auth/register/email-send');
+        if(result?.status === 201) navigate('/auth/register/email-send');
     }
 
 
@@ -70,7 +69,7 @@ export function CreatePassword({ isFromPath }: { isFromPath: string}) {
  
             <Typography typography='body1' fontSize='0.875rem' color='#00000077' mb={3}>Sua senha deve conter:</Typography>
 
-            <Grid container spacing={1} px={2}>
+            <Grid container spacing={1} px={2} key={1}>
                 {
                     passwordValidationText.map((el: string) => (
                         <Grid xs={6}>
