@@ -23,6 +23,7 @@ import { ProfileSystem } from "./pages/AppPages/ProfilePages/System";
 import { LoginProviderLayout } from "./layouts/providers/Auth/Login";
 import { RegisterProviderLayout } from "./layouts/providers/Auth/Register";
 import { MailVerified } from "./pages/AuthPages/MailPages/MailVerified";
+import { CreateBond } from "./pages/AppPages/BondPages/CreateBondPage";
 
 export function Routes() {
     const PreventBackHistory = () => {
@@ -90,11 +91,11 @@ export function Routes() {
                             <Route path="/profile/account-config" element={<ProfileAccountConfiguration />} />
                             <Route path="/profile/security" element={<ProfileAccountSecurity />} />
                             <Route path="/profile/system" element={<ProfileSystem />} />
+                            <Route path="/profile/plans" element={<ProfilePlans />} />
                         </Route>
                         
                         <Route element={<Protected />}>
-                            <Route path="/profile/plans" element={<ProfilePlans />} />
-                            
+                            <Route path="/users/bond" element={<CreateBond />} />
                         </Route>
                     </Route>
                 </Route>
