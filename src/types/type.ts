@@ -15,7 +15,6 @@ import {
 } from "react";
 import { NavLinkProps, To } from "react-router-dom";
 import { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-//import { FieldError } from "react-hook-form";
 
 //Props
 interface AppButtonProps {
@@ -46,7 +45,7 @@ interface AppInputProps {
     label?: ReactNode | undefined;
     value?: unknown;
     type?: HTMLInputTypeAttribute | undefined;
-    helperText?: ReactNode | undefined;
+    helperText?: string | ReactNode | undefined;
     size?: "small" | "medium" | undefined;
     placeholder?: string | undefined;
     fullWidth?: boolean | undefined;
@@ -93,6 +92,28 @@ interface AppInputAdornmentProps {
     endAdornment?: React.ReactNode | undefined;
 }
 
+interface AppInputSelectProps {
+    id?: string;
+    key?: Key | null | undefined
+    variant?: TextFieldVariants  | undefined;
+    color?: "error" | "primary" | "secondary" | "info" | "success" | "warning"; 
+    size?: "small" | "medium" | undefined;
+    message?: string | undefined;
+    type?: HTMLInputTypeAttribute | undefined; 
+    value?: string | undefined;
+    fullWidth?: boolean | undefined;
+    required?: boolean | undefined;
+    autoComplete?: string | undefined;
+    handleClick?: unknown;
+    handleMouseDown?: unknown;
+    error?: boolean | undefined;
+    sx?: SxProps<Theme> | undefined;
+    children: ReactNode;
+    onKeyDown?: KeyboardEventHandler<Element> | undefined;
+    onFocus?: FocusEventHandler<Element> | undefined;
+    onInput?: FormEventHandler<Element> | undefined;
+}
+
 interface AppCardProps {
     key?: Key | null | undefined
     children: ReactNode | undefined;
@@ -129,6 +150,33 @@ interface LoginService {
     password: string;
     role: number;
 }
+
+interface CreateBond {
+    email: string;
+    role: string;
+}
+
+interface StoreBond {
+    user_to_id: number;
+    user_to_role_id: number;
+}
+
+interface EditBond {
+    bond_id: number;
+    status_id: number;
+}
+
+interface IndexBondParams {
+    filter?: {
+      created_by?: number,
+      bond?: number
+    },
+    paginate?: {
+      skip: number,
+      take: number
+    },
+  
+  }
 
 interface Mail {
     email?: string;
@@ -168,10 +216,17 @@ export type {
     AppButtonProps,
     AppInputProps,
     AppInputAdornmentProps,
+    AppInputSelectProps,
     AppCardProps,
 
     RegisterService,
     LoginService,
+    
+    CreateBond,
+    StoreBond,
+    EditBond,
+    IndexBondParams,
+    
     Mail,
 
     AppBarProps,

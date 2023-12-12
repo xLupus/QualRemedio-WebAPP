@@ -1,5 +1,5 @@
 import { AxiosError } from "axios"
-import { axios_instance } from "../config/axios"
+import { axiosInstanceAPI } from "../config/axios"
 
 export interface IndexConsultationParams {
   filter?: {
@@ -61,7 +61,7 @@ class Consultations {
     console.log({ query_params });
 
     try {
-      const response = await axios_instance.get(`consultations?${query_string}`)
+      const response = await axiosInstanceAPI.get(`consultations?${query_string}`)
 
       return response.data
     } catch (err: unknown) {
@@ -75,7 +75,7 @@ class Consultations {
 
   async create(bond_id: number, data: CreateConsultationParams) {
     try {
-      const response = await axios_instance.post(`bond/${bond_id}/consultations`, data)
+      const response = await axiosInstanceAPI.post(`bond/${bond_id}/consultations`, data)
 
       return response.data
 
@@ -86,7 +86,7 @@ class Consultations {
 
   async show(consultation_id: number) {
     try {
-      const response = await axios_instance.get(`consultations/${consultation_id}`)
+      const response = await axiosInstanceAPI.get(`consultations/${consultation_id}`)
 
       return response.data
     } catch (err: unknown) {
@@ -96,7 +96,7 @@ class Consultations {
 
   async update(consultation_id: number, data: UpdateConsultationParams) {
     try {
-      const response = await axios_instance.patch(`consultations/${consultation_id}`, data)
+      const response = await axiosInstanceAPI.patch(`consultations/${consultation_id}`, data)
 
       return response.data
     } catch (err: unknown) {
@@ -108,7 +108,7 @@ class Consultations {
 
   async destroy(consultation_id: number) {
     try {
-      const response = await axios_instance.delete(`consultations/${consultation_id}`)
+      const response = await axiosInstanceAPI.delete(`consultations/${consultation_id}`)
 
       return response.data
     } catch (err: unknown) {
@@ -119,7 +119,7 @@ class Consultations {
 
   async status() {
     try {
-      const response = await axios_instance.get('consultation_status')
+      const response = await axiosInstanceAPI.get('consultation_status')
 
       return response.data
     } catch (err: unknown) {

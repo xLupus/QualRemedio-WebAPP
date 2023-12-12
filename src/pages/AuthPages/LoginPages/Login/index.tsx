@@ -210,7 +210,7 @@ export function Login() {
                     </AppButton>
                 </Stack>
             </Box>
-            <Box >
+            <Box>
                 <Snackbar
                     anchorOrigin={{ vertical, horizontal }}
                     autoHideDuration={4000}

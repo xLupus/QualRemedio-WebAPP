@@ -1,9 +1,9 @@
-import { axios_instance } from "../config/axios";
+import { axiosInstanceAPI } from "../config/axios";
 
 class Specialty {
   async index() {
     try {
-      const response = await axios_instance.get('specialties')
+      const response = await axiosInstanceAPI.get('specialties')
 
       return response.data
 

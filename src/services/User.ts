@@ -1,5 +1,5 @@
 import { AxiosError } from "axios"
-import { axios_instance } from "../config/axios"
+import { axiosInstanceAPI } from "../config/axios"
 
 export interface UserData {
   id: number,
@@ -14,9 +14,9 @@ export interface UserData {
 }
 
 class User {
-  async show(user_id: number) {
+  async show(email: string, role: number) {
     try {
-      const response = await axios_instance.get(`users/${user_id}`)
+      const response = await axiosInstanceAPI.post(`users`, { email, role })
 
       return response.data
     } catch (err: unknown) {
@@ -28,7 +28,7 @@ class User {
 
   async updateProfile(user_id: number, data: UserData) {
     try {
-      const response = await axios_instance.patch(`users/${user_id}`, data)
+      const response = await axiosInstanceAPI.patch(`users/${user_id}`, data)
       return response.data
     } catch (err: unknown) {
       if (err instanceof AxiosError) {
@@ -44,7 +44,7 @@ class User {
         current_password
       }
 
-      const response = await axios_instance.patch(`users/${user_id}/password`, form_data)
+      const response = await axiosInstanceAPI.patch(`users/${user_id}/password`, form_data)
 
       return response.data
     } catch (err: unknown) {
@@ -56,7 +56,7 @@ class User {
 
   async deleteAccount(user_id: number) {
     try {
-      const response = await axios_instance.delete(`users/${user_id}`)
+      const response = await axiosInstanceAPI.delete(`users/${user_id}`)
 
       return response.data
     } catch (err: unknown) {

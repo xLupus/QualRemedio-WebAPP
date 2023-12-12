@@ -6,6 +6,8 @@ import { Toolbar, Button, Menu, MenuItem, Box, Link, Typography, ListItem, ListI
 import { NavLink } from 'react-router-dom';
 import { AppButton } from '../../Button';
 import { Logo } from '../../Logo';
+import { Notifications } from '@mui/icons-material';
+
 /* import { useCurrentUserContext } from "../../../hooks/CurrentUserContext"
 import AuthService from '../../../services/Auth'; */
 //import { useNavigate } from 'react-router-dom';
@@ -146,21 +148,27 @@ export function AppHeaderWithSideBar() {
                                 </Box>
 
                                 {/* Full Menu */}
-                                <Box component='nav' display={{ xs: 'none', md: 'initial' }}>
+                    <Box component='nav' display={{ xs: 'none', md: 'initial' }}>
                                     <AppButton 
-                                        sx={{ height: '2.5rem', backgroundColor: '#404040', color: 'inherit', borderRadius: '.625rem', px: 2.25, py: 1.25, 
+                                        sx={{ height: '2.5rem', backgroundColor: '#404040', color: 'inherit', borderRadius: '.625rem', px: 2.25, py: 1.25, mr: 6,
                                             '&:hover': {
-                                             backgroundColor: '#525252'
+                                                backgroundColor: '#525252'
                                             } 
                                         }}
                                         variant='text'
                                         component={NavLink}
-                                        to='/auth/register/select-account'
+                                        to='/users/bond/create'
                                     >
                                         <Add />
                                     <Typography ml='.5rem' typography='body1' fontSize='1.15rem' color='inherit'>Vincular</Typography>
                                 </AppButton>
-                            <Link variant='body2' sx={{color: 'inherit'}} underline="none" px={2.25} py={1.25} fontSize='1.15rem'>///</Link>                               
+                                    <IconButton
+                                    color="inherit"
+                                    aria-label="notifications button"
+                                    edge="start"
+                                >
+                                    <Notifications />
+                            </IconButton>                         
                     </Box>
                 </Toolbar> 
             </AppBar>

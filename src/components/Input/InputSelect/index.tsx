@@ -1,10 +1,13 @@
 import { FormControl, InputLabel } from "@mui/material";
+import { AppInputSelectProps } from "../../../types/type";
 
-export function AppSelectInput({children}) {
+export function AppSelectInput(props: AppInputSelectProps) {
     return (
-        <FormControl size="small" variant="outlined" fullWidth> 
-            <InputLabel id="select-acc-option">Opção</InputLabel>
-            {children}
+        <FormControl 
+            {...props}
+        > 
+            <InputLabel id="select-acc-option">{props.message}</InputLabel>
+            {props.children}
         </FormControl>
     )
 }
