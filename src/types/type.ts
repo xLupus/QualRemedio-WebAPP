@@ -161,6 +161,23 @@ interface StoreBond {
     user_to_role_id: number;
 }
 
+interface EditBond {
+    bond_id: number;
+    status_id: number;
+}
+
+interface IndexBondParams {
+    filter?: {
+      created_by?: number,
+      bond?: number
+    },
+    paginate?: {
+      skip: number,
+      take: number
+    },
+  
+  }
+
 interface Mail {
     email?: string;
     urlContext?: string;
@@ -207,6 +224,9 @@ export type {
     
     CreateBond,
     StoreBond,
+    EditBond,
+    IndexBondParams,
+    
     Mail,
 
     AppBarProps,

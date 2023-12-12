@@ -24,7 +24,7 @@ import { LoginProviderLayout } from "./layouts/providers/Auth/Login";
 import { RegisterProviderLayout } from "./layouts/providers/Auth/Register";
 import { MailVerified } from "./pages/AuthPages/MailPages/MailVerified";
 import { CreateBondPage } from "./pages/AppPages/BondPages/CreateBondPage";
-import { ListBondPage } from "./pages/AppPages/BondPages/ListBondPage";
+import { BondPage } from "./pages/AppPages/BondPages/BondPage";
 
 export function Routes() {
     const currentUser = useCurrentUserContext();
@@ -95,7 +95,7 @@ export function Routes() {
                         
                         <Route element={<Protected />}>
                             <Route path="/users/bond/create" element={<CreateBondPage />} />
-                            <Route path="/users/bond/all" element={<ListBondPage actions query={{ auth_user: Number(currentUser?.user_id) }} />} />
+                            <Route path="/users/bond/all" element={<BondPage actions query={{ auth_user: Number(currentUser?.user_id) }} />} />
                         </Route>
                     </Route>
                 </Route>

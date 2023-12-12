@@ -1,17 +1,6 @@
 import { axiosInstanceAPI } from "../config/axios";
-import { StoreBond } from "../types/type";
+import { EditBond, IndexBondParams, StoreBond } from "../types/type";
 
-export interface IndexBondParams {
-    filter?: {
-      created_by?: number,
-      bond?: number
-    },
-    paginate?: {
-      skip: number,
-      take: number
-    },
-  
-  }
 class BondService {
     async index(params?: IndexBondParams) {
         try {
@@ -52,7 +41,6 @@ class BondService {
     }
 
     async create({ user_to_id, user_to_role_id }: StoreBond) {
-        console.log(user_to_id)
         try {
             const res = await axiosInstanceAPI.post('user/bond', {
                 user_to_id,
@@ -64,6 +52,16 @@ class BondService {
             console.log(err);
         }
     }
+
+	async edit({bond_id, status_id}: EditBond) {
+		try {
+            const res = await axiosInstanceAPI.patch(`user/bond/${bond_id}`, { status_id });
+
+            return res.data;
+        } catch (err: unknown) {
+            console.log(err);
+        }
+	}
 }
 
 export default new BondService();

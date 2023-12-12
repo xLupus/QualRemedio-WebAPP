@@ -9,13 +9,16 @@ import {
     TablePagination, TableRow, 
     IconButton,
     Typography, 
-    CircularProgress
+    CircularProgress,
+    Menu,
+    MenuItem
 } from "@mui/material";
-import { ReactNode, useState } from "react";
+import { ChangeEvent, ReactNode, useState } from "react";
 import BondService from '../../../../services/Bond';
 import { MoreVert } from '@mui/icons-material';
 import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
+import Cookies from "js-cookie";
 
 interface Column {
     id: 'bondId' | 'userFrom' | 'userFromRole' | 'userTo' | 'userToRole' | 'bondDate' | 'bondStatus' | 'actions';
@@ -87,9 +90,12 @@ function createData(
     return { bondId, userTo, userToRole, bondDate, bondStatus, actions };
 }
   
-export function ListBondPage({ actions, query }: ListBond) {
+export function BondPage({ actions, query }: ListBond) {
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [showActions, setShowActions] = useState<boolean>(false);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [selectedItem, setSelectedItem] = useState(null);
 
     const { data, isLoading, refetch } = useQuery({
         queryKey: ['bond', (page + 1)],
@@ -99,7 +105,7 @@ export function ListBondPage({ actions, query }: ListBond) {
                 filter: {
                     created_by: query?.auth_user,
                     bond: query?.bond_id
-                }, //TODO - Pegar do Storage
+                },
                 paginate: {
                     skip: (((page + 1) - 1) * rowsPerPage),
                     take: rowsPerPage
@@ -129,7 +135,36 @@ export function ListBondPage({ actions, query }: ListBond) {
     */
     const result = data?.data;
     const rows: Data[] = [];
- 
+    
+    const handleClick = (event, item) => {
+        setAnchorEl(event.currentTarget);
+        setSelectedItem(item);
+        setShowActions(Number(Cookies.get('user_id')) !== item.to_user ? false : true);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null); // Fecha o Menu
+        setSelectedItem(null); // Limpa o item selecionado
+    };
+
+    const handleUpdateBond = async (e) => {
+        const status_id = e.target.innerText.toLowerCase() === 'aceitar' ? 2 : 3;
+        const bond_id = Number(e.target.parentElement.id);
+
+        const bond = await BondService.edit({bond_id, status_id});
+
+        if(bond?.status === 200 && bond?.data) {
+            setShowActions(!showActions);
+            
+            console.log(result)
+            //setState({ vertical: 'top', horizontal: 'center', message: result?.message, open: true });
+
+            return;
+        }
+        
+        refetch();
+    }
+
     result?.map((el) => {
         rows.push(
             createData(
@@ -141,17 +176,20 @@ export function ListBondPage({ actions, query }: ListBond) {
                 <IconButton
                     color="inherit"
                     aria-label="notifications button"
+                    onClick={(event) => handleClick(event, el)}
                 >
                     <MoreVert />
                 </IconButton>
             ),
         )
     });
-
-    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+console.log(result)
+    const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+
+
 
     return (
         <>   
@@ -164,7 +202,7 @@ export function ListBondPage({ actions, query }: ListBond) {
                         <CircularProgress />
                     </Box>
                 :
-                    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+                    <Paper sx={{ width: '100%', overflow: 'hidden' }} id='table'>
                         <TableContainer sx={{ maxHeight: 590 }}>
                             <Table stickyHeader aria-label="sticky table">
                             <TableHead>
@@ -184,17 +222,17 @@ export function ListBondPage({ actions, query }: ListBond) {
                             <TableBody>
                                 {rows
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                    .map((row) => {
+                                    .map((row, i) => {
                                         return (
-                                            <TableRow hover role="checkbox" tabIndex={-1}>
+                                            <TableRow hover role="checkbox" tabIndex={-1} key={i}>
                                                 {
                                                     <>
-                                                        <TableCell key={1} align='center'>{row.bondId}</TableCell>  
-                                                        <TableCell key={2} align='center'>{row.userTo}</TableCell>  
-                                                        <TableCell key={3} align='center'>{row.userToRole}</TableCell>  
-                                                        <TableCell key={4} align='center'>{row.bondDate}</TableCell>  
-                                                        <TableCell key={5} align='center'>{row.bondStatus === 1 ? 'Pendente' : (row.bondStatus === 2 ? 'Aceito' : 'Recusado' )}</TableCell>  
-                                                        <TableCell key={6} align='center'>{row.actions}</TableCell>
+                                                        <TableCell align='center' id={String(row.bondId)}>{row.bondId}</TableCell>  
+                                                        <TableCell align='center'>{row.userTo}</TableCell>  
+                                                        <TableCell align='center'>{row.userToRole}</TableCell>  
+                                                        <TableCell align='center'>{row.bondDate}</TableCell>  
+                                                        <TableCell align='center'>{row.bondStatus === 1 ? 'Pendente' : (row.bondStatus === 2 ? 'Aceito' : 'Recusado' )}</TableCell>  
+                                                        <TableCell align='center'>{row.actions}</TableCell>
                                                     </>
                                                 }
                                             </TableRow>
@@ -213,8 +251,24 @@ export function ListBondPage({ actions, query }: ListBond) {
                             onPageChange={handleChangePage}
                             onRowsPerPageChange={handleChangeRowsPerPage}
                         />
-                    </Paper>
+                    </Paper>    
             }
+
+            <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+                MenuListProps={{
+                    'aria-labelledby': 'menu-button',
+                }}
+            >
+                {selectedItem && ( // Verifica se há um item selecionado para exibir o menu
+                    <Box id={String(selectedItem.id)}>
+                        {showActions &&  <MenuItem onClick={handleUpdateBond}>Aceitar</MenuItem>}
+                        <MenuItem onClick={handleUpdateBond}>Desvincular</MenuItem>
+                    </Box>
+                )}
+            </Menu>
         </>
     )
 }
