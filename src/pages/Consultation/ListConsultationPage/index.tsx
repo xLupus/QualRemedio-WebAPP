@@ -61,18 +61,18 @@ export const ListConsultationPage = ({ actions, query }: ListConsultationProps) 
   }
 
   return (
-    <Stack spacing={3} maxWidth={'lg'} padding={2} >
+    <Stack spacing={3} maxWidth={'lg'} width={'100%'} >
       <Typography variant='h5' component='h1'>Lista de Consultas</Typography>
 
       {actions && (
         <Box alignSelf='end'>
-          <NavLink to={'criar'}>
+          <NavLink to={'create'}>
             <Button variant='contained'>+ Consulta</Button>
           </NavLink>
         </Box>
       )}
 
-      <Table size="small">
+      <Table>
         <TableHead color=''>
           <TableRow>
             <TableCell>ID</TableCell>
@@ -118,7 +118,7 @@ export const ListConsultationPage = ({ actions, query }: ListConsultationProps) 
                         {actions && (
                           <TableCell>
                             <Stack direction='row' spacing={1}>
-                              <Button color='info' variant='contained' component={Link} to={`${consultation.id}/editar`}>Atualizar</Button>
+                              <Button color='info' variant='contained' component={Link} to={`${consultation.id}/edit`}>Atualizar</Button>
                               <Button color='error' variant='contained' onClick={() => openDeleteModalConfirm(consultation.id)}>Apagar</Button>
                             </Stack>
                           </TableCell>

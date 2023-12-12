@@ -1,28 +1,17 @@
-import { Button, Card, CardActions, CardContent, CardHeader, Container, Divider, List, ListItem, ListItemText, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Button, Card, CardActions, CardContent, CardHeader, Container, Divider, List, ListItem, ListItemText, Stack, Typography } from "@mui/material";
 import { blue } from "@mui/material/colors";
 
-function create_table_data(
-  feature: string,
-  free: string,
-  premium: string,
-  enterprise: string,
-) {
-  return { feature, free, premium, enterprise };
-}
+const free_plan = []
 
-const table_rows = [
-  create_table_data('Frozen yoghurt', 'v', 'v', 'v'),
-  create_table_data('Ice cream sandwich', 'v', 'v', 'v'),
-  create_table_data('Eclair', 'v', 'v', 'v'),
-  create_table_data('Cupcake', 'v', 'v', 'v'),
-  create_table_data('Gingerbread', 'v', 'v', 'v'),
-];
+const premium_plan = []
+
+const enterprise_plan = []
 
 
 export function PricePage() {
   return (
-    <Container maxWidth='xl'>
-      <Typography component='h1' variant='h4' fontWeight='bold' sx={{ paddingY: 6 }}>Planos</Typography>
+    <Container maxWidth='xl' sx={{paddingTop: 6, paddingBottom: 12}}>
+      <Typography component='h1' variant='h4' fontWeight='bold'>Planos</Typography>
 
       <Stack
         direction={{ sx: 'column', md: 'row' }} spacing={3} justifyContent='center' alignItems='center' divider={<Divider orientation="vertical" flexItem />}
@@ -32,7 +21,7 @@ export function PricePage() {
 
           <CardContent>
             <Typography marginBottom={3}>
-              Lorem ipsum dolor sit amet consectetur. Consectetur congue scelerisque vehicula dolor tincidunt.
+              Nosso Plano Gratuito oferece um ponto de partida acessível para o gerenciamento de consultas e prescrições médicas. Desfrute da facilidade de registrar suas consultas e gerenciar prescrições, tudo sem nenhum custo.
             </Typography>
 
             <Typography>
@@ -71,11 +60,11 @@ export function PricePage() {
 
           <CardContent>
             <Typography marginBottom={3}>
-              Lorem ipsum dolor sit amet consectetur. Consectetur congue scelerisque vehicula dolor tincidunt.
+              Além das funcionalidades do plano gratuito, desbloqueie recursos avançados como, lembretes ilimitados e permissões detalhadas entre vínculos. Para quem busca um gerenciamento mais completo e personalizado.
             </Typography>
 
             <Typography>
-              <Typography component='span' variant='h5' fontWeight='bold'>R$ 00,00</Typography>
+              <Typography component='span' variant='h5' fontWeight='bold'>R$ 29,90</Typography>
               <Typography component='span'>/mês</Typography>
             </Typography>
           </CardContent>
@@ -110,11 +99,11 @@ export function PricePage() {
 
           <CardContent>
             <Typography marginBottom={3}>
-              Lorem ipsum dolor sit amet consectetur. Consectetur congue scelerisque vehicula dolor tincidunt.
+              Para organizações e equipes médicas. Além das funcionalidades dos planos anteriores, obtenha ferramentas avançadas para gerenciar consultas, colaborar eficientemente e analisar resultados de exames. Uma solução integrada para otimizar o cuidado em escala.
             </Typography>
 
             <Typography>
-              <Typography component='span' variant='h5' fontWeight='bold'>R$ 00,00</Typography>
+              <Typography component='span' variant='h5' fontWeight='bold'>R$ 119,50</Typography>
               <Typography component='span'>/mês</Typography>
             </Typography>
           </CardContent>
@@ -144,54 +133,6 @@ export function PricePage() {
           </List>
         </Card>
       </Stack>
-
-      <Typography component='h2' variant='h5' fontWeight='bold' sx={{ paddingY: 4 }}>Detalhes do Plano</Typography>
-
-      <TableContainer sx={{ display: 'flex', justifyContent: 'center', marginBottom: 10 }}>
-        <Table sx={{ maxWidth: 'lg' }}>
-          <TableHead>
-            <TableRow>
-              <TableCell>Compare todos os planos</TableCell>
-              <TableCell align='center'>Gratuito</TableCell>
-              <TableCell align='center'>Premium</TableCell>
-              <TableCell align='center'>Enterprise</TableCell>
-            </TableRow>
-          </TableHead>
-
-          <TableBody>
-            {table_rows.map((row, i) => (
-              <TableRow key={i}>
-                <TableCell>{row.feature}</TableCell>
-                <TableCell align='center'>{row.free}</TableCell>
-                <TableCell align='center'>{row.premium}</TableCell>
-                <TableCell align='center'>{row.enterprise}</TableCell>
-              </TableRow>
-            ))}
-
-            <TableRow >
-              <TableCell></TableCell>
-
-              <TableCell align='center'>
-                <Button variant='contained' size="small">
-                  Assinar Plano
-                </Button>
-              </TableCell>
-
-              <TableCell align='center'>
-                <Button variant='contained' size="small">
-                  Assinar Plano
-                </Button>
-              </TableCell>
-
-              <TableCell align='center'>
-                <Button variant='contained' size="small">
-                  Assinar Plano
-                </Button>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
     </Container>
   )
 }

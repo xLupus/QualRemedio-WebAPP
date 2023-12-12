@@ -2,6 +2,7 @@ import { axiosInstanceAPI } from "../config/axios";
 
 class Specialty {
   async index() {
+    
     try {
       const response = await axiosInstanceAPI.get('specialties')
 

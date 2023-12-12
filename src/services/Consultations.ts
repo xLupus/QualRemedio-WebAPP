@@ -58,8 +58,6 @@ class Consultations {
 
     const query_string = query_params.join('&')
 
-    console.log({ query_params });
-
     try {
       const response = await axiosInstanceAPI.get(`consultations?${query_string}`)
 

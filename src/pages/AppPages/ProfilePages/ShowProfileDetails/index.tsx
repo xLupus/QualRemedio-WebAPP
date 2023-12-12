@@ -2,7 +2,7 @@ import { Link as MUILink, Button, Modal, Stack, Typography, Paper, CircularProgr
 import { grey, red } from "@mui/material/colors"
 import { useState } from 'react'
 import { useQuery } from "@tanstack/react-query"
-import User, { UserData } from "../../../services/User"
+import User, { UserData } from "../../../../services/User"
 import { Link, useNavigate } from "react-router-dom"
 import { useMutation } from "@tanstack/react-query"
 
@@ -45,7 +45,7 @@ export const ShowProfileDetails = () => {
 
 
   const handleDeleteAccount = (user_id: number) => {
-    deleteUser.mutate()
+    //deleteUser.mutate()
   }
 
   return (

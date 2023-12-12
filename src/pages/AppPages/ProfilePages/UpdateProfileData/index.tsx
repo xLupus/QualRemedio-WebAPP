@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Button, CircularProgress, Paper, Stack, TextField, Typography } from "@mui/material"
 import { SubmitHandler, useForm } from 'react-hook-form'
 import z from 'zod'
-import User, { UserData } from "../../../services/User"
+import User, { UserData } from "../../../../services/User"
 import { useQuery } from "@tanstack/react-query"
 import { user_id } from "../ShowProfileDetails"
 import { useEffect } from "react"
@@ -85,11 +85,11 @@ export const UpdateProfileData = () => {
     }
 
     if (response.data.success)
-      navigate('/d/perfil', { replace: true })
+      navigate('/profile/account-config', { replace: true })
   }
 
   return (
-    <Stack maxWidth='sm' spacing={3}>
+    <Stack maxWidth={'md'} width='100%' spacing={3}>
       <Typography>Informações de Conta</Typography>
 
       {isLoading && isFetching && (
@@ -142,6 +142,8 @@ export const UpdateProfileData = () => {
                 {...register('profile.bio')}
                 error={errors.profile?.bio ? true : false}
                 helperText={errors.profile?.bio && errors.profile.bio.message}
+                multiline
+                maxRows={20}
               />
             </Stack>
 

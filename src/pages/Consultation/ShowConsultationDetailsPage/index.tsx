@@ -19,8 +19,6 @@ export const ShowConsultationDetailsPage = () => {
 
   const consultation = data?.data
 
-  //if (data?.status == 200) {//? - se o id n for numerico o que fazer?}
-
   const date = new Date(consultation?.date_of_consultation)
 
   const year = date.getUTCFullYear();
@@ -54,8 +52,8 @@ export const ShowConsultationDetailsPage = () => {
   }
 
   return (
-    <Stack maxWidth='md' paddingY={2} spacing={2} borderRadius={2}>
-      <MUILink component={Link} to='/d/consultas'>Voltar</MUILink>
+    <Stack width='100%' maxWidth='md' paddingY={2} spacing={2} borderRadius={2}>
+      <MUILink component={Link} to='/consultations'>Voltar</MUILink>
 
       <Typography variant="h6" component='h1'>Consulta #{consultation?.id}</Typography>
 
@@ -117,7 +115,7 @@ export const ShowConsultationDetailsPage = () => {
 
               <Button
                 component={Link}
-                to={`prescricao/criar`}
+                to={`prescription/create`}
                 variant='contained'
                 sx={{ width: 'fit-content', alignSelf: 'end' }}
               >
@@ -131,7 +129,7 @@ export const ShowConsultationDetailsPage = () => {
                   </Typography>
                 )
                 : (
-                  <Table >
+                  <Table>
                     <TableHead>
                       <TableRow>
                         <TableCell>ID</TableCell>
@@ -153,7 +151,7 @@ export const ShowConsultationDetailsPage = () => {
                             <Stack direction={'row'} spacing={1}>
                               <Button onClick={() => openDetailsModal(prescription.id)} variant='contained' color="info">Visualizar</Button>
                               <Button onClick={() => openDeleteModalConfirm(prescription.id)} variant='contained' color="error" >Apagar</Button>
-                              <Button component={Link} to={`prescricao/${prescription.id}/atualizar`} variant='contained' color="success">Atualizar</Button>
+                              <Button component={Link} to={`prescription/${prescription.id}/edit`} variant='contained' color="success">Atualizar</Button>
                             </Stack>
                           </TableCell>
                         </TableRow>

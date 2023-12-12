@@ -6,11 +6,9 @@ import { Toolbar, Button, Menu, MenuItem, Box, Link, Typography, ListItem, ListI
 import { NavLink } from 'react-router-dom';
 import { AppButton } from '../../Button';
 import { Logo } from '../../Logo';
-import { Notifications } from '@mui/icons-material';
-
-/* import { useCurrentUserContext } from "../../../hooks/CurrentUserContext"
-import AuthService from '../../../services/Auth'; */
-//import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from "../../../hooks/AuthContext"
+import AuthService from '../../../services/Auth';
+import { useNavigate } from 'react-router-dom';
 import { Add, Inbox, Mail, MenuOpen } from '@mui/icons-material';
 import HiMenu from '@mui/icons-material/Menu';
 import { AppBarProps } from '../../../types/type';
@@ -77,9 +75,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export function AppHeaderWithSideBar() {
     const [open, setOpen] = useState(false);
-  //  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-/*     const currentUser = useCurrentUserContext();
+    const currentUser = useAuthContext();
 
     const handleLogout = async () => {
         const result = await AuthService.logout();
@@ -88,7 +86,7 @@ export function AppHeaderWithSideBar() {
             navigate('/auth/login');
         }
     }
- */
+
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const openMenu: boolean = Boolean(anchorEl);
 
@@ -148,27 +146,21 @@ export function AppHeaderWithSideBar() {
                                 </Box>
 
                                 {/* Full Menu */}
-                    <Box component='nav' display={{ xs: 'none', md: 'initial' }}>
+                                <Box component='nav' display={{ xs: 'none', md: 'initial' }}>
                                     <AppButton 
-                                        sx={{ height: '2.5rem', backgroundColor: '#404040', color: 'inherit', borderRadius: '.625rem', px: 2.25, py: 1.25, mr: 6,
+                                        sx={{ height: '2.5rem', backgroundColor: '#404040', color: 'inherit', borderRadius: '.625rem', px: 2.25, py: 1.25, 
                                             '&:hover': {
-                                                backgroundColor: '#525252'
+                                             backgroundColor: '#525252'
                                             } 
                                         }}
                                         variant='text'
                                         component={NavLink}
-                                        to='/users/bond/create'
+                                        to='/auth/register/select-account'
                                     >
                                         <Add />
                                     <Typography ml='.5rem' typography='body1' fontSize='1.15rem' color='inherit'>Vincular</Typography>
                                 </AppButton>
-                                    <IconButton
-                                    color="inherit"
-                                    aria-label="notifications button"
-                                    edge="start"
-                                >
-                                    <Notifications />
-                            </IconButton>                         
+                            <Link variant='body2' sx={{color: 'inherit'}} underline="none" px={2.25} py={1.25} fontSize='1.15rem'>///</Link>                               
                     </Box>
                 </Toolbar> 
             </AppBar>

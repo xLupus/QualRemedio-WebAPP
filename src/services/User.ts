@@ -1,5 +1,9 @@
 import { AxiosError } from "axios"
 import { axiosInstanceAPI } from "../config/axios"
+<<<<<<< HEAD
+=======
+import Cookies from 'js-cookie'
+>>>>>>> feature/integration
 
 export interface UserData {
   id: number,
@@ -10,7 +14,22 @@ export interface UserData {
   telephone: string,
   profile?: {
     bio: string
-  }
+  },
+  role: [
+    {
+      id: number,
+      name: string
+    }
+  ],
+  doctor: [
+    id: number,
+    crm: string,
+    crm_state: string,
+    specialty: {
+      id: number,
+      name: string
+    }
+  ]
 }
 
 class User {
