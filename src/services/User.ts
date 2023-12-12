@@ -37,7 +37,7 @@ export interface ShowUser {
 class User {
     async show({ id, email, role }: ShowUser) {
     try {
-      console.log(id)
+      console.log(role)
       const response = await axiosInstanceAPI.post(`users`, { id, email, role })
 
       return response.data

@@ -34,8 +34,7 @@ export const ListConsultationPage = ({ actions, query }: ListConsultationProps) 
     }),
   })
 
-  const request_data = data?.data
-  console.log(request_data)
+  const request_data = data?.data;
 
   const deleteConsultation = useMutation({
     mutationFn: (consultation_id: number) => Consultations.destroy(consultation_id),
@@ -132,15 +131,15 @@ export const ListConsultationPage = ({ actions, query }: ListConsultationProps) 
           }
         </TableBody>
       </Table>
-
-      {request_data?.number_of_pages && (
+      
+      {request_data?.number_of_pages > 0 && (
         <Stack alignItems={'center'} padding={2}>
           <Pagination
-            count={request_data.number_of_pages}
-            page={page}
+            count={!request_data.number_of_pages ? 1 : request_data.number_of_pages }
+            page={page === 0 ? 1 : page}
             onChange={handleChangePage}
-            hidePrevButton={page == 1}
-            hideNextButton={page == request_data.number_of_pages}
+            hidePrevButton={page === 1}
+            hideNextButton={page === request_data.number_of_pages}
             color='primary'
           />
         </Stack>

@@ -9,6 +9,7 @@ import validator from "validator"
 import { useNavigate } from "react-router-dom"
 import { grey } from "@mui/material/colors"
 import { useCurrentUserContext } from "../../../../hooks/CurrentUserContext"
+import Cookies from "js-cookie"
 
 const UpdateProfileSchema = z.object({
   name: z.string()
@@ -87,6 +88,7 @@ export const UpdateProfileData = () => {
     }
 
     if (response.data.success)
+      Cookies.set('user_name', response!.data.data.user.name)
       navigate('/profile/account-config', { replace: true })
   }
 

@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import moment from 'moment'
 import { Button, Stack, Typography } from '@mui/material'
 import { AppCard } from '../Card'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 export const ProfileInfo = () => {
   const user_id = Cookies.get('user_id')
@@ -13,7 +13,7 @@ export const ProfileInfo = () => {
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['user_profile'],
-    queryFn: () => User.show(Number(user_id))
+    queryFn: () => User.show({id: Number(user_id)})
   })
 
   const user: UserData = data?.data
@@ -50,7 +50,7 @@ export const ProfileInfo = () => {
         </Stack>
 
         <Stack spacing={2}>
-          <Button variant='contained'>
+          <Button variant='contained' component={NavLink} to='/users/bond/create'>
             Criar Vinculo
           </Button>
 

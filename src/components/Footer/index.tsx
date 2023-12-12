@@ -4,8 +4,23 @@ import { BsInstagram, BsLinkedin, BsGithub, BsTwitter } from 'react-icons/bs'
 import { NavLink } from 'react-router-dom'
 import { blue } from '@mui/material/colors'
 import moment from 'moment';
+import AuthService from '../../services/Auth';
+import { useCurrentUserContext } from '../../hooks/CurrentUserContext';
+import { useNavigate } from 'react-router-dom';
+import { AppButton } from '../Button';
 
 export function AppFooter() {
+    const currentUser = useCurrentUserContext();
+    const navigate = useNavigate();
+
+    const handleLogout = async () => {
+        const result = await AuthService.logout();
+    
+        if(result?.status === 200) {
+            navigate('/auth/login/select-account');
+        }
+    }
+
     return (
         <Box paddingY={6} sx={{ bgcolor: blue[900], color: 'white' }}>
             <Container>
@@ -16,9 +31,29 @@ export function AppFooter() {
 
                     <Box component='nav' alignSelf='center'>
                         <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/prices' underline="none" px={2.25} py={1.25} fontSize='1rem'>Preços</Link>
-                        <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/about' underline="none" px={2.25} py={1.25} fontSize='1rem'>Sobre</Link>
-                        <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/auth/login/select-account' underline="none" px={2.25} py={1.25} fontSize='1rem'>Entrar</Link>
-                        <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/auth/register/select-account' underline="none" px={2.25} py={1.25} fontSize='1rem'>Cadastrar</Link>
+                        {
+                            currentUser ?
+                                <>
+                                    <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/dashboard' underline="none" px={2.25} py={1.25} fontSize='1rem'>Dashboard</Link>
+                                    <AppButton 
+                                                sx={{ height: '2.5rem', backgroundColor: 'transparent', fontSize:'1rem', color: 'inherit', borderRadius: '.625rem', boxShadow: 0, px: 2.25, py: 1.25, 
+                                                    '&:hover': {
+                                                        backgroundColor: 'transparent'
+                                                    } 
+                                                }}
+                                                variant='text'
+                                                disableRipple
+                                                onClick={handleLogout}
+                                            >
+                                            Logout
+                                    </AppButton>
+                                </>
+                            :
+                            <>
+                                <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/auth/login/select-account' underline="none" px={2.25} py={1.25} fontSize='1rem'>Entrar</Link>
+                                <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/auth/register/select-account' underline="none" px={2.25} py={1.25} fontSize='1rem'>Cadastrar</Link>
+                            </>
+                        }
                     </Box>
                 </Box>
 

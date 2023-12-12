@@ -18,17 +18,15 @@ class AuthService {
                 account_type 
             });
 
-            if(res.status === 200) {
-                Cookies.remove('account_type_selected');
-                Cookies.remove('user_name');
-                Cookies.remove('user_cpf');
-                Cookies.remove('user_telephone');
-                Cookies.remove('user_birth_day');
-                Cookies.remove('user_crm_state');
-                Cookies.remove('user_crm');
-                Cookies.remove('user_specialty_name');
-            }
-
+            Cookies.remove('account_type_selected');
+            Cookies.remove('user_name');
+            Cookies.remove('user_cpf');
+            Cookies.remove('user_telephone');
+            Cookies.remove('user_birth_day');
+            Cookies.remove('user_crm_state');
+            Cookies.remove('user_crm');
+            Cookies.remove('user_specialty_name');
+            
             return res;
         } catch (err: unknown) {
             console.log(err);
@@ -46,6 +44,7 @@ class AuthService {
                 Cookies.set('auth_token', res.data!.data.authorization.token, { expires });
                 Cookies.set('user_id', res.data!.data.user.id, { expires });
                 Cookies.set('user_role', res.data!.data.user.role.id, { expires });
+                Cookies.set('user_name', res.data!.data.user.name, { expires });
             }
 
             return res;

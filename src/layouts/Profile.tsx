@@ -19,11 +19,6 @@ export function Profile() {
             path: '/profile/security'
         },
         {
-            name: 'Aparência e acessibilidade',
-            desc: 'Lizards are a widespread group of squamate reptiles.',
-            path: '/profile/system'
-        },
-        {
             name: 'Planos',
             desc: 'Lizards are a widespread group of squamate reptiles.',
             path: '/profile/plans'

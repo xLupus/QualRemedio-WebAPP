@@ -167,7 +167,7 @@ export function BondPage({ query }: ListBond) {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-console.log(status)
+
     return (
         <>   
             <Typography typography='h1' fontSize='1.75rem' color='#00000077' mb={6}>Meus vínculos</Typography>
