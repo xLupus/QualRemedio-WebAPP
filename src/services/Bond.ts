@@ -1,6 +1,7 @@
 import { axiosInstanceAPI } from "../config/axios";
 import { EditBond, IndexBondParams, StoreBond } from "../types/type";
 
+
 class BondService {
     async index(params?: IndexBondParams) {
         try {
@@ -11,13 +12,16 @@ class BondService {
               const { filter, paginate } = params
         
               if (filter) {
-                const { created_by, bond } = filter //* bond
+                const { created_by, bond, status } = filter //* bond
         
                 if (created_by)
                   filter_params.push(`created_by:${created_by}`)
         
                 if (bond)
                   filter_params.push(`bond:${bond}`)
+
+                if (status)
+                  filter_params.push(`status:${status}`)
         
                 query_params.push(`filter=${filter_params.join(',')}`)
               }
@@ -41,7 +45,9 @@ class BondService {
     }
 
     async create({ user_to_id, user_to_role_id }: StoreBond) {
+      console.log(user_to_id)
         try {
+          console.log(user_to_id)
             const res = await axiosInstanceAPI.post('user/bond', {
                 user_to_id,
                 user_to_role_id

@@ -2,7 +2,7 @@ import { Box, Stack, Typography, CardContent, CardActions, Divider, Paper, Circu
 import { AppCard } from '../../../../components/Card';
 import { useQuery } from '@tanstack/react-query';
 import { grey } from '@mui/material/colors';
-import { useAuthContext } from '../../../../hooks/authContext';
+import { useCurrentUserContext } from '../../../../hooks/CurrentUserContext';
 import { AppButton } from '../../../../components/Button';
 import User, { UserData } from '../../../../services/User';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
@@ -14,21 +14,20 @@ import { Link } from 'react-router-dom';
 export function ProfileAccountConfiguration() {
     //const [accountToDelete, setAccountToDelete] = useState<number | null>(null)
     //const navigate = useNavigate()
-    const currentUser = useAuthContext()
+    const currentUser = useCurrentUserContext()
 
     const { data, isLoading, isFetching } = useQuery({
         queryKey: ['user_profile'],
-        queryFn: () => User.show(Number(currentUser?.user_id))
+        queryFn: () => User.show({id: Number(currentUser?.user_id), role: Number(currentUser?.user_role)})
     })
 
-    console.log(isLoading, isFetching);
+    console.log(data);
     const user: UserData = data?.data
 
     const formated_data = moment(user?.birth_day).format('LL')
 
     const user_role_info = user?.role.filter(role => role.id == Number(currentUser?.user_role))[0]
 
-    console.log(user_role_info);
     console.log({ doctor: user?.doctor[0], currentUser, user });
 
     return (

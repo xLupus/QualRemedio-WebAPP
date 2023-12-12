@@ -28,10 +28,17 @@ export interface UserData {
   ]
 }
 
+export interface ShowUser {
+    id?: number | undefined;
+    email?: string | undefined;
+    role?: string | number | undefined;
+}
+
 class User {
-  async show(email: string, role: number) {
+    async show({ id, email, role }: ShowUser) {
     try {
-      const response = await axiosInstanceAPI.post(`users`, { email, role })
+      console.log(id)
+      const response = await axiosInstanceAPI.post(`users`, { id, email, role })
 
       return response.data
     } catch (err: unknown) {

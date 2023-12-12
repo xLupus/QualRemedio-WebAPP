@@ -170,6 +170,7 @@ interface IndexBondParams {
     filter?: {
       created_by?: number,
       bond?: number
+      status?: number
     },
     paginate?: {
       skip: number,

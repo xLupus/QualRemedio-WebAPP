@@ -112,7 +112,7 @@ export function Routes() {
                         </Route>
 
                         <Route element={<Protected />}>
-                        <Route path="/users/bond/create" element={<CreateBondPage />} />
+                            <Route path="/users/bond/create" element={<CreateBondPage />} />
                             <Route path="/users/bond/all" element={<BondPage actions query={{ auth_user: Number(currentUser?.user_id) }} />} />
 
                             <Route path="/profile/plans" element={<ProfilePlans />} />

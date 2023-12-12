@@ -4,11 +4,11 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import z from 'zod'
 import User, { UserData } from "../../../../services/User"
 import { useQuery } from "@tanstack/react-query"
-import { user_id } from "../ShowProfileDetails"
 import { useEffect } from "react"
 import validator from "validator"
 import { useNavigate } from "react-router-dom"
 import { grey } from "@mui/material/colors"
+import { useCurrentUserContext } from "../../../../hooks/CurrentUserContext"
 
 const UpdateProfileSchema = z.object({
   name: z.string()
@@ -34,6 +34,8 @@ const UpdateProfileSchema = z.object({
 })
 
 export const UpdateProfileData = () => {
+  const currentUser = useCurrentUserContext();
+  const user_id = Number(currentUser?.user_id);
   const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors }, setValue, setError } = useForm<UserData>({
     resolver: zodResolver(UpdateProfileSchema)
@@ -41,7 +43,7 @@ export const UpdateProfileData = () => {
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['user_data'],
-    queryFn: () => User.show(user_id)
+    queryFn: () => User.show({id: user_id})
   })
 
   const user_data: UserData = data?.data

@@ -35,6 +35,7 @@ export const ListConsultationPage = ({ actions, query }: ListConsultationProps) 
   })
 
   const request_data = data?.data
+  console.log(request_data)
 
   const deleteConsultation = useMutation({
     mutationFn: (consultation_id: number) => Consultations.destroy(consultation_id),

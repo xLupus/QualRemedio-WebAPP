@@ -59,14 +59,14 @@ export function CreateBondPage() {
     const handleCreateBond = async (data: CreateBond) => {
         const { email, role } = data;
 
-        const user = await User.show(email, Number(role));
-        console.log(user)
+        const user = await User.show({email, role: Number(role)});
+console.log(user)
         if(user.status === 200) {
             const result = await BondService.create({ user_to_id: user.data.id, user_to_role_id: Number(role) });
             console.log(result)
             setState({ vertical: 'top', horizontal: 'center', message: result?.message, open: true });
 
-            navigate('/');
+
             return;
         }
 

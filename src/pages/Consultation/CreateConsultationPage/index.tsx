@@ -7,6 +7,7 @@ import Specialty from "../../../services/Specialty"
 import Bond from "../../../services/Bond"
 import Consultations, { CreateConsultationParams } from "../../../services/Consultations"
 import { Link, useNavigate } from "react-router-dom"
+import { useCurrentUserContext } from "../../../hooks/CurrentUserContext"
 
 interface ConsultationCreateFormData {
   reason: string,
@@ -44,6 +45,8 @@ const CreateConsultationSchema = z.object({
 })
 
 export const CreateConsultationPage = () => {
+  const currentUser = useCurrentUserContext();
+
   const navigate = useNavigate()
 
   const { register, handleSubmit, formState: { errors } } = useForm<ConsultationCreateFormData>({
@@ -62,8 +65,6 @@ export const CreateConsultationPage = () => {
   const bonds = results[1].data ?? []
   const consultation_status = results[2].data
 
-  console.log(bonds);
-
   const handleFormSubmit: SubmitHandler<ConsultationCreateFormData> = async (form_data) => {
     const { consultation_status, date, observation, professional, reason, specialty } = form_data
 
@@ -72,7 +73,7 @@ export const CreateConsultationPage = () => {
       date,
       observation,
       reason,
-      created_by_user: 14, //TODO - Pegar do Storage DEPOIS
+      created_by_user: Number(currentUser?.user_id), //TODO - Pegar do Storage DEPOIS
       department_id: Number(specialty),
     }
 

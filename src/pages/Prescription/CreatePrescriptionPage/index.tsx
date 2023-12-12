@@ -36,7 +36,7 @@ export const CreatePrescriptionPage = () => {
 
   const handleFormSubmit: SubmitHandler<CreatePrescriptionData> = async (data) => {
     const response = await Prescription.store(Number(consultation_id), data, data.digital)
-
+console.log(response)
     if (response.status == 422) {
       console.log(response.data);
       setError('digital', { message: response.data })
@@ -45,7 +45,7 @@ export const CreatePrescriptionPage = () => {
     if (response.status == 200)
       navigate(`/consultations/${consultation_id}`, { replace: true })
 
-    console.log({ response, data, consultation_id });
+    //console.log({ response, data, consultation_id });
   }
 
   return (
