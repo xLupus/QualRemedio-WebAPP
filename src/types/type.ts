@@ -166,6 +166,34 @@ interface EditBond {
     status_id: number;
 }
 
+interface BondData {
+    bondId: number;
+    userTo?: string | undefined;
+    userFrom?: string | undefined;
+    userToRole: number;
+    bondDate: string;
+    bondStatus: number;
+    actions: ReactNode;
+}
+
+interface BondTableColumn {
+    id: 'bondId' | 'userFrom' | 'userFromRole' | 'userTo' | 'userToRole' | 'bondDate' | 'bondStatus' | 'actions';
+    label: string;
+    minWidth?: number;
+    align?: 'left' | 'right' | 'center';
+    format?: (value: number) => string;
+}
+  
+    
+interface ListBond {
+    actions?: boolean,
+
+    query?: {
+        auth_user?: number,
+        bond_id?: number
+    }
+}
+  
 interface IndexBondParams {
     filter?: {
       created_by?: number,
@@ -226,12 +254,15 @@ export type {
     CreateBond,
     StoreBond,
     EditBond,
+    ListBond,
     IndexBondParams,
     
     Mail,
 
     AppBarProps,
     State,
+    BondData,
+    BondTableColumn,
 
     LoginContextType,
     RegisterContextType,

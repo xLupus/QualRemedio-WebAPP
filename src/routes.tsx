@@ -119,7 +119,7 @@ export function Routes() {
 
                             <Route element={<ProfileCard />}>
                                 {/* Consultas */}
-                                <Route path="/consultations" element={<ListConsultationPage actions query={{ auth_user: Number(currentUser?.user_id) }} />} />
+                                <Route path="/consultations" element={<ListConsultationPage query={{ auth_user: Number(currentUser?.user_id) }} />} />
                                 <Route path="/consultations/create" element={<CreateConsultationPage />} />
                                 <Route path="/consultations/:consultation_id" element={<ShowConsultationDetailsPage />} />
                                 <Route path="/consultations/:consultation_id/edit" element={<UpdateConsultationPage />} />

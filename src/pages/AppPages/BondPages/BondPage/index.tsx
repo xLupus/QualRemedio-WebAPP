@@ -13,89 +13,60 @@ import {
     Menu,
     MenuItem
 } from "@mui/material";
-import { ChangeEvent, ReactNode, useState } from "react";
+import { ChangeEvent, MouseEvent, SetStateAction, useState } from "react";
 import BondService from '../../../../services/Bond';
 import { MoreVert } from '@mui/icons-material';
 import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
-import Cookies from "js-cookie";
+import { BondData, ListBond, BondTableColumn } from "../../../../types/type";
+import { useCurrentUserContext } from "../../../../hooks/CurrentUserContext";
 
-interface Column {
-    id: 'bondId' | 'userFrom' | 'userFromRole' | 'userTo' | 'userToRole' | 'bondDate' | 'bondStatus' | 'actions';
-    label: string;
-    minWidth?: number;
-    align?: 'left' | 'right' | 'center';
-    format?: (value: number) => string;
-}
-  
-const columns: readonly Column[] = [
+const columns: readonly BondTableColumn[] = [
     { 
-            id: 'bondId', 
-            label: 'ID',
-            align: 'center',
-        },
-        {
-            id: 'userTo',
-            label: 'Vinculado a',
-            align: 'center',
-        },
-        {
-            id: 'userToRole',
-            label: 'Cargo',
-            align: 'center',
-        },
-        {
-            id: 'bondDate',
-            label: 'Data do vínculo',
-            align: 'center',
-        },
-        {
-            id: 'bondStatus',
-            label: 'Status do vínculo',
-            align: 'center',
-        },
-        {
-            id: 'actions',
-            label: 'Ações',
-            align: 'center'
-        }
+        id: 'bondId', 
+        label: 'ID do vínculo',
+        align: 'center',
+    },
+    {
+        id: 'userTo',
+        label: 'Vinculado a',
+        align: 'center',
+    },
+    {
+        id: 'userToRole',
+        label: 'Cargo',
+        align: 'center',
+    },
+    {
+        id: 'bondDate',
+        label: 'Data do vínculo',
+        align: 'center',
+    },
+    {
+        id: 'bondStatus',
+        label: 'Status do vínculo',
+        align: 'center',
+    },
+    {
+        id: 'actions',
+        label: 'Ações',
+        align: 'center'
+    }  
 ];
   
-interface Data {
-    bondId: number;
-    userTo: string;
-    userToRole: number;
-    bondDate: string;
-    bondStatus: number;
-    actions: ReactNode;
-}
-    
-interface ListBond {
-    actions?: boolean,
 
-    query?: {
-        auth_user?: number,
-        bond_id?: number
-    }
+function createData({bondId, userTo, userFrom, userToRole, bondDate, bondStatus, actions }: BondData): BondData {
+    return { bondId, userTo, userFrom, userToRole, bondDate, bondStatus, actions };
 }
   
-function createData(
-    bondId: number,
-    userTo: string,
-    userToRole: number,
-    bondDate: string,
-    bondStatus: number,
-    actions: ReactNode,
-): Data {
-    return { bondId, userTo, userToRole, bondDate, bondStatus, actions };
-}
-  
-export function BondPage({ actions, query }: ListBond) {
+export function BondPage({ query }: ListBond) {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [showActions, setShowActions] = useState<boolean>(false);
+    const [status, setShowStatus] = useState<number>(0);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [selectedItem, setSelectedItem] = useState(null);
+    const currentUser = useCurrentUserContext();
 
     const { data, isLoading, refetch } = useQuery({
         queryKey: ['bond', (page + 1)],
@@ -134,63 +105,69 @@ export function BondPage({ actions, query }: ListBond) {
         };
     */
     const result = data?.data;
-    const rows: Data[] = [];
+    const rows: BondData[] = [];
     
-    const handleClick = (event, item) => {
-        setAnchorEl(event.currentTarget);
+    const handleClick = (e: MouseEvent<HTMLButtonElement, MouseEvent>, item: any) => {
+        setAnchorEl(e.currentTarget);
         setSelectedItem(item);
-        setShowActions(Number(Cookies.get('user_id')) !== item.to_user ? false : true);
+        setShowActions(Number(currentUser?.user_id) !== item.to_user || item.status_id === 2 ? false : true);
+        setShowStatus(item.status_id === 4 ? 4 : (item.status_id === 2 ? 2 : 1))
     };
 
     const handleClose = () => {
-        setAnchorEl(null); // Fecha o Menu
-        setSelectedItem(null); // Limpa o item selecionado
+        setAnchorEl(null);
+        setSelectedItem(null);
     };
 
     const handleUpdateBond = async (e) => {
-        const status_id = e.target.innerText.toLowerCase() === 'aceitar' ? 2 : 3;
+        const status_id = e.target.innerText.toLowerCase() === 'aceitar' ? 2 : (e.target.innerText.toLowerCase() === 'desvincular' ? 4 : 1);
         const bond_id = Number(e.target.parentElement.id);
-
         const bond = await BondService.edit({bond_id, status_id});
 
         if(bond?.status === 200 && bond?.data) {
+            if(status_id === 2) {
+                setShowStatus(status_id)
+            } else {
+                setShowStatus(status_id)
+            }
+
             setShowActions(!showActions);
             
-            console.log(result)
             //setState({ vertical: 'top', horizontal: 'center', message: result?.message, open: true });
 
+            refetch();
             return;
-        }
-        
-        refetch();
+        }  
     }
-
+   
     result?.map((el) => {
         rows.push(
             createData(
-                el.id,
-                el.to.name, 
-                el.to_role.id, 
-                moment(el.createdAt).format('DD-MM-YYYY'), 
-                el.status_id,
-                <IconButton
-                    color="inherit"
-                    aria-label="notifications button"
-                    onClick={(event) => handleClick(event, el)}
-                >
-                    <MoreVert />
-                </IconButton>
+                {
+                    bondId: el.id,
+                    userTo: el.to.name, 
+                    userFrom: el.from.name,
+                    userToRole: el.to_role.id, 
+                    bondDate: moment(el.createdAt).format('DD-MM-YYYY'),
+                    bondStatus: el.status_id,
+                    actions: 
+                    <IconButton
+                        color="inherit"
+                        aria-label="notifications button"
+                        onClick={(e) => handleClick(e, el)}
+                        >
+                        <MoreVert />
+                    </IconButton>
+                }
             ),
         )
     });
-console.log(result)
+
     const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-
-
-
+console.log(status)
     return (
         <>   
             <Typography typography='h1' fontSize='1.75rem' color='#00000077' mb={6}>Meus vínculos</Typography>
@@ -228,10 +205,15 @@ console.log(result)
                                                 {
                                                     <>
                                                         <TableCell align='center' id={String(row.bondId)}>{row.bondId}</TableCell>  
-                                                        <TableCell align='center'>{row.userTo}</TableCell>  
+                                                        {
+                                                            row.userTo ? 
+                                                            <TableCell align='center'>{row.userTo}</TableCell>
+                                                            :
+                                                            <TableCell align='center'>{row.userFrom}</TableCell>
+                                                        }
                                                         <TableCell align='center'>{row.userToRole}</TableCell>  
                                                         <TableCell align='center'>{row.bondDate}</TableCell>  
-                                                        <TableCell align='center'>{row.bondStatus === 1 ? 'Pendente' : (row.bondStatus === 2 ? 'Aceito' : 'Recusado' )}</TableCell>  
+                                                        <TableCell align='center'>{row.bondStatus === 1 ? 'Pendente' : (row.bondStatus === 2 ? 'Aceito' : (row.bondStatus === 3 ? 'Recusado' : 'Desvinculado') )}</TableCell>  
                                                         <TableCell align='center'>{row.actions}</TableCell>
                                                     </>
                                                 }
@@ -262,12 +244,11 @@ console.log(result)
                     'aria-labelledby': 'menu-button',
                 }}
             >
-                {selectedItem && ( // Verifica se há um item selecionado para exibir o menu
-                    <Box id={String(selectedItem.id)}>
-                        {showActions &&  <MenuItem onClick={handleUpdateBond}>Aceitar</MenuItem>}
-                        <MenuItem onClick={handleUpdateBond}>Desvincular</MenuItem>
-                    </Box>
-                )}
+                <Box id={String(selectedItem?.id)}>
+                    {showActions && status !== 4 && <MenuItem onClick={handleUpdateBond} disabled={showActions ? false : true}>Aceitar</MenuItem>}
+                    {showActions && status === 4 && <MenuItem onClick={handleUpdateBond} disabled={showActions ? false : true}>Enviar novamente</MenuItem>}
+                    <MenuItem onClick={handleUpdateBond} disabled={status === 2 ? false : true}>Desvincular</MenuItem>
+                </Box>
             </Menu>
         </>
     )
