@@ -157,7 +157,7 @@ export function AppHeaderWithSideBar() {
                                         }}
                                         variant='text'
                                         component={NavLink}
-                                        to='/users/bond'
+                                        to='/users/bond/create'
                                     >
                                         <Add />
                                     <Typography ml='.5rem' typography='body1' fontSize='1.15rem' color='inherit'>Vincular</Typography>

@@ -1,28 +1,65 @@
 import { axiosInstanceAPI } from "../config/axios";
 import { StoreBond } from "../types/type";
-import Cookies from "js-cookie";
+
+export interface IndexBondParams {
+    filter?: {
+      created_by?: number,
+      bond?: number
+    },
+    paginate?: {
+      skip: number,
+      take: number
+    },
+  
+  }
 class BondService {
-    async index() {
+    async index(params?: IndexBondParams) {
         try {
-        const response = await axiosInstanceAPI.get('user/bond')
+            const query_params = []
+            const filter_params = []
+        
+            if (params) {
+              const { filter, paginate } = params
+        
+              if (filter) {
+                const { created_by, bond } = filter //* bond
+        
+                if (created_by)
+                  filter_params.push(`created_by:${created_by}`)
+        
+                if (bond)
+                  filter_params.push(`bond:${bond}`)
+        
+                query_params.push(`filter=${filter_params.join(',')}`)
+              }
+        
+              if (paginate) {
+                query_params.push(`skip=${paginate.skip}`)
+                query_params.push(`take=${paginate.take}`)
+              }
+            }
+        
+            const query_string = query_params.join('&')
+        
+            console.log({ query_params });
 
-        return response.data
+            const res = await axiosInstanceAPI.get(`user/bond?${query_string}`);
 
+            return res.data;
         } catch (err: unknown) {
-        console.log(err);
+            console.log(err);
         }
     }
 
     async create({ user_to_id, user_to_role_id }: StoreBond) {
+        console.log(user_to_id)
         try {
-            const token = Cookies.get('auth_token') || '';            
-
-            const res = axiosInstanceAPI.post('user/bond', {
+            const res = await axiosInstanceAPI.post('user/bond', {
                 user_to_id,
                 user_to_role_id
-            }, { headers: { Authorization: `Bearer ${token}` }});
+            });
 
-            return res;
+            return res.data;
         } catch (err: unknown) {
             console.log(err);
         }

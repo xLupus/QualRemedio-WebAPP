@@ -24,11 +24,12 @@ import { LoginProviderLayout } from "./layouts/providers/Auth/Login";
 import { RegisterProviderLayout } from "./layouts/providers/Auth/Register";
 import { MailVerified } from "./pages/AuthPages/MailPages/MailVerified";
 import { CreateBondPage } from "./pages/AppPages/BondPages/CreateBondPage";
+import { ListBondPage } from "./pages/AppPages/BondPages/ListBondPage";
 
 export function Routes() {
+    const currentUser = useCurrentUserContext();
+    
     const PreventBackHistory = () => {
-        const currentUser = useCurrentUserContext();
-
         if(currentUser) {
             return <Navigate to='/' replace={true} />
         }
@@ -37,8 +38,6 @@ export function Routes() {
     }
 
     const Protected = () => {
-        const currentUser = useCurrentUserContext();
-
         if(!currentUser) {
             return <Navigate to='/auth/login/select-account' replace={true} />
         }
@@ -95,7 +94,8 @@ export function Routes() {
                         </Route>
                         
                         <Route element={<Protected />}>
-                            <Route path="/users/bond" element={<CreateBondPage />} />
+                            <Route path="/users/bond/create" element={<CreateBondPage />} />
+                            <Route path="/users/bond/all" element={<ListBondPage actions query={{ auth_user: Number(currentUser?.user_id) }} />} />
                         </Route>
                     </Route>
                 </Route>

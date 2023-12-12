@@ -1,6 +1,6 @@
 import { AxiosError } from "axios"
 import { axiosInstanceAPI } from "../config/axios"
-import Cookies from "js-cookie"
+
 export interface UserData {
   id: number,
   name: string,
@@ -16,8 +16,7 @@ export interface UserData {
 class User {
   async show(email: string, role: number) {
     try {
-      const token = Cookies.get('auth_token') || '';
-      const response = await axiosInstanceAPI.post(`users`, { email, role },{ headers: { Authorization: `Bearer ${token}` }})
+      const response = await axiosInstanceAPI.post(`users`, { email, role })
 
       return response.data
     } catch (err: unknown) {
