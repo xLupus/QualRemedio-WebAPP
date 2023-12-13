@@ -193,6 +193,7 @@ export function ProfileAccountConfiguration() {
 */}
 
                     <Typography typography='h3' fontSize='1.125rem' color='#00000077' mt={12}>Área restrita</Typography>
+                    <Divider sx={{ mt: 2, mb: 3 }} />
 
                     <AppCard sx={{ height: '13.25rem', p: 1.5, mt: 5, backgroundColor: '#FF55554A' }}>
                         <CardContent>
@@ -203,11 +204,10 @@ export function ProfileAccountConfiguration() {
                         <CardActions>
                             <AppButton
                                 sx={{
-                                    width: '13.75rem', height: '2.8125rem', backgroundColor: '#D9D9D9', fontSize: '1.125rem',
+                                    width: '13.75rem', height: '2.8125rem', fontSize: '1.125rem',  backgroundColor: '#606060', color: '#FFF',
                                     '&:hover': {
-                                        backgroundColor: '#C6C6C6'
-                                    }
-                                }}
+                                    backgroundColor: '#525252'
+                                }}}
                                 id='btn-updade-profile'
                                 variant='text'
                             >

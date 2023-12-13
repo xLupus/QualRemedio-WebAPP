@@ -194,7 +194,7 @@ export function BondPage({ query }: ListBond) {
                                 isLoading ?
                                     <TableRow>
                                         <TableCell align='center' colSpan={6}>
-                                            <CircularProgress />
+                                            <CircularProgress sx={{color: '#000'}} />
                                         </TableCell>  
                                     </TableRow>
                                 :
@@ -233,6 +233,7 @@ export function BondPage({ query }: ListBond) {
                             </Table>
                         </TableContainer>
                         <TablePagination
+                            labelRowsPerPage='Itens por página'
                             rowsPerPageOptions={[10, 25, 100]}
                             component="div"
                             count={rows.length}
@@ -241,7 +242,7 @@ export function BondPage({ query }: ListBond) {
                             onPageChange={handleChangePage}
                             onRowsPerPageChange={handleChangeRowsPerPage}
                         />
-                </Paper>  
+            </Paper>  
  
             <Menu
                 anchorEl={anchorEl}

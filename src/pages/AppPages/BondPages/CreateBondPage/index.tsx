@@ -63,10 +63,12 @@ export function CreateBondPage() {
 
         if(user.status === 200) {
             const result = await BondService.create({ user_to_id: Number(user.data.id), user_to_role_id: Number(role) });
-            console.log(result)
 
             setState({ vertical: 'top', horizontal: 'center', message: result?.message, open: true });
-            navigate('/users/bond/all');
+
+            setTimeout(() => {
+                navigate('/users/bond/all');
+            }, 4200)
 
             return;
         }
@@ -156,7 +158,7 @@ export function CreateBondPage() {
                     onClose={handleClose}
                     key={vertical + horizontal}
                 >
-                    <SnackbarContent  message={message} sx={{ backgroundColor: '#D4D4D4',  color: '#50505080' }}/>
+                    <SnackbarContent  message={message} sx={{ bbackgroundColor: '#404040',  color: '#FFF' }}/>
                 </Snackbar>
             </Box>
         </>

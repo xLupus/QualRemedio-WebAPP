@@ -4,6 +4,7 @@ import { FaHandHoldingMedical } from "react-icons/fa";
 import { FaUserDoctor, FaUser } from "react-icons/fa6";
 import LogoDarkSVG from "../../../assets/logo_dark.svg"
 import { NavLink } from 'react-router-dom';
+import { AppButton } from '../../../components/Button';
 
 export function HomePage() {
 
@@ -17,7 +18,21 @@ export function HomePage() {
             Transforme a Saúde, Simplifique a Vida. Descubra o Futuro do Gerenciamento de Consultas e Prescrições Médicas. Seu bem-estar está em primeiro lugar!
             </Typography>
 
-            <Button component={NavLink} to='/prices'>Conheça nossos preços </Button>
+            <Box my={4}>
+                <AppButton
+                        sx={{ width: '18.5rem', height: '2.5rem', backgroundColor: 'transparent', color: '#000', boxShadow: 0,
+                            '&:hover': {
+                            backgroundColor: 'transparent'
+                        }}}
+                        id='btn-bond-user'
+                        variant='text'
+                        component={NavLink} 
+                        disableRipple
+                        to='/prices'
+                    >
+                    Conheça nossos preços 
+                </AppButton>
+            </Box>
 
             <img src="https://placehold.co/700x400" alt="" />
         </Stack >

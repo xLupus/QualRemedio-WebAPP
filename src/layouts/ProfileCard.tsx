@@ -1,14 +1,22 @@
 import { Outlet } from "react-router-dom"
 import { ProfileInfo } from "../components/ProfileInfo"
-import { Stack } from "@mui/material"
+import Grid from '@mui/material/Unstable_Grid2';
+import Item from '@mui/material/Unstable_Grid2';
 
 export const ProfileCard = () => {
+    return (
+        <Grid container  columnSpacing={12}>
+            <Grid lg={8}>
+                <Item>
+                    <Outlet />
+                </Item>
+            </Grid>
 
-  return (
-    <Stack direction={'row'} justifyContent={'space-between'} spacing={8} useFlexGap maxWidth={'xl'} marginX={'auto'}>
-      <Outlet />
-
-      <ProfileInfo />
-    </Stack>
-  )
+            <Grid lg={4}>
+                <Item>
+                    <ProfileInfo />
+                </Item>
+            </Grid>
+        </Grid>
+    )
 }

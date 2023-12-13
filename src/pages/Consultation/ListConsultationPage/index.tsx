@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, Link as MUILink, Modal, Pagination, Stack, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { Box, Button, CircularProgress, Link as MUILink, Modal, Pagination, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from '@mui/material'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { Link, NavLink } from 'react-router-dom'
 import Consultations from '../../../services/Consultations'
@@ -61,89 +61,94 @@ export const ListConsultationPage = ({ actions, query }: ListConsultationProps) 
   }
 
   return (
-    <Stack spacing={3} maxWidth={'lg'} width={'100%'} >
-      <Typography variant='h5' component='h1'>Lista de Consultas</Typography>
+    <>
+      <Box>
+      <Typography typography='h1' fontSize='1.75rem' color='#00000077' mb={6}>Minhas consultas</Typography>
 
-      {actions && (
-        <Box alignSelf='end'>
-          <NavLink to={'create'}>
-            <Button variant='contained'>+ Consulta</Button>
-          </NavLink>
-        </Box>
-      )}
+        {actions && (
+            <Box alignSelf='end'>
+                <NavLink to={'create'}>
+                <Button variant='contained'>+ Consulta</Button>
+                </NavLink>
+            </Box>
+        )}
+      </Box>
 
-      <Table>
-        <TableHead  sx={{backgroundColor: '#C6C6C6'}} aria-label="normal table">
-          <TableRow>
-            <TableCell align='center'>ID</TableCell>
-            <TableCell  align='center'>Razão</TableCell>
-            <TableCell  align='center'>Especialidade</TableCell>
-            <TableCell  align='center'>Status</TableCell>
-            <TableCell  align='center'>Vinculado a</TableCell>
-            {actions && (
-              <TableCell  align='center'>Ações</TableCell>
-            )}
-          </TableRow>
-        </TableHead>
+        <Paper sx={{ width: '100%', overflow: 'hidden' }} id='table'>
+        <TableContainer sx={{ maxHeight: 590 }}>
+            <Table>
+                <TableHead  sx={{backgroundColor: '#C6C6C6'}} aria-label="normal table">
+                <TableRow>
+                    <TableCell align='center'>ID</TableCell>
+                    <TableCell  align='center'>Razão</TableCell>
+                    <TableCell  align='center'>Especialidade</TableCell>
+                    <TableCell  align='center'>Status</TableCell>
+                    <TableCell  align='center'>Vinculado a</TableCell>
+                    {actions && (
+                    <TableCell  align='center'>Ações</TableCell>
+                    )}
+                </TableRow>
+                </TableHead>
 
-        <TableBody>
-          {isLoading
-            ? (
-              <TableRow>
-                <TableCell colSpan={6} align='center'>
-                  <CircularProgress />
-                </TableCell>
-              </TableRow>
-            )
-
-            : <>
-              {request_data?.total_consultations == 0
-                ? (
-                  <TableRow>
-                    <TableCell colSpan={6} align='center'>Voce não possui consultas registradas.</TableCell>
-                  </TableRow>
-                )
-                : (
-                  <>
-                    {request_data?.consultations.map(consultation => (
-                      <TableRow key={consultation.id}>
-                        <TableCell>
-                          <MUILink component={Link} to={`${consultation.id}`}>#{consultation.id}</MUILink>
+                <TableBody>
+                {isLoading
+                    ? (
+                    <TableRow>
+                        <TableCell colSpan={6} align='center'>
+                        <CircularProgress />
                         </TableCell>
-                        <TableCell>{consultation.reason}</TableCell>
-                        <TableCell>{consultation.specialty.name}</TableCell>
-                        <TableCell>{consultation.status.status}</TableCell>
-                        <TableCell>{consultation.bond.to.name}</TableCell>
+                    </TableRow>
+                    )
 
-                        {actions && (
-                          <TableCell>
-                            <Stack direction='row' spacing={1}>
-                              <Button color='info' variant='contained' component={Link} to={`${consultation.id}/edit`}>Atualizar</Button>
-                              <Button color='error' variant='contained' onClick={() => openDeleteModalConfirm(consultation.id)}>Apagar</Button>
-                            </Stack>
-                          </TableCell>
+                    : <>
+                    {request_data?.total_consultations == 0
+                        ? (
+                        <TableRow>
+                            <TableCell colSpan={6} align='center'>Voce não possui consultas registradas.</TableCell>
+                        </TableRow>
+                        )
+                        : (
+                        <>
+                            {request_data?.consultations.map(consultation => (
+                            <TableRow key={consultation.id}>
+                                <TableCell align='center'>
+                                <MUILink color='#000' underline='none' fontWeight='bold' component={Link} to={`${consultation.id}`}>#{consultation.id}</MUILink>
+                                </TableCell>
+                                <TableCell align='center'>{consultation.reason}</TableCell>
+                                <TableCell align='center'>{consultation.specialty.name}</TableCell>
+                                <TableCell align='center'>{consultation.status.status}</TableCell>
+                                <TableCell align='center'>{consultation.bond.to.name}</TableCell>
+
+                                {actions && (
+                                <TableCell>
+                                    <Stack direction='row' spacing={1}>
+                                    <Button color='info' variant='contained' component={Link} to={`${consultation.id}/edit`}>Atualizar</Button>
+                                    <Button color='error' variant='contained' onClick={() => openDeleteModalConfirm(consultation.id)}>Apagar</Button>
+                                    </Stack>
+                                </TableCell>
+                                )}
+                            </TableRow>
+                            ))}
+                        </>
                         )}
-                      </TableRow>
-                    ))}
-                  </>
-                )}
-            </>
-          }
-        </TableBody>
-      </Table>
-      
-      {request_data?.number_of_pages > 0 && (
-        <Stack alignItems={'center'} padding={2}>
-          <Pagination
-            count={!request_data.number_of_pages ? 1 : request_data.number_of_pages }
-            page={page === 0 ? 1 : page}
-            onChange={handleChangePage}
-            hidePrevButton={page === 1}
-            hideNextButton={page === request_data.number_of_pages}
-            color='primary'
-          />
-        </Stack>
-      )}
+                    </>
+                }
+                </TableBody>
+                </Table>
+            </TableContainer>
+                            {request_data?.number_of_pages > 0 && (
+            <Stack alignItems={'center'} padding={2}>
+            <Pagination
+                count={!request_data.number_of_pages ? 1 : request_data.number_of_pages }
+                page={page === 0 ? 1 : page}
+                onChange={handleChangePage}
+                hidePrevButton={page === 1}
+                hideNextButton={page === request_data.number_of_pages}
+                color='primary'
+            />
+            </Stack>
+        )}
+        </Paper>  
 
       {selectedConsultation && (
         <Modal
@@ -161,7 +166,7 @@ export const ListConsultationPage = ({ actions, query }: ListConsultationProps) 
           </Stack>
         </Modal>
       )}
-    </Stack>
+    </>
   )
 }
 

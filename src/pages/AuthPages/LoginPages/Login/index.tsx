@@ -181,6 +181,7 @@ export function Login() {
                             <CircularProgress
                                 size={24}
                                 sx={{
+                                    color: '#FFF',
                                     position: 'absolute',
                                     top: '50%',
                                     left: '50%',
@@ -255,7 +256,7 @@ export function Login() {
                     onClose={handleClose}
                     key={vertical + horizontal}
                 >
-                    <SnackbarContent  message={message} sx={{ backgroundColor: '#D4D4D4',  color: '#50505080' }}/>
+                    <SnackbarContent  message={message} sx={{ backgroundColor: '#404040',  color: '#FFF' }}/>
                 </Snackbar>
             </Box>
         </>

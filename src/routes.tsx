@@ -40,7 +40,7 @@ import { ChangePassword } from "./pages/AppPages/ProfilePages/ChangePassword";
 
 export function Routes() {
     const currentUser = useCurrentUserContext();
-    
+
     const PreventBackHistory = () => {
         if(currentUser) {
             return <Navigate to='/' replace={true} />

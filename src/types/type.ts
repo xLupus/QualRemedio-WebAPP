@@ -51,6 +51,8 @@ interface AppInputProps {
     fullWidth?: boolean | undefined;
     required?: boolean | undefined;
     autoComplete?: string | undefined;
+    multiline?: boolean | undefined;
+    maxRows?: number | undefined;
     min?: string | number | undefined;
     max?: string | number | undefined;
     sx?: SxProps<Theme> | undefined;
