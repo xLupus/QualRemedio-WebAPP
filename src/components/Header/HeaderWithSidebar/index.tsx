@@ -7,12 +7,8 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { AppButton } from '../../Button';
 import { Logo } from '../../Logo';
 import { Notifications } from '@mui/icons-material';
-
 import { Dashboard, Person, AddLink, Logout, Event } from '@mui/icons-material';
-/* import { useCurrentUserContext } from "../../../hooks/CurrentUserContext"
-import AuthService from '../../../services/Auth'; */
-//import { useNavigate } from 'react-router-dom';
-import { Add, Inbox, Mail, MenuOpen } from '@mui/icons-material';
+import { Add, MenuOpen } from '@mui/icons-material';
 import HiMenu from '@mui/icons-material/Menu';
 import { AppBarProps } from '../../../types/type';
 import { useCurrentUserContext } from '../../../hooks/CurrentUserContext';
@@ -107,8 +103,8 @@ export function AppHeaderWithSideBar() {
     };
 
     return (
-        <Box sx={{ display: 'flex' }}>
-            <AppBar position="fixed" open={open}>
+        <Box sx={{ display: 'flex'}}>
+            <AppBar position="fixed" open={open} sx={{backgroundColor: '#424242'}}>
                 <Toolbar sx={{display: 'flex', justifyContent: 'space-between'}}>
                     <Box display='flex' alignItems='center'>
                         <IconButton
@@ -122,9 +118,6 @@ export function AppHeaderWithSideBar() {
                         <Box ml={3}>
                             <Link component={NavLink} to='/' underline="none" color='inherit' sx={{display: {xs: 'none', lg: 'block'}}}>
                                 <Logo /> 
-                            </Link>
-                            <Link variant='body2' component={NavLink} to='/' underline="none" color='inherit' sx={{display: {xs: 'block', lg: 'none'}}}>
-                                QR
                             </Link>
                         </Box>
                         <Typography ml={12}>Olá, {currentUser?.user_name} !</Typography>
@@ -153,9 +146,9 @@ export function AppHeaderWithSideBar() {
                                 {/* Full Menu */}
                     <Box component='nav' display={{ xs: 'none', md: 'initial' }}>
                                     <AppButton 
-                                        sx={{ height: '2.5rem', backgroundColor: '#404040', color: 'inherit', borderRadius: '.625rem', px: 2.25, py: 1.25, mr: 6,
+                                        sx={{ height: '2.5rem', backgroundColor: '#f7f7f7', color: '#212121', borderRadius: '.625rem', px: 2.25, py: 1.25, mr: 6,
                                             '&:hover': {
-                                                backgroundColor: '#525252'
+                                                backgroundColor: '#ededed'
                                             } 
                                         }}
                                         variant='text'

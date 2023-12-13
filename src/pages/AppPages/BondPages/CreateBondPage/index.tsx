@@ -135,9 +135,9 @@ export function CreateBondPage() {
 
                 <Box display='flex' justifyContent='flex-end' mt={8}>
                     <AppButton
-                        sx={{ width: '18.5rem', height: '2.5rem', backgroundColor: '#D9D9D9', 
+                        sx={{ width: '18.5rem', height: '2.5rem', backgroundColor: '#404040', color: '#FFF',
                             '&:hover': {
-                            backgroundColor: '#C6C6C6'
+                            backgroundColor: '#525252'
                         }}}
                         id='btn-bond-user'
                         variant='text'

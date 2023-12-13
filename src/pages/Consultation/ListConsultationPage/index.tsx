@@ -73,15 +73,15 @@ export const ListConsultationPage = ({ actions, query }: ListConsultationProps) 
       )}
 
       <Table>
-        <TableHead color=''>
+        <TableHead  sx={{backgroundColor: '#C6C6C6'}} aria-label="normal table">
           <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>Razão</TableCell>
-            <TableCell>Especialidade</TableCell>
-            <TableCell>Status</TableCell>
-            <TableCell>Vinculado a</TableCell>
+            <TableCell align='center'>ID</TableCell>
+            <TableCell  align='center'>Razão</TableCell>
+            <TableCell  align='center'>Especialidade</TableCell>
+            <TableCell  align='center'>Status</TableCell>
+            <TableCell  align='center'>Vinculado a</TableCell>
             {actions && (
-              <TableCell>Ações</TableCell>
+              <TableCell  align='center'>Ações</TableCell>
             )}
           </TableRow>
         </TableHead>

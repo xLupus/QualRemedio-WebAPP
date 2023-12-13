@@ -172,15 +172,8 @@ export function BondPage({ query }: ListBond) {
         <>   
             <Typography typography='h1' fontSize='1.75rem' color='#00000077' mb={6}>Meus vínculos</Typography>
 
-            {
-                isLoading ? 
-      
-                    <Box>
-                        <CircularProgress />
-                    </Box>
-                :
-                    <Paper sx={{ width: '100%', overflow: 'hidden' }} id='table'>
-                        <TableContainer sx={{ maxHeight: 590 }}>
+            <Paper sx={{ width: '100%', overflow: 'hidden' }} id='table'>
+                <TableContainer sx={{ maxHeight: 590 }}>
                             <Table stickyHeader aria-label="sticky table">
                             <TableHead>
                                 <TableRow>
@@ -197,29 +190,44 @@ export function BondPage({ query }: ListBond) {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {rows
-                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                    .map((row, i) => {
-                                        return (
-                                            <TableRow hover role="checkbox" tabIndex={-1} key={i}>
-                                                {
-                                                    <>
-                                                        <TableCell align='center' id={String(row.bondId)}>{row.bondId}</TableCell>  
+                               {
+                                isLoading ?
+                                    <TableRow>
+                                        <TableCell align='center' colSpan={6}>
+                                            <CircularProgress />
+                                        </TableCell>  
+                                    </TableRow>
+                                :
+                                (
+                                    result ?
+                                        rows
+                                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                            .map((row, i) => {
+                                                return (
+                                                    <TableRow hover role="checkbox" tabIndex={-1} key={i}>
                                                         {
-                                                            row.userTo ? 
-                                                            <TableCell align='center'>{row.userTo}</TableCell>
-                                                            :
-                                                            <TableCell align='center'>{row.userFrom}</TableCell>
+                                                            <>
+                                                                <TableCell align='center' id={String(row.bondId)}>{row.bondId}</TableCell>  
+                                                                {
+                                                                    row.userTo ? 
+                                                                    <TableCell align='center'>{row.userTo}</TableCell>
+                                                                    :
+                                                                    <TableCell align='center'>{row.userFrom}</TableCell>
+                                                                }
+                                                                <TableCell align='center'>{row.userToRole}</TableCell>  
+                                                                <TableCell align='center'>{row.bondDate}</TableCell>  
+                                                                <TableCell align='center'>{row.bondStatus === 1 ? 'Pendente' : (row.bondStatus === 2 ? 'Aceito' : (row.bondStatus === 3 ? 'Recusado' : 'Desvinculado') )}</TableCell>  
+                                                                <TableCell align='center'>{row.actions}</TableCell>
+                                                            </>
                                                         }
-                                                        <TableCell align='center'>{row.userToRole}</TableCell>  
-                                                        <TableCell align='center'>{row.bondDate}</TableCell>  
-                                                        <TableCell align='center'>{row.bondStatus === 1 ? 'Pendente' : (row.bondStatus === 2 ? 'Aceito' : (row.bondStatus === 3 ? 'Recusado' : 'Desvinculado') )}</TableCell>  
-                                                        <TableCell align='center'>{row.actions}</TableCell>
-                                                    </>
-                                                }
-                                            </TableRow>
-                                        )
-                                    })
+                                                    </TableRow>
+                                                )
+                                            })
+                                        :
+                                        <TableRow hover role="checkbox" tabIndex={-1}>
+                                            <TableCell align='center' colSpan={6}>Nenhum vínculo foi encontrado</TableCell>  
+                                        </TableRow>
+                                    )
                                 }
                             </TableBody>
                             </Table>
@@ -233,9 +241,8 @@ export function BondPage({ query }: ListBond) {
                             onPageChange={handleChangePage}
                             onRowsPerPageChange={handleChangeRowsPerPage}
                         />
-                    </Paper>    
-            }
-
+                </Paper>  
+ 
             <Menu
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}

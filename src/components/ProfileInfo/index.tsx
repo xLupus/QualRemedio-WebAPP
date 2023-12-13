@@ -5,6 +5,7 @@ import moment from 'moment'
 import { Button, Stack, Typography } from '@mui/material'
 import { AppCard } from '../Card'
 import { Link, NavLink } from 'react-router-dom'
+import { AppButton } from '../Button'
 
 export const ProfileInfo = () => {
   const user_id = Cookies.get('user_id')
@@ -50,13 +51,34 @@ export const ProfileInfo = () => {
         </Stack>
 
         <Stack spacing={2}>
-          <Button variant='contained' component={NavLink} to='/users/bond/create'>
-            Criar Vinculo
-          </Button>
+        <AppButton
+                        sx={{ width: '18.5rem', height: '2.5rem', backgroundColor: '#404040', color: '#FFF',
+                            '&:hover': {
+                            backgroundColor: '#525252'
+                        }}}
+                        id='btn-bond-user'
+                        component={NavLink} 
+                        to='/users/bond/create'
+                        variant='text'
+                        type='submit'
+                    >
+                        Criar Vinculo
+                    </AppButton>
 
-          <Button component={Link} to={'/consultations/create'} variant='contained'>
-            Adicionar Consulta
-          </Button>
+                    <AppButton
+                        sx={{ width: '18.5rem', height: '2.5rem', backgroundColor: '#404040', color: '#FFF',
+                            '&:hover': {
+                            backgroundColor: '#525252'
+                        }}}
+                        id='btn-bond-user'
+                        variant='text'
+                        type='submit'
+                        component={Link} 
+                        to={'/consultations/create'}
+                    >
+                        Adicionar Consulta
+                    </AppButton>
+
         </Stack>
       </Stack>
     </AppCard>

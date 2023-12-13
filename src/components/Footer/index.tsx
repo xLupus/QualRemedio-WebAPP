@@ -22,7 +22,7 @@ export function AppFooter() {
     }
 
     return (
-        <Box paddingY={6} sx={{ bgcolor: blue[900], color: 'white' }}>
+        <Box paddingY={6} sx={{ backgroundColor: '#424242', color: 'white' }}>
             <Container>
                 <Box display='flex' flexDirection={{xs: 'column', md: 'row'}} mb={{xs: 5, md: 3}} justifyContent='space-between'>
                     <Link component={NavLink} to='/' underline="none" color='inherit' mb={{xs: 4, md: 0}}>
@@ -63,11 +63,11 @@ export function AppFooter() {
                         <Typography ml={2} textAlign={{xs: 'center', md: 'initial'}}>Todos os direitos reservados.</Typography>
                     </Box>
 
-                    <Stack direction='row' mt={{xs: 4, md: 0}} mx={{xs: 'auto', lg: 'none'}}>
-                        <Button component={NavLink} to={''}><BsInstagram size={20} /></Button>
-                        <Button component={NavLink} to={''}><BsTwitter size={20} /></Button>
-                        <Button component={NavLink} to={''}><BsLinkedin size={20} /></Button>
-                        <Button component={NavLink} to={''}><BsGithub size={20} /></Button>
+                    <Stack direction='row' mt={{xs: 4, md: 0}}>
+                        <Button color='inherit' component={NavLink} to={''}><BsInstagram size={20} /></Button>
+                        <Button color='inherit' component={NavLink} to={''}><BsTwitter size={20} /></Button>
+                        <Button color='inherit' component={NavLink} to={''}><BsLinkedin size={20} /></Button>
+                        <Button color='inherit' component={NavLink} to={''}><BsGithub size={20} /></Button>
                     </Stack>
                 </Box>
             </Container>

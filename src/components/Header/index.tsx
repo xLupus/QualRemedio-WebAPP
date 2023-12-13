@@ -6,6 +6,7 @@ import { Logo } from '../Logo';
 import { useCurrentUserContext } from "../../hooks/CurrentUserContext"
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../../services/Auth';
+
 import HiMenu from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Divider from '@mui/material/Divider';
@@ -29,7 +30,7 @@ export function AppHeader() {
     const handleCloseMenu = () => setAnchorEl(null);
 
     return (
-        <AppBar position="fixed">
+        <AppBar position="fixed" sx={{backgroundColor: '#424242'}}>
             <Container maxWidth='xl'>
                 <Toolbar sx={{display: 'flex', justifyContent: 'space-between', alignItems:'center'}}>
                     <Link component={NavLink} to='/' underline="none" color='inherit'>
@@ -95,9 +96,9 @@ export function AppHeader() {
                                         <>
                                             <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/dashboard' underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Dashboard</Link>
                                             <AppButton 
-                                                sx={{ height: '2.5rem', backgroundColor: '#404040', fontSize:'1.15rem', color: 'inherit', borderRadius: '.625rem', px: 2.25, py: 1.25, 
+                                                sx={{ height: '2.5rem', backgroundColor: '#f7f7f7', fontSize:'1.15rem', color: '#212121', borderRadius: '.625rem', px: 2.25, py: 1.25, 
                                                     '&:hover': {
-                                                        backgroundColor: '#525252'
+                                                        backgroundColor: '#ededed'
                                                     } 
                                                 }}
                                                 variant='text'
@@ -110,9 +111,9 @@ export function AppHeader() {
                                     <>
                                         <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/auth/login/select-account' underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Entrar</Link>
                                         <AppButton 
-                                            sx={{ height: '2.5rem', backgroundColor: '#404040', fontSize:'1.15rem', color: 'inherit', borderRadius: '.625rem', px: 2.25, py: 1.25, ml: 2,
+                                            sx={{ height: '2.5rem', backgroundColor: '#f7f7f7', fontSize:'1.15rem', color: '#212121', borderRadius: '.625rem', px: 2.25, py: 1.25, ml: 2,
                                                 '&:hover': {
-                                                backgroundColor: '#525252'
+                                                backgroundColor: '#ededed'
                                             } 
                                         }}
                                         variant='text'

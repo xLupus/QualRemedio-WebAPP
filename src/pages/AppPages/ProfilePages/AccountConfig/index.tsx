@@ -1,4 +1,4 @@
-import { Box, Stack, Typography, CardContent, CardActions, Divider, Paper, CircularProgress, Button } from '@mui/material';
+import { Box, Stack, Typography, CardContent, CardActions, Divider, Paper, CircularProgress } from '@mui/material';
 import { AppCard } from '../../../../components/Card';
 import { useQuery } from '@tanstack/react-query';
 import { grey } from '@mui/material/colors';
@@ -7,9 +7,7 @@ import { AppButton } from '../../../../components/Button';
 import User, { UserData } from '../../../../services/User';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
 import moment from 'moment';
-import { Link } from 'react-router-dom';
-
-//moment.locale('pt-br')
+import { NavLink } from 'react-router-dom';
 
 export function ProfileAccountConfiguration() {
     //const [accountToDelete, setAccountToDelete] = useState<number | null>(null)
@@ -21,14 +19,11 @@ export function ProfileAccountConfiguration() {
         queryFn: () => User.show({id: Number(currentUser?.user_id), role: Number(currentUser?.user_role)})
     })
 
-    console.log(data);
     const user: UserData = data?.data
 
     const formated_data = moment(user?.birth_day).format('LL')
 
     const user_role_info = user?.role.filter(role => role.id == Number(currentUser?.user_role))[0]
-
-    console.log({ doctor: user?.doctor[0], currentUser, user });
 
     return (
         <>
@@ -104,7 +99,18 @@ export function ProfileAccountConfiguration() {
                         </AppCard>
 
                         <Box display='flex' justifyContent='flex-end' mt={6}>
-                            <Button component={Link} to={'update'} variant='contained' id='btn-updade-profile'>Atualizar informações</Button>
+                        <AppButton
+                        sx={{ width: '18.5rem', height: '2.5rem', backgroundColor: '#404040', color: '#FFF',
+                            '&:hover': {
+                            backgroundColor: '#525252'
+                        }}}
+                        component={NavLink} 
+                        to={'update'}
+                        id='btn-updade-profile'
+                        variant='contained'
+                    >
+                        Atualizar informações
+                    </AppButton>
                         </Box>
                     </Stack>
 

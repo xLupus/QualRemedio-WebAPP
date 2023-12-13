@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Button, CircularProgress, Paper, Stack, TextField, Typography } from "@mui/material"
+import { Box, CircularProgress, Paper, Stack, TextField, Typography } from "@mui/material"
 import { SubmitHandler, useForm } from 'react-hook-form'
 import z from 'zod'
 import User, { UserData } from "../../../../services/User"
@@ -9,7 +9,8 @@ import validator from "validator"
 import { useNavigate } from "react-router-dom"
 import { grey } from "@mui/material/colors"
 import { useCurrentUserContext } from "../../../../hooks/CurrentUserContext"
-import Cookies from "js-cookie"
+import Cookies from "js-cookie";
+import { AppButton } from '../../../../components/Button';
 
 const UpdateProfileSchema = z.object({
   name: z.string()
@@ -87,8 +88,8 @@ export const UpdateProfileData = () => {
       }
     }
 
-    if (response.data.success)
-      Cookies.set('user_name', response!.data.data.user.name)
+    if (response?.data.success)
+      Cookies.set('user_name', response?.data.user_data.name)
       navigate('/profile/account-config', { replace: true })
   }
 
@@ -145,14 +146,29 @@ export const UpdateProfileData = () => {
               <TextField
                 {...register('profile.bio')}
                 error={errors.profile?.bio ? true : false}
-                helperText={errors.profile?.bio && errors.profile.bio.message}
+                helperText={errors.profile?.bio && errors.profile?.bio.message}
                 multiline
                 maxRows={20}
               />
             </Stack>
 
-            <Button type="submit" variant='contained' sx={{ width: 'fit-content' }}>Atualizar Dados</Button>
+     
+            <Box mt={10}>
+            <AppButton
+                        sx={{ width: '18.5rem', height: '2.5rem', backgroundColor: '#404040', color: '#FFF',
+                            '&:hover': {
+                            backgroundColor: '#525252'
+                        }}}
+
+                        id='btn-updade-profile'
+                        variant='contained'
+                        type="submit"
+                    >
+                       Atualizar Dados
+                    </AppButton>
+            </Box>
           </Stack>
+           
         </form>
       )}
     </Stack>

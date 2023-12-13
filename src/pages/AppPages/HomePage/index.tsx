@@ -2,7 +2,7 @@ import { Box, Stack, Typography, Button, Card, CardContent } from '@mui/material
 import { grey } from '@mui/material/colors';
 import { FaHandHoldingMedical } from "react-icons/fa";
 import { FaUserDoctor, FaUser } from "react-icons/fa6";
-import LogoSVG from "../../../assets/logo.svg"
+import LogoDarkSVG from "../../../assets/logo_dark.svg"
 import { NavLink } from 'react-router-dom';
 
 export function HomePage() {
@@ -79,7 +79,7 @@ export function HomePage() {
 
         {/* Pequeno Sobre */}
         <Stack direction={{ md: 'row' }} spacing={5} useFlexGap paddingX={2} justifyContent='center' alignItems='center' paddingY={12} sx={{ bgcolor: grey[50] }}>
-            <img src={LogoSVG} alt="" height={200} draggable='false' />
+            <img src={LogoDarkSVG} alt="" height={200} draggable='false' />
 
             <Box marginTop={{ xs: 5, md: 0 }}>
             <Typography variant='h4' fontWeight='bold' marginBottom={3}>MedSync Innovation</Typography>
