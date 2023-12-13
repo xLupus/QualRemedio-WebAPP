@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom"
 import Prescription from "../../../services/Prescription";
-import { Box, Button, CircularProgress, Link as MUILink, Modal, Stack, Typography, Paper, Divider } from "@mui/material";
+import {  CircularProgress, Link as MUILink, Modal, Stack, Typography, Paper, Divider } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { AppButton } from "../../../components/Button";
 
@@ -30,7 +30,7 @@ export const ShowPrescriptionDetailsPage = ({ consultation_id, prescription_id, 
     >
 
       <Stack minWidth={500} maxWidth={'md'} sx={{ bgcolor: 'white', borderRadius: '.50rem', boxShadow: 2 }} padding={3} spacing={5} >
-      <Typography typography='h4' fontSize='1.125rem' mb={2}>Detalhes da receita - # {prescription.id}</Typography>
+      <Typography typography='h4' fontSize='1.125rem' mb={2}>Detalhes da receita - # {prescription?.id}</Typography>
       <Divider />
        
         {isLoading || isFetching

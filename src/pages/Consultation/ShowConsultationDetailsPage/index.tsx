@@ -61,7 +61,7 @@ export const ShowConsultationDetailsPage = () => {
         {isLoading || isFetching && (
             <Paper sx={{ bgcolor: grey[50] }}>
                 <Stack width='100%' minHeight={600} justifyContent={'center'} alignItems={'center'}>
-                <CircularProgress />
+                <CircularProgress sx={{color: '#000'}} />
                 </Stack>
             </Paper>
         )}

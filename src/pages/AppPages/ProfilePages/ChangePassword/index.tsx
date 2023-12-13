@@ -1,11 +1,16 @@
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Button, CircularProgress, Paper, Stack, TextField, Typography } from "@mui/material"
+import { Box, CardContent, CircularProgress, Paper, Stack, Link, Typography, Snackbar, SnackbarContent } from "@mui/material"
 import { SubmitHandler, useForm } from 'react-hook-form'
 import z from 'zod'
 import User from "../../../../services/User"
-import { useNavigate } from "react-router-dom"
+import {  NavLink, useNavigate } from "react-router-dom"
 import { useEffect, useState } from 'react'
 import { grey } from "@mui/material/colors"
+import { AppButton } from "../../../../components/Button"
+import { AppCard } from "../../../../components/Card"
+import { AppInput } from "../../../../components/Input"
+import Grid from '@mui/material/Unstable_Grid2';
+import { State } from "../../../../types/type"
 
 const user_id = 14
 
@@ -44,6 +49,15 @@ export const ChangePassword = () => {
         resolver: zodResolver(ChangePasswordSchema)
     })
 
+    const [state, setState] = useState<State>({
+        open: false,
+        vertical: 'top',
+        horizontal: 'center',
+        message: ''
+    });
+    const { vertical, horizontal, message, open } = state;
+    
+
     useEffect(() => {
         setIsLoading(false)
     }, [setIsLoading])
@@ -76,65 +90,120 @@ export const ChangePassword = () => {
                     })
 
                 } else {
-                
-                    navigate('/profile/config')
+                    setState({ vertical: 'top', horizontal: 'center', message: 'senha alterada com sucesso!', open: true });
+
+                    setTimeout(() => {
+                        navigate('/profile/config');
+                    }, 4200)
                 }
             }
         }
     }
 
+        
+    const handleClose = () => {
+        setState({ ...state, open: false });
+    };
+
     return (
-        <Stack maxWidth={'md'} width='100%'>
-
-        {isLoading && (
-            <Paper sx={{ bgcolor: grey[50] }}>
-            <Stack width='100%' minHeight={400} justifyContent={'center'} alignItems={'center'}>
-                <CircularProgress color="primary" />
-            </Stack>
-            </Paper>
-        )}
-        {!isLoading && (
-            <form onSubmit={handleSubmit(handleFormSubmit)}>
-            <Stack spacing={3}>
-                <Stack spacing={1}>
-                <Typography>Senha Atual</Typography>
-
-                <TextField
-                    type='password'
-                    {...register('current_password')}
-                    error={Boolean(errors.current_password)}
-                    helperText={errors.current_password && (errors.current_password.message)}
-                />
+        <>
+            {isLoading && (
+                <Paper sx={{ bgcolor: grey[50] }}>
+                <Stack width='100%' minHeight={400} justifyContent={'center'} alignItems={'center'}>
+                    <CircularProgress color="primary" />
                 </Stack>
+                </Paper>
+            )}
 
-                <Stack spacing={1}>
-                <Typography>Nova Senha</Typography>
+            {
+                !isLoading && (
+                    <Box component='form' onSubmit={handleSubmit(handleFormSubmit)}>      
+                        <AppCard sx={{p: 1.5}}>
+                            <CardContent>
+                                <Grid container spacing={4}>
+                                    <Grid xs={12}>
+                                        <Typography typography='h4' fontSize='1.125rem' mb={2}>Senha Atual</Typography>
+                                        <AppInput 
+                                            id='current-password-field'
+                                            color='primary'
+                                            variant='filled'
+                                            label='Senha'
+                                            type="password"                            
+                                            {...register('current_password')}
+                                            error={Boolean(errors.current_password)}
+                                            helperText={errors.current_password && (errors.current_password.message)}
+                                            fullWidth
+                                            autoComplete='off'
+                                        />
+                                    </Grid>
 
-                <TextField
-                    type='password'
-                    {...register('new_password')}
-                    error={errors.new_password ? true : false}
-                    helperText={errors.new_password && errors.new_password.message}
-                />
-                </Stack>
+                                    <Grid xs={12}>
+                                        <Typography typography='h4' fontSize='1.125rem' mb={2}>Senha</Typography>
 
-                <Stack spacing={1}>
-                <Typography>Confirme a Nova Senha</Typography>
+                                        <AppInput 
+                                            id='password-field'
+                                            color='primary'
+                                            variant='filled'
+                                            label='Senha'
+                                            type="password"                            
+                                            {...register('new_password')}
+                                            error={errors.new_password ? true : false}
+                                            helperText={errors.new_password && errors.new_password.message}
+                                            fullWidth
+                                            autoComplete='off'
+                                        /> 
+                                    </Grid>
+                    
+                                    <Grid xs={12}>
+                                        <Typography typography='h4' fontSize='1.125rem' mb={2}>Confirmar senha</Typography>
+                                        <AppInput 
+                                            id='confirm-password-field'
+                                            color='primary'
+                                            variant='filled'
+                                            type='text'
+                                            label='Nova senha'
+                                            {...register('confirm_new_password')}
+                                            error={errors.confirm_new_password ? true : false}
+                                            helperText={errors.confirm_new_password && errors.confirm_new_password.message}
+                                            fullWidth
+                                            autoComplete='off'
+                                        /> 
+                                    </Grid>
+                                </Grid>
+                            </CardContent>
+                        </AppCard> 
 
-                <TextField
-                    type='password'
-                    {...register('confirm_new_password')}
-                    error={errors.confirm_new_password ? true : false}
-                    helperText={errors.confirm_new_password && errors.confirm_new_password.message}
-                />
-                </Stack>
+                        <Stack direction='row' alignItems={'center'} spacing={3} mt={8}>
+                <AppButton
+                        sx={{ width: '18.5rem', height: '2.5rem', backgroundColor: '#404040', color: '#FFF',
+                                        '&:hover': {
+                                        backgroundColor: '#525252'
+                            }}}
 
-                <Button type='submit' sx={{ width: 'fit-content' }} variant='contained'>
-                <Typography>Mudar Senha</Typography>
-                </Button>
-            </Stack>
-            </form>
-        )}
-        </Stack>
+                                    id='btn-updade-profile'
+                                    variant='contained'
+                                    type="submit"
+                                >
+                            Atualizar senha
+                </AppButton>
+
+                        <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to={`/profile/account-config`} underline="none" px={2.25} py={1.25} fontSize='1'>Voltar</Link>
+                    </Stack>
+                    </Box>
+                )
+            }
+
+        <Box>
+            <Snackbar
+                anchorOrigin={{ vertical, horizontal }}
+                autoHideDuration={4000}
+                open={open}
+                onClose={handleClose}
+                key={vertical + horizontal}
+            >
+                <SnackbarContent  message={message} sx={{ backgroundColor: '#FFF',  color: '#000' }}/>
+            </Snackbar>
+        </Box>
+        </>
     )
 }

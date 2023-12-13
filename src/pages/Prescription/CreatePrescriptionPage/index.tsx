@@ -55,7 +55,7 @@ export const CreatePrescriptionPage = () => {
             }
 
             if (response.status == 200) {
-                setState({ vertical: 'top', horizontal: 'center', message: 'Presrição criada com sucesso!', open: true });
+                setState({ vertical: 'top', horizontal: 'center', message: 'Prescrição criada com sucesso!', open: true });
 
                 setTimeout(() => {
                     navigate(`/consultations/${consultation_id}`, { replace: true })
