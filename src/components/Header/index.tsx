@@ -88,6 +88,7 @@ export function AppHeader() {
                             {/* Full Menu */}
                             <Box component='nav' display={{ xs: 'none', md: 'flex'}} alignItems={{xs: 'none', md: 'center'}}>
                                {/*  <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/functionalities' underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Funcionalidades</Link> */}
+                                <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/' underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Home</Link>
                                 <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/prices' underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Preços</Link>
                              {/* <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/about' underline="none" px={2.25} py={1.25} fontSize='1.15rem'>Sobre</Link> */}
                                 {

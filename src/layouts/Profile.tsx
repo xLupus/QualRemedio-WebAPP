@@ -28,7 +28,7 @@ export function Profile() {
     return (
         <>
             <Box typography='h1' fontSize='1.75rem' color='#00000077' mb={6}>
-                Configurações de senha e segurança
+                Configurações
             </Box>
             
             <Grid container columnSpacing={12}>

@@ -5,6 +5,7 @@ import { FaUserDoctor, FaUser } from "react-icons/fa6";
 import LogoDarkSVG from "../../../assets/logo_dark.svg"
 import { NavLink } from 'react-router-dom';
 import { AppButton } from '../../../components/Button';
+import dashboard from '../../../assets/dashboard.png';
 
 export function HomePage() {
 
@@ -34,12 +35,12 @@ export function HomePage() {
                 </AppButton>
             </Box>
 
-            <img src="https://placehold.co/700x400" alt="" />
+            <img src={dashboard} alt="" height={500} draggable='false' />
         </Stack >
 
 
         {/* Publico Alvo */}
-        <Stack alignItems='center' paddingX={2} paddingY={12} spacing={4}>
+        <Stack alignItems='center' paddingX={2} paddingY={14} spacing={4}>
             <Stack alignItems='center' spacing={2} textAlign={'center'}>
             <Typography variant='h5' fontWeight='bold'>Publico Alvo</Typography>
 

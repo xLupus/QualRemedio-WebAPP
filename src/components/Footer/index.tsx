@@ -30,6 +30,7 @@ export function AppFooter() {
                     </Link>
 
                     <Box component='nav' alignSelf='center'>
+                        <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/' underline="none" px={2.25} py={1.25} fontSize='1rem'>Home</Link>
                         <Link variant='body2' sx={{color: 'inherit'}} component={NavLink} to='/prices' underline="none" px={2.25} py={1.25} fontSize='1rem'>Preços</Link>
                         {
                             currentUser ?

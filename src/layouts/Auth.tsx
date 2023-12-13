@@ -6,6 +6,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Item from '@mui/material/Unstable_Grid2';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import '../assets/auth.css';
+import LogoSVG from "../assets/logo.svg"
 
 //page
 export function Auth() {
@@ -19,7 +20,11 @@ export function Auth() {
                     backgroundColor: isLargeScreen ? '#303030' : 'none', 
                     minHeight: isLargeScreen ? '100vh' : undefined, 
                     minWidth: isLargeScreen ? '50vw' : undefined,
-                }} />
+                }}>
+                    <Box sx={{position: 'relative', top: '23rem', left:'15rem'}}>
+                        <img src={LogoSVG} alt="" height={150} draggable='false' />
+                    </Box>
+                </Item>
             </Grid>
 
             <Grid 
