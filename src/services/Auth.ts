@@ -18,7 +18,7 @@ class AuthService {
                 account_type 
             });
 
-            ['account_type_selected', 'user_name', 'user_email', 'user_cpf', 'user_telephone', 'user_birth_day', 'user_crm_state', 'user_crm', 'user_specialty_name'].forEach((el) => {
+            ['account_type_selected', 'user_name', 'user_cpf', 'user_telephone', 'user_birth_day', 'user_crm_state', 'user_crm', 'user_specialty_name'].forEach((el) => {
                 Cookies.remove(`${el}`);
             });
             

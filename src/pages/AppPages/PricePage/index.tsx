@@ -1,5 +1,6 @@
 import { Button, Card, CardActions, CardContent, CardHeader, Container, Divider, List, ListItem, ListItemText, Stack, Typography } from "@mui/material";
 import { blue, grey } from "@mui/material/colors";
+import { AppButton } from "../../../components/Button";
 
 export function PricePage() {
   return (
@@ -25,9 +26,18 @@ export function PricePage() {
           </CardContent>
 
           <CardActions >
-            <Button variant='contained' fullWidth>
-              Assinar Plano
-            </Button>
+          <AppButton
+                        sx={{  height: '2.5rem', backgroundColor: '#404040', color: '#FFF',
+                            '&:hover': {
+                            backgroundColor: '#525252'
+                        }}}
+                        to={'update'}
+                        id='btn-updade-profile'
+                        variant='contained'
+                        fullWidth
+                    >
+                       Assinar Plano
+                    </AppButton>
           </CardActions>
 
           <List>
@@ -74,9 +84,19 @@ export function PricePage() {
           </CardContent>
 
           <CardActions >
-            <Button variant='contained' fullWidth>
-              Assinar Plano
-            </Button>
+          <AppButton
+                        sx={{  height: '2.5rem', backgroundColor: '#404040', color: '#FFF',
+                            '&:hover': {
+                            backgroundColor: '#525252'
+                        }}}
+                        to={'update'}
+                        id='btn-updade-profile'
+                        variant='contained'
+                        fullWidth
+                    >
+                       Assinar Plano
+                    </AppButton>
+
           </CardActions>
 
           <List>
@@ -123,9 +143,19 @@ export function PricePage() {
           </CardContent>
 
           <CardActions >
-            <Button variant='contained' sx={{textTransform: 'normal'}} fullWidth>
-              Assinar Plano
-            </Button>
+          <AppButton
+                        sx={{  height: '2.5rem', backgroundColor: '#404040', color: '#FFF',
+                            '&:hover': {
+                            backgroundColor: '#525252'
+                        }}}
+                        to={'update'}
+                        id='btn-updade-profile'
+                        variant='contained'
+                        fullWidth
+                    >
+                       Assinar Plano
+                    </AppButton>
+
           </CardActions>
 
           <List>

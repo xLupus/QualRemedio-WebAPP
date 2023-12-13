@@ -8,7 +8,7 @@ export function SendMail({ isFromPath }: { isFromPath: string }) {
     const email = Cookies.get('user_email') || '';
 
     const handeSendMail = async () => {
-        await MailService.resend({ email, urlContext: 'http://localhost:5173' });
+        await MailService.send({ email, urlContext: 'http://localhost:5173' });
     }
     
     handeSendMail();
@@ -31,7 +31,7 @@ export function SendMail({ isFromPath }: { isFromPath: string }) {
                     }}}
                     id='btn-login'
                     variant='contained'
-                    type='submit'
+
                     fullWidth
                 >
                     Reenviar verificação

@@ -341,6 +341,7 @@ export function RegisterAccountInformation() {
                                     variant='filled'
                                     type='text'
                                     label='Nome'
+                                    autoComplete="off"
                                     value={userData.name_value}
                                     {...register('name', {
                                             onChange: e => setUserData({...userData, name_value: e.target.value})
@@ -359,6 +360,7 @@ export function RegisterAccountInformation() {
                                     variant='filled'
                                     type='number'
                                     label='CPF'
+                                    autoComplete="off"
                                     value={userData.cpf_value}
                                     {...register('cpf', {
                                         onChange: e => setUserData({...userData, cpf_value: e.target.value})
@@ -375,6 +377,7 @@ export function RegisterAccountInformation() {
                                     id='date-field'
                                     color='primary'
                                     variant='filled'
+                                    autoComplete="off"
                                     type='date'
                                     label='Nasc.:'
                                     value={userData.birth_day_value}
@@ -393,6 +396,7 @@ export function RegisterAccountInformation() {
                                     id='tel-field'
                                     color='primary'
                                     variant='filled'
+                                    autoComplete="off"
                                     type='tel'
                                     label='Telefone'
                                     value={userData.telephone_value}
@@ -414,6 +418,7 @@ export function RegisterAccountInformation() {
                                                 id='crm-field'
                                                 color='primary'
                                                 variant='filled'
+                                                autoComplete="off"
                                                 type='text'
                                                 label='CRM'
                                                 value={userData.crm_value}
@@ -432,6 +437,7 @@ export function RegisterAccountInformation() {
                                                 id='tel-field'
                                                 color='primary'
                                                 variant='filled'
+                                                autoComplete="off"
                                                 type='tel'
                                                 label='Estado - CRM'
                                                 value={userData.crm_state_value}
@@ -452,6 +458,7 @@ export function RegisterAccountInformation() {
                                                 id='crm-field'
                                                 color='primary'
                                                 variant='filled'
+                                                autoComplete="off"
                                                 type='text'
                                                 label='Documento'
                                                 value={userData.doc_value}
@@ -473,6 +480,7 @@ export function RegisterAccountInformation() {
                                     color='primary'
                                     variant='filled'
                                     type='text'
+                                    autoComplete="off"
                                     label='Especialidade'
                                     value={userData.specialty_name_value}
                                     {...register('specialty_name', {
@@ -490,7 +498,7 @@ export function RegisterAccountInformation() {
 
                 <Box display='flex' justifyContent='space-between' alignItems='center' mt={8}>
                     <Box width='8.75rem'>
-                        <AppSelectInput>
+                        <AppSelectInput message="Opção">
                             <Select
                                 labelId="select-acc-option"
                                 id="select-acc"
