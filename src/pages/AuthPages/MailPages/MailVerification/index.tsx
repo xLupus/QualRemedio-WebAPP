@@ -4,6 +4,33 @@ import { AppInput } from "../../../../components/Input";
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useContext, useState } from "react";
 import { RegisterContext } from "../../../../hooks/RegisterContext";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { RegisterMailVerification } from "../../../../types/type";
+
+const validator = z.object({
+    email: z
+        .string({ 
+            required_error: 'Este campo deve ser especificado',
+            invalid_type_error: 'O campo informado deve ser texto'
+        })
+        .max(50, { message: 'Este campo excedeu o limite de 50 caracteres' })
+        .min(1, { message: 'Preencha este campo' })
+        .email({ message: 'O formato de e-mail é inválido' })
+        .toLowerCase()
+        .superRefine((val, ctx) => {
+            const availableEmailProviders: string[] = ['gmail.com', 'outlook.com', 'outlook.com.br'];
+
+            if(!availableEmailProviders.includes(val.split('@')[1])) {
+                ctx.addIssue({
+                    code: z.ZodIssueCode.custom,
+                    message: 'O provedor informado é inválido'
+                });
+            }
+        }),
+});
+
 
 export function MailVerification({ isFromPath }: { isFromPath: string }) {
     const [value, setValue] = useState<string>('');
@@ -11,9 +38,14 @@ export function MailVerification({ isFromPath }: { isFromPath: string }) {
     const navigate = useNavigate();
     const { registerUserCredentials, setRegisterUserCredentials } = useContext(RegisterContext);
 
+    const { register, handleSubmit, formState: { errors } } = useForm<RegisterMailVerification>({
+        resolver: zodResolver(validator),
+    })
+    
     const handleValue = (val: string) => setValue(val);
 
     const handleSelectAccount = () => {
+        console.log('oi')
         setRegisterUserCredentials([
             ...registerUserCredentials,
             {
@@ -28,49 +60,56 @@ export function MailVerification({ isFromPath }: { isFromPath: string }) {
     return (
             isFromPath === 'register' ?  
                 <>
-                    <Box typography='body1' mb={3.5} textAlign='center'>STEP</Box>
+                    <Box typography='body1' mb={3.5} textAlign='center'></Box>
 
                     <Box typography='body1' fontSize='0.875rem' color='#00000077' textAlign='center' mb={1.25}>Muito bem, agora informe o seu e-mail</Box>
                     <Box typography='body1' fontSize='0.875rem' color='#00000077' textAlign='center' mb={4.3} width='80%' mx='auto'>Faremos uma verificação após o seu cadastro para fins de segurança</Box>
 
-                    <Box>
-                        <AppInput 
-                            id='email-field'
-                            color='primary'
-                            variant='filled'
-                            type='email'
-                            label='Email'
-                            value={value}
-                            onChange={e => handleValue(e.target.value)}
-                            autoComplete="off"
-                            required
-                            fullWidth
-                        />
-                    </Box>
+                    <Box component='form' onSubmit={handleSubmit(handleSelectAccount)}>
+                        <Box>
+                            <AppInput 
+                                id='email-field'
+                                color='primary'
+                                variant='filled'
+                                type='email'
+                                value={value}
+                                label='Email'
+                                autoComplete="off"
+                                {...register('email', {
+                                    onChange: e => handleValue(e.target.value)
+                                    })
+                                }
+                                error={errors.email ? true : false}
+                                helperText={errors.email && errors.email.message}
+                                fullWidth
+                            />
+                        </Box>
 
-                    <Box display='flex' justifyContent='flex-end' mt={8}>
-                        <AppButton
-                            sx={{ width: '5rem', height: '1.875rem', fontSize: '.75rem', boxShadow: 'none', backgroundColor: 'none' }}
-                            id='btn-login'
-                            variant='text'
-                            component={NavLink}
-                            to='/auth/register/select-account'
-                            className='authBackButton'
-                            disableRipple
-                        >
-                            Voltar
-                        </AppButton>
+                        <Box display='flex' justifyContent='flex-end' mt={8}>
+                            <AppButton
+                                sx={{ width: '5rem', height: '1.875rem', fontSize: '.75rem', boxShadow: 'none', backgroundColor: 'none' }}
+                                id='btn-login'
+                                variant='text'
+                                component={NavLink}
+                                to='/auth/register/select-account'
+                                className='authBackButton'
+                                disableRipple
+                            >
+                                Voltar
+                            </AppButton>
 
-                        <AppButton 
-                            sx={{ width: '5rem', height: '1.875rem', fontSize: '.75rem' }}
-                            id='btn-login'
-                            variant='text'
-                            type='submit'
-                            className='authButton authNextButton'
-                            onClick={handleSelectAccount}
-                        >
-                            Avançar
-                        </AppButton>
+                            <AppButton 
+                                sx={{width: '5rem', height: '1.875rem', fontSize: '.75rem', backgroundColor: '#404040', color: '#FFF', ml: 2,
+                                '&:hover': {
+                                    backgroundColor: '#525252'
+                            }}}
+                                id='btn-login'
+                                variant='text'
+                                type='submit'
+                            >
+                                Avançar
+                            </AppButton>
+                        </Box>
                     </Box>
                 </>
                :
@@ -87,7 +126,9 @@ export function MailVerification({ isFromPath }: { isFromPath: string }) {
                         type='email'
                         label='Email'
                         autoComplete="off"
-                        required
+                        {...register('email')}
+                        error={errors.email ? true : false}
+                        helperText={errors.email && errors.email.message}
                         fullWidth
                     />
         
@@ -108,7 +149,10 @@ export function MailVerification({ isFromPath }: { isFromPath: string }) {
         
                     <Box display='flex' justifyContent='flex-end' mt={8}>
                         <AppButton
-                            sx={{ width: '5rem', height: '1.875rem', fontSize: '.75rem', boxShadow: 'none', backgroundColor: 'none' }}
+                            sx={{width: '5rem', height: '1.875rem', fontSize: '.75rem', backgroundColor: '#404040', color: '#FFF', ml: 2,
+                             '&:hover': {
+                                 backgroundColor: '#525252'
+                            }}}
                             id='btn-login'
                             variant='text'
                             component={NavLink}

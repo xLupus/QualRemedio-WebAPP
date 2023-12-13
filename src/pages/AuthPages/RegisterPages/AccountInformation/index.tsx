@@ -82,7 +82,7 @@ export function RegisterAccountInformation() {
 
     return (
         <>
-            <Box typography='body1' mb={6} textAlign='center'>STEP</Box>
+            {/* <Box typography='body1' mb={6} textAlign='center'></Box> */}
             <Box typography='body1' fontSize='0.875rem' color='#00000077' textAlign='center' mb={6}>Excelente, agora preencha algumas informações</Box>
 
             <Grid container spacing={3} component='form'>
@@ -304,11 +304,13 @@ export function RegisterAccountInformation() {
                     </AppButton>
 
                     <AppButton 
-                        sx={{ width: '5rem', height: '1.875rem', fontSize: '.75rem' }}
+                        sx={{width: '5rem', height: '1.875rem', fontSize: '.75rem', backgroundColor: '#404040', color: '#FFF', ml: 2,
+                         '&:hover': {
+                             backgroundColor: '#525252'
+                        }}}
                         id='btn-login'
                         variant='contained'
                         type='submit'
-                        className='authButton authNextButton'
                         onClick={handleAccountInformation}
                     >
                         Avançar

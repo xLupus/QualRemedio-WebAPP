@@ -1,5 +1,5 @@
 import { NavLink, NavigateFunction, useNavigate } from 'react-router-dom';
-import { Box, Checkbox, Divider, FormControlLabel, FormGroup, IconButton, InputAdornment, Link, Typography, Stack, CircularProgress, Snackbar, SnackbarContent } from "@mui/material";
+import { Box, Checkbox, Divider, FormControlLabel, FormGroup, IconButton, InputAdornment, Link, Typography, Stack, CircularProgress, Snackbar, SnackbarContent, FormHelperText } from "@mui/material";
 import { AppButton } from '../../../../components/Button';
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -14,15 +14,36 @@ import AuthService from '../../../../services/Auth'
 
 const validator = z.object({
     email: z
-    .string({ required_error: "Preencha o Campo", })
-      .min(1, 'Preencha o Campo'),
+        .string({ 
+            required_error: 'Este campo deve ser especificado',
+            invalid_type_error: 'O campo informado deve ser texto'
+        })
+        .max(50, { message: 'Este campo excedeu o limite de 50 caracteres' })
+        .min(1, { message: 'Preencha este campo' })
+        .email({ message: 'O formato de e-mail é inválido' })
+        .toLowerCase()
+        .superRefine((val, ctx) => {
+            const availableEmailProviders: string[] = ['gmail.com', 'outlook.com', 'outlook.com.br'];
+
+            if(!availableEmailProviders.includes(val.split('@')[1])) {
+                ctx.addIssue({
+                    code: z.ZodIssueCode.custom,
+                    message: 'O provedor informado é inválido'
+                });
+            }
+        }),
   
     password: z
-    .string({ required_error: "Preencha o Campo", })
-      .min(1, 'Preencha o Campo'),
+        .string({ 
+            required_error: 'Este campo deve ser especificado',
+            invalid_type_error: 'O campo informado deve ser texto'
+        })
+        .min(8, { message: 'Este campo deve ter no mínimo 8 caracteres' })
+        .min(1, { message: 'Preencha este campo' }),
   
-    role: z.number({ required_error: "Preencha o Campo", })
-      .min(1, 'Preencha o Campo'),
+    role: z
+        .number({ required_error: "Preencha o Campo", })
+        .min(1, 'Preencha o Campo'),
 });
 
 export function Login() {
@@ -49,7 +70,7 @@ export function Login() {
 
     const handleLogin = async (data: LoginService) => {
         const { email, password, role } = data;
-    
+
         setIsLoading(true);
         const result = await AuthService.login({email, password, role});
         setIsLoading(false);
@@ -95,11 +116,10 @@ export function Login() {
                         label='E-mail'
                         {...register('email')}
                         error={errors.email ? true : false}
-                       // helperText={errors.email}
-                        required
                         fullWidth
                         autoComplete='off'
                     />
+                    <FormHelperText error={errors.email ? true : false}>{errors.email && errors.email.message}</FormHelperText>
 
                     <AppInputAdornment
                         id='password-field'
@@ -109,7 +129,6 @@ export function Login() {
                         label='Senha'
                         error={errors.password ? true : false}
                         {...register('password')}
-                        required
                         fullWidth
                         autoComplete='off'
                         endAdornment={
@@ -126,6 +145,7 @@ export function Login() {
                             </InputAdornment>
                         }
                     />
+                    <FormHelperText error={errors.password ? true : false}>{errors.password && errors.password.message}</FormHelperText>
 
                     <AppInput 
                         id='role-field'
@@ -172,7 +192,7 @@ export function Login() {
                     </AppButton>
                 </Box>
                 
-                <Divider sx={{
+               {/*  <Divider sx={{
                     marginTop: 5, 
                     marginBottom: 5, 
                     typography: 'body1', 
@@ -184,9 +204,9 @@ export function Login() {
                     '::after': {
                         borderTop: 2
                     }
-                }}>Ou</Divider>
+                }}>Ou</Divider> */}
 
-                <Stack spacing={2.5} alignItems="center">
+                {/* <Stack spacing={2.5} alignItems="center">
                     <AppButton 
                         sx={{ width: '18.75rem', height: '2.5rem' }}
                         id='btn-login-google'
@@ -208,8 +228,23 @@ export function Login() {
                         <Microsoft />
                         <Typography ml='.5rem' typography='body1' fontSize='1rem' color='#00000077'>Continuar com Microsoft</Typography>
                     </AppButton>
-                </Stack>
+                </Stack> */}
+                <Box display='flex' justifyContent='end' alignItems='center' mt={8}>
+                    <AppButton
+                        sx={{width: '5rem', height: '1.875rem', fontSize: '.75rem', boxShadow: 'none', backgroundColor: 'transparent' }}
+                        id='btn-login'
+                        variant='text'
+                        type='submit'
+                        component={NavLink}
+                        to='/auth/login/select-account'
+                        className='authBackButton' 
+                        disableRipple
+                    >
+                        Voltar
+                    </AppButton>
+                </Box>
             </Box>
+
             <Box>
                 <Snackbar
                     anchorOrigin={{ vertical, horizontal }}

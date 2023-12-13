@@ -1,4 +1,4 @@
-import { Box, Unstable_Grid2 as Grid, IconButton, InputAdornment, Stack, Typography } from "@mui/material";
+import { Box, Unstable_Grid2 as Grid, IconButton, InputAdornment, Stack, Typography, FormHelperText } from "@mui/material";
 import { AppButton } from '../../../../components/Button';
 import { Square, Visibility, VisibilityOff } from '@mui/icons-material';
 import { AppInputAdornment } from "../../../../components/Input/InputAdornment";
@@ -7,19 +7,50 @@ import { RegisterContext } from "../../../../hooks/RegisterContext";
 import { useForm } from "react-hook-form";
 import AuthService from '../../../../services/Auth';
 import { useState, useContext } from "react";
+import { z } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { RegisterCreatePassword } from '../../../../types/type';
+
+const validator = z.object({
+    password: z
+        .string({ 
+            required_error: 'Este campo deve ser especificado',
+            invalid_type_error: 'O campo informado deve ser texto'
+        })
+        .min(8, { message: 'Este campo deve ter no mínimo 8 caracteres' })
+        .min(1, { message: 'Preencha este campo' }),
+  
+    confirm_password: z
+        .string({ required_error: "Este campo deve ser especificado" })
+        .min(8, { message: 'Este campo deve ter no mínimo 8 caracteres' })
+        .min(1, { message: 'Preencha este campo' })
+}).superRefine((val, ctx) => {
+    if(val.password !== val.confirm_password) {
+        ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'As senhas informadas não coincidem',
+            fatal: true
+        });
+
+        return z.NEVER;
+    }
+});
+
 
 export function CreatePassword({ isFromPath }: { isFromPath: string}) {
     const passwordValidationText: string[] = ['Letras maiúsculas', 'Caracteres especiais', 'Letras minúsculas', 'Mínimo de 8 caracteres', 'Números'];
     const [showPassword, setShowPassword] = useState<boolean>(false);
-
+    
     const { registerUserCredentials } = useContext(RegisterContext);
     const navigate = useNavigate();
-
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    
+    const { register, handleSubmit, formState: { errors } } = useForm<RegisterCreatePassword>({
+        resolver: zodResolver(validator),
+    })
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (e) => e.preventDefault();
-    
+
     const handleCreateUser = async (data) => {
         const userData: {[key: string]: {
             value: string
@@ -57,7 +88,7 @@ export function CreatePassword({ isFromPath }: { isFromPath: string}) {
                 isFromPath === 'register' 
                 ? 
                     <>
-                        <Box typography='body1' mb={6} textAlign='center'>STEP</Box>
+                        {/* <Box typography='body1' mb={6} textAlign='center'>STEP</Box> */}
                         <Box typography='body1' fontSize='0.875rem' color='#00000077' textAlign='center' mb={6}>Quase lá, agora crie uma senha</Box>
                     </>
                 :
@@ -92,7 +123,6 @@ export function CreatePassword({ isFromPath }: { isFromPath: string}) {
                             label='Senha'
                             {...register('password')}
                             error={errors.password ? true : false}
-                            required
                             fullWidth
                             autoComplete='off'
                             endAdornment={
@@ -109,6 +139,7 @@ export function CreatePassword({ isFromPath }: { isFromPath: string}) {
                                 </InputAdornment>
                             }
                         />
+                        <FormHelperText error={errors.password ? true : false}>{errors.password && errors.password.message}</FormHelperText>
 
                         <AppInputAdornment
                             id='confirm-pass-field'
@@ -116,8 +147,9 @@ export function CreatePassword({ isFromPath }: { isFromPath: string}) {
                             color='primary'
                             type={showPassword ? 'text' : 'password'}
                             label='Confirmar senha'
-                            //{...register('password')}
-                            required
+                            {...register('confirm_password')}
+                            error={errors.confirm_password ? true : false}
+                           // helperText={errors.confirm_password && errors.confirm_password.message}
                             fullWidth
                             autoComplete='off'
                             endAdornment={
@@ -134,6 +166,7 @@ export function CreatePassword({ isFromPath }: { isFromPath: string}) {
                                 </InputAdornment>
                             }
                         />
+                        <FormHelperText error={errors.confirm_password ? true : false}>{errors.confirm_password && errors.confirm_password.message}</FormHelperText>
                 </Stack>
 
                 <Box display='flex' justifyContent='flex-end' alignItems='center' mt={8}>
@@ -151,11 +184,13 @@ export function CreatePassword({ isFromPath }: { isFromPath: string}) {
                         </AppButton>
 
                         <AppButton 
-                            sx={{ width: '5rem', height: '1.875rem', fontSize: '.75rem' }}
+                            sx={{width: '5rem', height: '1.875rem', fontSize: '.75rem', backgroundColor: '#404040', color: '#FFF', ml: 2,
+                            '&:hover': {
+                                backgroundColor: '#525252'
+                            }}}
                             id='btn-login'
                             variant='text'
                             type='submit'
-                            className='authButton authNextButton'
                         >
                             Avançar
                         </AppButton>

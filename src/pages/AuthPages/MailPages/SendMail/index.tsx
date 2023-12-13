@@ -8,16 +8,16 @@ export function SendMail({ isFromPath }: { isFromPath: string }) {
     const email = Cookies.get('user_email') || '';
 
     const handeSendMail = async () => {
-        await MailService.send({ email, urlContext: 'http://localhost:5173' });
+        await MailService.resend({ email, urlContext: 'http://localhost:5173' });
     }
     
     handeSendMail();
 
     return (
         <>
-            {
+           {/*  {
                 isFromPath === 'register' && <Box typography='body1' mb={8} textAlign='center'>STEP</Box>
-            }
+            } */}
 
             <Box typography='body1' fontSize='0.875rem' color='#00000077' textAlign='center' mb={1.25}>Enviamos uma verificação em seu e-mail:</Box>
             <Box typography='body1' fontSize='0.875rem' color='#00000077' textAlign='center' mb={9} width='80%' mx='auto'>{email}</Box>
@@ -26,12 +26,12 @@ export function SendMail({ isFromPath }: { isFromPath: string }) {
             
             <Box display='flex' justifyContent='center' mt={4}>
                 <AppButton 
-                    sx={{ width: '22.8125rem', height: '2.5rem', fontSize: '.875rem' }}
+                    sx={{ width: '22.8125rem', height: '2.5rem', fontSize: '.875rem', backgroundColor: '#404040', color: '#FFF', '&:hover': {
+                        backgroundColor: '#525252'
+                    }}}
                     id='btn-login'
                     variant='contained'
                     type='submit'
-                    className='authButton'
-                    disableRipple
                     fullWidth
                 >
                     Reenviar verificação

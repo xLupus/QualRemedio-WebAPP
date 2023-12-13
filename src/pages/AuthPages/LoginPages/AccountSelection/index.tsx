@@ -16,12 +16,12 @@ export function LoginAccountSelection() {
             type: 'Paciente'
         },
         {
-            id: 3,
-            type: 'Cuidador'
-        },
-        {
             id: 2,
             type: 'Médico'
+        },
+        {
+            id: 3,
+            type: 'Cuidador'
         }
     ];
 
@@ -45,11 +45,14 @@ export function LoginAccountSelection() {
                 {
                     accountsType.map((el, i) => (
                         <AppButton 
-                            sx={{ height: '2.5rem'}}
+                            sx={{ height: '2.5rem', backgroundColor: '#484848', color: '#FFF', 
+                                '&:hover': {
+                                    backgroundColor: '#696969'
+                                }
+                            }}
                             id={String(el.id)}
                             key={i}
                             variant='text'
-                            className='authButton'
                             onClick={e => handleSelectAccount(e.target as HTMLElement)}
                         >
                             {el.type}

@@ -166,6 +166,11 @@ interface EditBond {
     status_id: number;
 }
 
+interface RegisterCreatePassword {
+    password: string;
+    confirm_password: string;
+}
+
 interface BondData {
     bondId: number;
     userTo?: string | undefined;
@@ -205,8 +210,10 @@ interface IndexBondParams {
       take: number
     },
   
-  }
-
+}
+interface RegisterMailVerification {
+    email: string;
+}
 interface Mail {
     email?: string;
     urlContext?: string;
@@ -258,6 +265,8 @@ export type {
     IndexBondParams,
     
     Mail,
+    RegisterCreatePassword,
+    RegisterMailVerification,
 
     AppBarProps,
     State,
