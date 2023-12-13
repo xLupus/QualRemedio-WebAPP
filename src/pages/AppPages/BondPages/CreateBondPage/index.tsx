@@ -158,7 +158,7 @@ export function CreateBondPage() {
                     onClose={handleClose}
                     key={vertical + horizontal}
                 >
-                    <SnackbarContent  message={message} sx={{ bbackgroundColor: '#404040',  color: '#FFF' }}/>
+                    <SnackbarContent  message={message} sx={{ backgroundColor: '#FFF',  color: '#000' }}/>
                 </Snackbar>
             </Box>
         </>

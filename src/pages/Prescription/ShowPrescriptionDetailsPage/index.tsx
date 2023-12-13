@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom"
 import Prescription from "../../../services/Prescription";
-import { Box, Button, CircularProgress, Link as MUILink, Modal, Stack, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Link as MUILink, Modal, Stack, Typography, Paper, Divider } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import { AppButton } from "../../../components/Button";
 
 interface ShowPrescriptionDetailsProps {
   consultation_id: number
@@ -27,11 +28,15 @@ export const ShowPrescriptionDetailsPage = ({ consultation_id, prescription_id, 
       onClose={handleCloseModal}
       sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: 2   }}
     >
-      <Stack minWidth={500} maxWidth={'md'} sx={{ bgcolor: 'white' }} padding={3} spacing={5}>
+
+      <Stack minWidth={500} maxWidth={'md'} sx={{ bgcolor: 'white', borderRadius: '.50rem', boxShadow: 2 }} padding={3} spacing={5} >
+      <Typography typography='h4' fontSize='1.125rem' mb={2}>Detalhes da receita - # {prescription.id}</Typography>
+      <Divider />
+       
         {isLoading || isFetching
           ? (
             <Stack alignItems='center'>
-              <CircularProgress />
+              <CircularProgress sx={{color: '#000'}}/>
             </Stack>
           )
           : (
@@ -39,32 +44,34 @@ export const ShowPrescriptionDetailsPage = ({ consultation_id, prescription_id, 
               {prescription && (
                 <Stack sx={{ whiteSpace: 'pre-wrap' }} spacing={3}>
                   <Stack>
-                    <Typography fontWeight='bold'>Rotulo:</Typography>
-                    <Typography sx={{ bgcolor: grey[300] }} paddingY={1.5} paddingX={2} borderRadius={2}>{prescription.label}</Typography>
+                      <Typography typography='h4' fontSize='1.125rem' mb={2}>Rotulo</Typography>
+
+                      <Paper sx={{ height: '2.8125rem', display: 'flex', alignItems: 'center', justifyContent: 'center', typography: 'body1', color: '#00000077', bgcolor: grey[300] }} elevation={2}>{prescription.label}</Paper>
                   </Stack>
 
                   <Stack>
-                    <Typography fontWeight='bold'>Observação:</Typography>
-                    <Typography sx={{ bgcolor: grey[300] }} paddingY={1.5} paddingX={2} borderRadius={2}>{prescription.observation}</Typography>
+                    <Typography typography='h4' fontSize='1.125rem' mb={2}>Observação</Typography>
+
+                    <Paper sx={{ height: '2.8125rem', display: 'flex', alignItems: 'center', justifyContent: 'center', typography: 'body1', color: '#00000077', bgcolor: grey[300] }} elevation={2}>{prescription.observation}</Paper>
                   </Stack>
 
                   <Stack>
-                    <Typography fontWeight='bold'>Versão Escrita:</Typography>
+                    <Typography typography='h4' fontSize='1.125rem' mb={2}>Versão Escrita</Typography>
 
                     {prescription.physical ? (
-                      <Typography sx={{ bgcolor: grey[300] }} paddingY={1.5} paddingX={2} borderRadius={2}>{prescription.physical}</Typography>
-                    ) : (
-                      <Typography borderRadius={2}>Não Possui</Typography>
+                      <Paper sx={{ height: '2.8125rem', display: 'flex', alignItems: 'center', justifyContent: 'center', typography: 'body1', color: '#00000077', bgcolor: grey[300] }} elevation={2}>{prescription.physical}</Paper>
+                      ) : (
+                      <Paper sx={{ height: '2.8125rem', display: 'flex', alignItems: 'center', justifyContent: 'center', typography: 'body1', color: '#00000077', bgcolor: grey[300] }} elevation={2}>Não possui</Paper>
                     )}
                   </Stack>
 
                   <Stack>
-                    <Typography fontWeight='bold'>Versão Digital:</Typography>
+                  <Typography typography='h4' fontSize='1.125rem' mb={2}>Versão Digital</Typography>
 
                     {digital_link ? (
                       <MUILink component={Link} to={digital_link}>Baixar versão digital</MUILink>
                     ) : (
-                      <Typography borderRadius={2}>Não Possui</Typography>
+                      <Paper sx={{ height: '2.8125rem', display: 'flex', alignItems: 'center', justifyContent: 'center', typography: 'body1', color: '#00000077', bgcolor: grey[300] }} elevation={2}>Não possui</Paper>
                     )}
                   </Stack>
                 </Stack>
@@ -73,7 +80,18 @@ export const ShowPrescriptionDetailsPage = ({ consultation_id, prescription_id, 
             </>
           )}
 
-        <Button onClick={handleCloseModal} variant='contained'>Fechar</Button>
+      <AppButton
+            sx={{ height: '2.5rem', backgroundColor: '#404040', color: '#FFF',
+               '&:hover': {
+                     backgroundColor: '#525252'
+          }}}
+
+         onClick={handleCloseModal}
+                       id='btn-close-modal'
+                       variant='contained'
+            >
+                                                                                   Fechar
+                                                                        </AppButton>
       </Stack>
     </Modal>
   )

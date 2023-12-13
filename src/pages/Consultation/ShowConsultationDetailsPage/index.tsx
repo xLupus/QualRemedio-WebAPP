@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
 import Consultations from "../../../services/Consultations"
 import { NavLink, useParams } from "react-router-dom"
-import { Box, Button, CircularProgress, Modal, Paper, Stack, Table, TableBody, TableCell, TableHead, TableRow, Typography, Link, CardContent } from "@mui/material"
+import { Box, Button, CircularProgress, Modal, Paper, Stack, Table, TableBody, TableCell, TableHead, TableRow, Typography, Link, CardContent, TableContainer } from "@mui/material"
 import { grey } from "@mui/material/colors"
 import Prescription from "../../../services/Prescription"
 import { useState } from "react"
@@ -156,35 +156,51 @@ export const ShowConsultationDetailsPage = () => {
                                 </Typography>
                                 )
                                 : (
-                                <Table>
-                                    <TableHead>
-                                    <TableRow>
-                                        <TableCell>ID</TableCell>
-                                        <TableCell>Rotulo</TableCell>
-                                        <TableCell>Ações</TableCell>
-                                    </TableRow>
-                                    </TableHead>
+                                    <Paper sx={{ width: '100%', overflow: 'hidden' }} id='table'>
+                                        <TableContainer sx={{ maxHeight: 590 }}>
+                                                    <Table stickyHeader aria-label="sticky table">
+                                                    <TableHead>
+                                                    <TableRow>
+                                                        <TableCell align='center' sx={{backgroundColor: '#C6C6C6'}}>ID</TableCell>
+                                                        <TableCell align='center' sx={{backgroundColor: '#C6C6C6'}}>Rotulo</TableCell>
+                                                        <TableCell align='center' sx={{backgroundColor: '#C6C6C6'}}>Ações</TableCell>
+                                                    </TableRow>
+                                                    </TableHead>     
+                                                    <TableBody>
+                                                                {consultation?.prescription.map(prescription => (
+                                                                    <TableRow  hover role="checkbox" key={prescription.id}>
+                                                                        <TableCell onClick={() => openDetailsModal(prescription.id)} sx={{width: 290}} align='center'>
+                                                                            <Typography>#{prescription.id}</Typography>
+                                                                        </TableCell>
 
-                                    <TableBody>
-                                    {consultation?.prescription.map(prescription => (
-                                        <TableRow key={prescription.id}>
-                                        <TableCell onClick={() => openDetailsModal(prescription.id)}>
-                                            <Typography>#{prescription.id}</Typography>
-                                        </TableCell>
+                                                                        <TableCell align='center' sx={{width: 290}}>{prescription.label}</TableCell>
 
-                                        <TableCell>{prescription.label}</TableCell>
+                                                                        <TableCell align='center' sx={{width: 290}}>
+                                                                            <Stack direction={'row'} spacing={1}>
+                                                                            <AppButton
+                                                                                sx={{ height: '2.5rem', backgroundColor: '#404040', color: '#FFF',
+                                                                                                '&:hover': {
+                                                                                                backgroundColor: '#525252'
+                                                                                    }}}
 
-                                        <TableCell>
-                                            <Stack direction={'row'} spacing={1}>
-                                            <Button onClick={() => openDetailsModal(prescription.id)} variant='contained' color="info">Visualizar</Button>
-                                            <Button onClick={() => openDeleteModalConfirm(prescription.id)} variant='contained' color="error" >Apagar</Button>
-                                            <Button component={NavLink} to={`prescription/${prescription.id}/edit`} variant='contained' color="success">Atualizar</Button>
-                                            </Stack>
-                                        </TableCell>
-                                        </TableRow>
-                                    ))}
-                                    </TableBody>
-                                </Table>
+                                                                                            onClick={() => openDetailsModal(prescription.id)}
+                                                                                            id='btn-show-prescription-details'
+                                                                                            variant='contained'
+                                                                                            type="submit"
+                                                                                        >
+                                                                                   Visualizar
+                                                                        </AppButton>
+                                                            <Button onClick={() => openDeleteModalConfirm(prescription.id)} variant='contained' color="error" >Apagar</Button>
+                                                            <Button component={NavLink} to={`prescription/${prescription.id}/edit`} variant='contained' color="success">Atualizar</Button>
+                                                            </Stack>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                ))}
+                                                    </TableBody>
+                                                    </Table>
+                                                </TableContainer>
+                                              
+                                    </Paper> 
                                 )
                             }
 
@@ -194,7 +210,7 @@ export const ShowConsultationDetailsPage = () => {
                                             sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}
                                             onClose={() => openDeleteModalConfirm(null)}
                                             >
-                                            <Stack maxWidth={500} sx={{ bgcolor: 'white' }} padding={3} spacing={4}>
+                                            <Stack maxWidth={500} sx={{ bgcolor: 'white', borderRadius: '.50rem', boxShadow: 2}} padding={3} spacing={4}>
                                                 <Typography>Tem certeza que deseja apagar essa prescripção?</Typography>
 
                                                 <Stack spacing={2} >
