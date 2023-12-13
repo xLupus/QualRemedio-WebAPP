@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 export function RegisterAccountCreated() {
     return (
         <>
-            <Box typography='body1' mb={6} textAlign='center'>STEP</Box>
+           {/*  <Box typography='body1' mb={6} textAlign='center'>STEP</Box> */}
             <Box typography='body1' fontSize='0.875rem' color='#00000077' textAlign='center' mb={1}>Tudo Certo!</Box>
 
             <Typography typography='body1' fontSize='0.875rem' color='#00000077' textAlign='center'>Sua conta foi registrada com sucesso!</Typography>
@@ -20,10 +20,14 @@ export function RegisterAccountCreated() {
 
             <Box display='flex' justifyContent='flex-end' alignItems='center' mt={8}>
                 <AppButton 
-                    sx={{ width: '5rem', height: '1.875rem', fontSize: '.75rem' }}
+                    sx={{width: '5rem', height: '1.875rem', fontSize: '.75rem', backgroundColor: '#404040', color: '#FFF', ml: 2,
+                        '&:hover': {
+                            backgroundColor: '#525252'
+                        }
+                    }}
                     id='btn-login'
                     variant='contained'
-                    className='authButton authNextButton'
+
                     component={NavLink}
                     to='/auth/login/select-account'
                 >

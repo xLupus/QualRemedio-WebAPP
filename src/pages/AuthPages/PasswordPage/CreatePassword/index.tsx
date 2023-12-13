@@ -79,6 +79,8 @@ export function CreatePassword({ isFromPath }: { isFromPath: string}) {
         });
 
         if(result?.status === 201) navigate('/auth/register/email-send');
+
+        if(result?.status === 200) navigate('/auth/register/account-created')
     }
 
 

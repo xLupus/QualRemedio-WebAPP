@@ -145,6 +145,17 @@ interface RegisterService {
     specialty_name?: string | undefined;
 }
 
+interface RegisterAccountService {
+    name: string;
+    cpf: number;
+    birth_day: Date;
+    telephone: string;
+    crm_state?: string;
+    specialty_name?: string;
+    crm?: string;
+    doc?: string;
+}
+
 interface LoginService {
     email: string;
     password: string;
@@ -244,7 +255,7 @@ interface RegisterContextType {
 //Array data
 interface RegisterType {
     name: string;
-    value: string
+    value: string;
 }
 
 //Exports
@@ -267,6 +278,7 @@ export type {
     Mail,
     RegisterCreatePassword,
     RegisterMailVerification,
+    RegisterAccountService,
 
     AppBarProps,
     State,

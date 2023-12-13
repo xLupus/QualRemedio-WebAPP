@@ -167,11 +167,13 @@ export function Login() {
 
                 <Box display='flex' justifyContent='center'>
                     <AppButton 
-                        sx={{ width: '18.75rem', height: '2.5rem' }}
+                        sx={{ width: '18.75rem', height: '2.5rem', backgroundColor: '#404040', color: '#FFF', ml: 2,
+                        '&:hover': {
+                            backgroundColor: '#525252'
+                        } }}
                         id='btn-login'
                         variant='text'
                         type='submit'
-                        className='authButton'
                         disabled={isLoading ? true : false}
                     >
                     {

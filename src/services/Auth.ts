@@ -18,14 +18,9 @@ class AuthService {
                 account_type 
             });
 
-            Cookies.remove('account_type_selected');
-            Cookies.remove('user_name');
-            Cookies.remove('user_cpf');
-            Cookies.remove('user_telephone');
-            Cookies.remove('user_birth_day');
-            Cookies.remove('user_crm_state');
-            Cookies.remove('user_crm');
-            Cookies.remove('user_specialty_name');
+            ['account_type_selected', 'user_name', 'user_email', 'user_cpf', 'user_telephone', 'user_birth_day', 'user_crm_state', 'user_crm', 'user_specialty_name'].forEach((el) => {
+                Cookies.remove(`${el}`);
+            });
             
             return res;
         } catch (err: unknown) {
