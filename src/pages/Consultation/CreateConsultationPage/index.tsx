@@ -13,7 +13,6 @@ import { AppCard } from "../../../components/Card"
 import { AppInput } from "../../../components/Input"
 import { AppSelectInput } from "../../../components/Input/InputSelect"
 import Grid from '@mui/material/Unstable_Grid2';
-import Item from '@mui/material/Unstable_Grid2';
 
     interface ConsultationCreateFormData {
     reason: string,

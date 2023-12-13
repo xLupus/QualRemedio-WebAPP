@@ -204,7 +204,7 @@ export function ProfileAccountConfiguration() {
                         <CardActions>
                             <AppButton
                                 sx={{
-                                    width: '13.75rem', height: '2.8125rem', fontSize: '1.125rem',  backgroundColor: '#606060', color: '#FFF',
+                                    width: '13.75rem', height: '2.8125rem', fontSize: '1.125rem',  backgroundColor: '#404040', color: '#FFF',
                                     '&:hover': {
                                     backgroundColor: '#525252'
                                 }}}
