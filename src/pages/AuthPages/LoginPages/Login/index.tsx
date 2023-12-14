@@ -114,6 +114,7 @@ export function Login() {
                         variant='filled'
                         type='email'
                         label='E-mail'
+                        aria-label="email input"
                         {...register('email')}
                         error={errors.email ? true : false}
                         fullWidth
@@ -127,6 +128,7 @@ export function Login() {
                         color='primary'
                         type={showPassword ? 'text' : 'password'}
                         label='Senha'
+                        aria-label="password input"
                         error={errors.password ? true : false}
                         {...register('password')}
                         fullWidth

@@ -123,6 +123,7 @@ export function CreatePassword({ isFromPath }: { isFromPath: string}) {
                             color='primary'
                             type={showPassword ? 'text' : 'password'}
                             label='Senha'
+                            aria-label="password input"
                             {...register('password')}
                             error={errors.password ? true : false}
                             fullWidth
@@ -149,6 +150,7 @@ export function CreatePassword({ isFromPath }: { isFromPath: string}) {
                             color='primary'
                             type={showPassword ? 'text' : 'password'}
                             label='Confirmar senha'
+                            aria-label="confirm_password input"
                             {...register('confirm_password')}
                             error={errors.confirm_password ? true : false}
                            // helperText={errors.confirm_password && errors.confirm_password.message}

@@ -35,6 +35,7 @@ interface AppButtonProps {
     disabled?: boolean | undefined;
     to?: To | undefined;
     onClick?: MouseEventHandler<Element> | undefined;
+    'aria-label'?: string | undefined;
 }
 
 interface AppInputProps {
@@ -53,6 +54,7 @@ interface AppInputProps {
     autoComplete?: string | undefined;
     multiline?: boolean | undefined;
     maxRows?: number | undefined;
+    'aria-label'?: string | undefined;
     min?: string | number | undefined;
     max?: string | number | undefined;
     sx?: SxProps<Theme> | undefined;
@@ -92,6 +94,7 @@ interface AppInputAdornmentProps {
     onInput?: FormEventHandler<Element> | undefined;
     startAdornment?: React.ReactNode | undefined;
     endAdornment?: React.ReactNode | undefined;
+    'aria-label'?: string | undefined;
 }
 
 interface AppInputSelectProps {

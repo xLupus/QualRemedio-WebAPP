@@ -17,6 +17,7 @@ export interface CreateConsultationParams {
   reason: string,
   observation: string,
   created_by_user: number,
+  created_to_user: number,
   date: string,
   department_id: number,
   consultation_status: number

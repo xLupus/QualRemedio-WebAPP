@@ -10,8 +10,10 @@ import moment from "moment"
 import { AppCard } from "../../../components/Card"
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
 import { AppButton } from "../../../components/Button"
+import { useCurrentUserContext } from "../../../hooks/CurrentUserContext"
 
 export const ShowConsultationDetailsPage = () => {
+    const currentUser = useCurrentUserContext();
   const { consultation_id } = useParams()
   const [prescriptionToDelete, setPrescriptionToDelete] = useState<number | null>(null)
   const [prescriptionToShowDetails, setPrescriptionToShowDetails] = useState<number | null>(null)
@@ -129,7 +131,9 @@ export const ShowConsultationDetailsPage = () => {
             <AppCard sx={{ height: '23.9375rem', p: 1.5 }}>
                 <CardContent>
                             <Grid container spacing={4}>
-                                <Grid xs={12}>
+                                {
+                                    Number(currentUser?.user_role) === 2 &&
+                                    <Grid xs={12}>
                                     <Stack alignItems='flex-end'>
                                             <AppButton
                                             sx={{ width: '18.5rem', height: '2.5rem', backgroundColor: '#404040', color: '#FFF',
@@ -147,6 +151,8 @@ export const ShowConsultationDetailsPage = () => {
                                     </AppButton>
                                     </Stack>
                                 </Grid>
+                                }
+                                
 
                                 <Grid xs={12}>
                                {consultation?.prescription.length == 0
@@ -167,7 +173,7 @@ export const ShowConsultationDetailsPage = () => {
                                                     </TableRow>
                                                     </TableHead>     
                                                     <TableBody>
-                                                                {consultation?.prescription.map(prescription => (
+                                                        {consultation?.prescription.map(prescription => (
                                                                     <TableRow  hover role="checkbox" key={prescription.id}>
                                                                         <TableCell onClick={() => openDetailsModal(prescription.id)} sx={{width: 290}} align='center'>
                                                                             <Typography>#{prescription.id}</Typography>
@@ -190,8 +196,13 @@ export const ShowConsultationDetailsPage = () => {
                                                                                         >
                                                                                    Visualizar
                                                                         </AppButton>
-                                                            <Button onClick={() => openDeleteModalConfirm(prescription.id)} variant='contained' color="error" >Apagar</Button>
-                                                            <Button component={NavLink} to={`prescription/${prescription.id}/edit`} variant='contained' color="success">Atualizar</Button>
+                                                                        {
+                                                                            Number(currentUser?.user_role) === 2 &&
+                                                                            <>
+                                                                                <Button onClick={() => openDeleteModalConfirm(prescription.id)} variant='contained' color="error" >Apagar</Button>
+                                                                                <Button component={NavLink} to={`prescription/${prescription.id}/edit`} variant='contained' color="success">Atualizar</Button>
+                                                                            </>
+                                                                        }
                                                             </Stack>
                                                         </TableCell>
                                                     </TableRow>
@@ -210,12 +221,13 @@ export const ShowConsultationDetailsPage = () => {
                                             sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}
                                             onClose={() => openDeleteModalConfirm(null)}
                                             >
+                                                
                                             <Stack maxWidth={500} sx={{ bgcolor: 'white', borderRadius: '.50rem', boxShadow: 2}} padding={3} spacing={4}>
                                                 <Typography>Tem certeza que deseja apagar essa prescripção?</Typography>
 
                                                 <Stack spacing={2} >
                                                 <Button color='error' variant='contained' onClick={() => openDeleteModalConfirm(null)}>Cancelar</Button>
-                                                <Button color='success' variant='contained' onClick={() => handleDeletePerscription(prescriptionToDelete)}>Apagar Consulta</Button>
+                                                <Button color='success' variant='contained' onClick={() => handleDeletePerscription(prescriptionToDelete)}>Apagar prescrição</Button>
                                                 </Stack>
                                             </Stack>
                                             </Modal>

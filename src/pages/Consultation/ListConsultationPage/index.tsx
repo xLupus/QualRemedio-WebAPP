@@ -3,6 +3,7 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { Link, NavLink } from 'react-router-dom'
 import Consultations from '../../../services/Consultations'
 import { useState } from 'react'
+import { useCurrentUserContext } from '../../../hooks/CurrentUserContext'
 
 interface ListConsultationProps {
   actions?: boolean,
@@ -14,6 +15,7 @@ interface ListConsultationProps {
 }
 
 export const ListConsultationPage = ({ actions, query }: ListConsultationProps) => {
+  const currentUser = useCurrentUserContext();
   const [selectedConsultation, setSelectedConsultation] = useState<number | null>(null)
 
   const [page, setPage] = useState(1)
@@ -24,7 +26,7 @@ export const ListConsultationPage = ({ actions, query }: ListConsultationProps) 
 
     queryFn: () => Consultations.index({
       filter: {
-        created_by: query?.auth_user,
+  
         bond: query?.bond_id
       }, //TODO - Pegar do Storage
       paginate: {
@@ -117,7 +119,7 @@ export const ListConsultationPage = ({ actions, query }: ListConsultationProps) 
                                 <TableCell align='center'>{consultation.reason}</TableCell>
                                 <TableCell align='center'>{consultation.specialty.name}</TableCell>
                                 <TableCell align='center'>{consultation.status.status}</TableCell>
-                                <TableCell align='center'>{consultation.bond.to.name}</TableCell>
+                                <TableCell align='center'>{consultation.bond.to.id === Number(currentUser?.user_id) ? consultation.bond.from.name : consultation.bond.to.name}</TableCell>
 
                                 {actions && (
                                 <TableCell>

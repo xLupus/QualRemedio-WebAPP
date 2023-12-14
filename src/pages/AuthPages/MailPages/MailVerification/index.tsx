@@ -75,6 +75,7 @@ export function MailVerification({ isFromPath }: { isFromPath: string }) {
                                 value={value}
                                 label='Email'
                                 autoComplete="off"
+                                aria-label="email input"
                                 {...register('email', {
                                     onChange: e => handleValue(e.target.value)
                                     })

@@ -74,12 +74,13 @@ import Grid from '@mui/material/Unstable_Grid2';
         const { consultation_status, date, observation, professional, reason, specialty } = form_data
 
         const create_consultation_request_data: CreateConsultationParams = {
-        consultation_status: Number(consultation_status),
-        date,
-        observation,
-        reason,
-        created_by_user: Number(currentUser?.user_id), //TODO - Pegar do Storage DEPOIS
-        department_id: Number(specialty),
+            consultation_status: Number(consultation_status),
+            date,
+            observation,
+            reason,
+            created_by_user: Number(currentUser?.user_id), //TODO - Pegar do Storage DEPOIS
+            created_to_user: bonds?.data[0].to_user,
+            department_id: Number(specialty),
         }
 
         const response = await Consultations.create(Number(professional), create_consultation_request_data)
@@ -104,6 +105,7 @@ import Grid from '@mui/material/Unstable_Grid2';
                                         variant='filled'
                                         type='date'
                                         label='Data da consulta'
+                                        aria-label="consultation-date input"
                                         {...register('date')}
                                         error={errors.date ? true : false}
                                         helperText={errors.date && errors.date.message}
@@ -119,6 +121,7 @@ import Grid from '@mui/material/Unstable_Grid2';
                                         color='primary'
                                         variant='filled'
                                         message="Profissional"
+                                        aria-label="profissional input"
                                         error={errors.professional ? true : false}
                                         fullWidth
                                     >
@@ -148,6 +151,7 @@ import Grid from '@mui/material/Unstable_Grid2';
                                         color='primary'
                                         variant='filled'
                                         message="Especialidade"
+                                        aria-label="specialty input"
                                         error={errors.specialty ? true : false}
                                         fullWidth
                                     >
@@ -177,6 +181,7 @@ import Grid from '@mui/material/Unstable_Grid2';
                                         color='primary'
                                         variant='filled'
                                         message="Status"
+                                        aria-label="status input"
                                         error={errors.consultation_status ? true : false}
                                         fullWidth
                                     >
@@ -207,6 +212,7 @@ import Grid from '@mui/material/Unstable_Grid2';
                                         variant='filled'
                                         type="text"
                                         label='Motivo da consulta'
+                                        aria-label="consultation-reason input"
                                         multiline
                                         maxRows={20}
                                         {...register('reason')}
@@ -225,6 +231,7 @@ import Grid from '@mui/material/Unstable_Grid2';
                                         variant='filled'
                                         type='text'
                                         label='Observação'
+                                        aria-label="observation input"
                                         multiline
                                         maxRows={20}
                                         {...register('observation')}

@@ -145,6 +145,7 @@ export const UpdateConsultationPage = () => {
                 labelId="specialty"
                 sx={{ minWidth: 200 }}
                 {...register('specialty')}
+                aria-label="speacialty input"
                 error={errors.specialty ? true : false}
                 defaultValue={Number(consultation_data?.data.specialty.id)}
               >
@@ -165,6 +166,7 @@ export const UpdateConsultationPage = () => {
                 <Select
                   labelId="status"
                   sx={{ minWidth: 200 }}
+                  aria-label="consultation input"
                   {...register('consultation_status')}
                   error={errors.consultation_status ? true : false}
                   defaultValue={consultation_data?.data.status.id}
@@ -188,9 +190,11 @@ export const UpdateConsultationPage = () => {
               <TextField
                 id="reason"
                 type="text"
+                aria-label="consultation-reason input"
                 multiline
                 maxRows={20}
                 {...register('reason')}
+                
                 error={errors.reason ? true : false}
                 helperText={errors.reason && errors.reason.message}
               />
@@ -206,6 +210,7 @@ export const UpdateConsultationPage = () => {
                 multiline
                 {...register('observation')}
                 error={errors.observation ? true : false}
+                aria-label="observation input"
                 helperText={errors.observation && errors.observation.message}
               />
             </Stack>

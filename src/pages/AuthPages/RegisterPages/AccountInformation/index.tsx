@@ -257,6 +257,7 @@ export function RegisterAccountInformation() {
                                     color='primary'
                                     variant='filled'
                                     autoComplete="off"
+                                    aria-label="name input"
                                     type='text'
                                     label='Nome'
                                     value={userData.name_value}
@@ -271,13 +272,13 @@ export function RegisterAccountInformation() {
                             </Grid>
 
                             <Grid xs={7}>
-                                <AppInput 
-                
+                                <AppInput            
                                     id='cpf-field'
                                     color='primary'
                                     variant='filled'
                                     type='number'
                                     label='CPF'
+                                    aria-label="cpf input"
                                     value={userData.cpf_value}
                                     {...register('cpf', {
                                             onChange: e => setUserData({...userData, cpf_value: e.target.value})
@@ -297,6 +298,7 @@ export function RegisterAccountInformation() {
                                     variant='filled'
                                     type='date'
                                     label='Nasc.:'
+                                    aria-label="birth_day input"
                                     min="1900-01-01"
                                     value={userData.birth_day_value}
                                     {...register('birth_day', {
@@ -317,6 +319,7 @@ export function RegisterAccountInformation() {
                                     variant='filled'
                                     type='tel'
                                     label='Telefone'
+                                    aria-label="telephone input"
                                     value={userData.telephone_value}
                                     {...register('telephone', {
                                         onChange: e => setUserData({...userData, telephone_value: e.target.value})
@@ -342,6 +345,7 @@ export function RegisterAccountInformation() {
                                     type='text'
                                     label='Nome'
                                     autoComplete="off"
+                                    aria-label="telephone input"
                                     value={userData.name_value}
                                     {...register('name', {
                                             onChange: e => setUserData({...userData, name_value: e.target.value})
@@ -380,6 +384,7 @@ export function RegisterAccountInformation() {
                                     autoComplete="off"
                                     type='date'
                                     label='Nasc.:'
+                                    aria-label="birth_day input"
                                     value={userData.birth_day_value}
                                     {...register('birth_day', {
                                         onChange: e => setUserData({...userData, birth_day_value: e.target.value})
@@ -400,6 +405,7 @@ export function RegisterAccountInformation() {
                                     type='tel'
                                     label='Telefone'
                                     value={userData.telephone_value}
+                                    aria-label="telephone input"
                                     {...register('telephone', {
                                         onChange: e => setUserData({...userData, telephone_value: e.target.value})
                                         })
@@ -421,6 +427,7 @@ export function RegisterAccountInformation() {
                                                 autoComplete="off"
                                                 type='text'
                                                 label='CRM'
+                                                aria-label="crm input"
                                                 value={userData.crm_value}
                                                 {...register('crm', {
                                                     onChange: e => setUserData({...userData, crm_value: e.target.value})
@@ -440,6 +447,7 @@ export function RegisterAccountInformation() {
                                                 autoComplete="off"
                                                 type='tel'
                                                 label='Estado - CRM'
+                                                aria-label="crm_state input"
                                                 value={userData.crm_state_value}
                                                 {...register('crm_state', {
                                                     onChange: e => setUserData({...userData, crm_state_value: e.target.value})
@@ -461,6 +469,7 @@ export function RegisterAccountInformation() {
                                                 autoComplete="off"
                                                 type='text'
                                                 label='Documento'
+                                                aria-label="doc input"
                                                 value={userData.doc_value}
                                                 {...register('doc', {
                                                     onChange: e => setUserData({...userData, doc_value: e.target.value})
@@ -482,6 +491,7 @@ export function RegisterAccountInformation() {
                                     type='text'
                                     autoComplete="off"
                                     label='Especialidade'
+                                    aria-label="specialty input"
                                     value={userData.specialty_name_value}
                                     {...register('specialty_name', {
                                         onChange: e => setUserData({...userData, specialty_name_value: e.target.value})
@@ -498,7 +508,7 @@ export function RegisterAccountInformation() {
 
                 <Box display='flex' justifyContent='space-between' alignItems='center' mt={8}>
                     <Box width='8.75rem'>
-                        <AppSelectInput message="Opção">
+                        <AppSelectInput message="Opção" aria-label="account-option input">
                             <Select
                                 labelId="select-acc-option"
                                 id="select-acc"
